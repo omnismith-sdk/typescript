@@ -1,0 +1,44 @@
+
+# ImportEntities200Response
+
+
+## Properties
+
+Name | Type
+------------ | -------------
+`total` | number
+`created` | number
+`updated` | number
+`skipped` | number
+`failed` | number
+`errors` | [Array&lt;ImportEntities200ResponseErrorsInner&gt;](ImportEntities200ResponseErrorsInner.md)
+
+## Example
+
+```typescript
+import type { ImportEntities200Response } from '@omnismith/sdk-typescript'
+
+// TODO: Update the object below with actual values
+const example = {
+  "total": null,
+  "created": null,
+  "updated": null,
+  "skipped": null,
+  "failed": null,
+  "errors": null,
+} satisfies ImportEntities200Response
+
+console.log(example)
+
+// Convert the instance to a JSON string
+const exampleJSON: string = JSON.stringify(example)
+console.log(exampleJSON)
+
+// Parse the JSON string back to an object
+const exampleParsed = JSON.parse(exampleJSON) as ImportEntities200Response
+console.log(exampleParsed)
+```
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
