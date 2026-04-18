@@ -1,0 +1,6 @@
+# Preserve repo-managed automation and tests during hub sync.
+.openapi-ignore
+.github/
+.gitignore
+tests/
+test/
