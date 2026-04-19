@@ -17,7 +17,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { CreateAttributeRequest } from '@omnismith/sdk-typescript'
+import type { CreateAttributeRequest } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {

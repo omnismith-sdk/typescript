@@ -13,7 +13,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { CreateEntityRequestAttributeValuesInner } from '@omnismith/sdk-typescript'
+import type { CreateEntityRequestAttributeValuesInner } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {

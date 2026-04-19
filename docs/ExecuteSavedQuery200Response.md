@@ -12,7 +12,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { ExecuteSavedQuery200Response } from '@omnismith/sdk-typescript'
+import type { ExecuteSavedQuery200Response } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {

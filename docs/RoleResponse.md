@@ -15,7 +15,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { RoleResponse } from '@omnismith/sdk-typescript'
+import type { RoleResponse } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {

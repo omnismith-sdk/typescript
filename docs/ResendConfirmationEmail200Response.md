@@ -11,7 +11,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { ResendConfirmationEmail200Response } from '@omnismith/sdk-typescript'
+import type { ResendConfirmationEmail200Response } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {

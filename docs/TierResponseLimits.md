@@ -21,7 +21,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { TierResponseLimits } from '@omnismith/sdk-typescript'
+import type { TierResponseLimits } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {

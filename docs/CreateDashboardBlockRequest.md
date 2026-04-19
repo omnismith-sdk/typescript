@@ -13,7 +13,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { CreateDashboardBlockRequest } from '@omnismith/sdk-typescript'
+import type { CreateDashboardBlockRequest } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
