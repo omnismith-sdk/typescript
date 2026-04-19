@@ -125,6 +125,7 @@ docs/RoleResourceAccessResponse.md
 docs/RoleResponse.md
 docs/RolesApi.md
 docs/SavedQueriesApi.md
+docs/SchemaApi.md
 docs/SearchEntities200Response.md
 docs/SearchEntitiesRequest.md
 docs/SearchMarketplaceBlueprints200Response.md
@@ -184,6 +185,7 @@ src/apis/MarketplaceApi.ts
 src/apis/ProjectsApi.ts
 src/apis/RolesApi.ts
 src/apis/SavedQueriesApi.ts
+src/apis/SchemaApi.ts
 src/apis/TemplatesApi.ts
 src/apis/UserApi.ts
 src/apis/index.ts

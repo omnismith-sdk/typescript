@@ -16,5 +16,6 @@ export * from './MarketplaceApi';
 export * from './ProjectsApi';
 export * from './RolesApi';
 export * from './SavedQueriesApi';
+export * from './SchemaApi';
 export * from './TemplatesApi';
 export * from './UserApi';

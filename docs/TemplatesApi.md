@@ -6,7 +6,6 @@ All URIs are relative to *https://api.omnismith.io/v1*
 |------------- | ------------- | -------------|
 | [**createTemplate**](TemplatesApi.md#createtemplateoperation) | **POST** /templates | Create a new template |
 | [**deleteTemplate**](TemplatesApi.md#deletetemplate) | **DELETE** /templates/{id} | Delete a template |
-| [**getProjectSchema**](TemplatesApi.md#getprojectschema) | **GET** /discovery/project-schema | Get complete project schema |
 | [**getTemplate**](TemplatesApi.md#gettemplate) | **GET** /templates/{id} | Get a template |
 | [**listTemplateEntityCounts**](TemplatesApi.md#listtemplateentitycounts) | **GET** /templates/entity-counts | List entity counts per template |
 | [**listTemplates**](TemplatesApi.md#listtemplates) | **GET** /templates | List templates |
@@ -154,70 +153,6 @@ example().catch(console.error);
 | **204** | Template deleted |  -  |
 | **401** | Unauthorized |  -  |
 | **404** | Not Found |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
-
-
-## getProjectSchema
-
-> ProjectSchemaResponse getProjectSchema()
-
-Get complete project schema
-
-Returns all attributes, templates, list items, and reference configs in a single response
-
-### Example
-
-```ts
-import {
-  Configuration,
-  TemplatesApi,
-} from '@omnismith-sdk/typescript';
-import type { GetProjectSchemaRequest } from '@omnismith-sdk/typescript';
-
-async function example() {
-  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
-  const config = new Configuration({ 
-    // Configure HTTP bearer authorization: bearerAuth
-    accessToken: "YOUR BEARER TOKEN",
-  });
-  const api = new TemplatesApi(config);
-
-  try {
-    const data = await api.getProjectSchema();
-    console.log(data);
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-// Run the test
-example().catch(console.error);
-```
-
-### Parameters
-
-This endpoint does not need any parameter.
-
-### Return type
-
-[**ProjectSchemaResponse**](ProjectSchemaResponse.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: `application/json`
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | Project schema |  -  |
-| **401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 

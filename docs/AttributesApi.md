@@ -11,7 +11,6 @@ All URIs are relative to *https://api.omnismith.io/v1*
 | [**deleteAttributeReferenceConfig**](AttributesApi.md#deleteattributereferenceconfig) | **DELETE** /attributes/{id}/reference | Delete reference configuration for an attribute |
 | [**getAttribute**](AttributesApi.md#getattribute) | **GET** /attributes/{id} | Get an attribute |
 | [**getAttributeReferenceConfig**](AttributesApi.md#getattributereferenceconfig) | **GET** /attributes/{id}/reference | Get reference configuration for an attribute |
-| [**getProjectSchema**](AttributesApi.md#getprojectschema) | **GET** /discovery/project-schema | Get complete project schema |
 | [**listAttributeItems**](AttributesApi.md#listattributeitems) | **GET** /attributes/{id}/items | List items of an attribute |
 | [**listAttributes**](AttributesApi.md#listattributes) | **GET** /attributes | List attributes |
 | [**setAttributeItems**](AttributesApi.md#setattributeitems) | **PUT** /attributes/{id}/items | Set list items for an attribute (replaces all existing items) |
@@ -518,70 +517,6 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Reference config |  -  |
 | **404** | Reference config not found |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
-
-
-## getProjectSchema
-
-> ProjectSchemaResponse getProjectSchema()
-
-Get complete project schema
-
-Returns all attributes, templates, list items, and reference configs in a single response
-
-### Example
-
-```ts
-import {
-  Configuration,
-  AttributesApi,
-} from '@omnismith-sdk/typescript';
-import type { GetProjectSchemaRequest } from '@omnismith-sdk/typescript';
-
-async function example() {
-  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
-  const config = new Configuration({ 
-    // Configure HTTP bearer authorization: bearerAuth
-    accessToken: "YOUR BEARER TOKEN",
-  });
-  const api = new AttributesApi(config);
-
-  try {
-    const data = await api.getProjectSchema();
-    console.log(data);
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-// Run the test
-example().catch(console.error);
-```
-
-### Parameters
-
-This endpoint does not need any parameter.
-
-### Return type
-
-[**ProjectSchemaResponse**](ProjectSchemaResponse.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: `application/json`
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | Project schema |  -  |
-| **401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
