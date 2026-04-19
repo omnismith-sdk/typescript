@@ -24,11 +24,11 @@ Delete a file attachment
 import {
   Configuration,
   FileAttachmentApi,
-} from '@omnismith/sdk-typescript';
-import type { DeleteFileAttachmentRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { DeleteFileAttachmentRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -94,11 +94,11 @@ Download a file attachment
 import {
   Configuration,
   FileAttachmentApi,
-} from '@omnismith/sdk-typescript';
-import type { DownloadFileAttachmentRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { DownloadFileAttachmentRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -164,11 +164,11 @@ Get file metadata without downloading content
 import {
   Configuration,
   FileAttachmentApi,
-} from '@omnismith/sdk-typescript';
-import type { GetFileAttachmentMetadataRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { GetFileAttachmentMetadataRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -234,11 +234,11 @@ Get image thumbnail
 import {
   Configuration,
   FileAttachmentApi,
-} from '@omnismith/sdk-typescript';
-import type { GetFileAttachmentThumbnailRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { GetFileAttachmentThumbnailRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -311,11 +311,11 @@ Upload a file attachment
 import {
   Configuration,
   FileAttachmentApi,
-} from '@omnismith/sdk-typescript';
-import type { UploadFileAttachmentRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { UploadFileAttachmentRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",

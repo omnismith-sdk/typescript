@@ -24,11 +24,11 @@ Creates a new API access token for the current user and project. The raw API key
 import {
   Configuration,
   AccessTokensApi,
-} from '@omnismith/sdk-typescript';
-import type { CreateAccessTokenOperationRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { CreateAccessTokenOperationRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -96,11 +96,11 @@ Delete an API access token
 import {
   Configuration,
   AccessTokensApi,
-} from '@omnismith/sdk-typescript';
-import type { DeleteAccessTokenRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { DeleteAccessTokenRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -169,11 +169,11 @@ Returns all access tokens for the current user and project.
 import {
   Configuration,
   AccessTokensApi,
-} from '@omnismith/sdk-typescript';
-import type { ListAccessTokensRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { ListAccessTokensRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",

@@ -22,11 +22,11 @@ Sends a feedback email to the Omnismith support team on behalf of the authentica
 import {
   Configuration,
   FeedbackApi,
-} from '@omnismith/sdk-typescript';
-import type { SendFeedbackOperationRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { SendFeedbackOperationRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",

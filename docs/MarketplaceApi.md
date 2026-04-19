@@ -25,11 +25,11 @@ Delete a marketplace blueprint
 import {
   Configuration,
   MarketplaceApi,
-} from '@omnismith/sdk-typescript';
-import type { DeleteMarketplaceBlueprintRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { DeleteMarketplaceBlueprintRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -97,11 +97,11 @@ Get marketplace blueprint details
 import {
   Configuration,
   MarketplaceApi,
-} from '@omnismith/sdk-typescript';
-import type { GetMarketplaceBlueprintRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { GetMarketplaceBlueprintRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const api = new MarketplaceApi();
 
   const body = {
@@ -163,11 +163,11 @@ Install a marketplace blueprint into a project
 import {
   Configuration,
   MarketplaceApi,
-} from '@omnismith/sdk-typescript';
-import type { InstallMarketplaceBlueprintOperationRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { InstallMarketplaceBlueprintOperationRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -239,11 +239,11 @@ List all marketplace keywords with blueprint counts
 import {
   Configuration,
   MarketplaceApi,
-} from '@omnismith/sdk-typescript';
-import type { ListMarketplaceKeywordsRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { ListMarketplaceKeywordsRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const api = new MarketplaceApi();
 
   try {
@@ -296,11 +296,11 @@ Publish or update a marketplace blueprint
 import {
   Configuration,
   MarketplaceApi,
-} from '@omnismith/sdk-typescript';
-import type { PublishMarketplaceBlueprintOperationRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { PublishMarketplaceBlueprintOperationRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -369,11 +369,11 @@ Search marketplace blueprints
 import {
   Configuration,
   MarketplaceApi,
-} from '@omnismith/sdk-typescript';
-import type { SearchMarketplaceBlueprintsRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { SearchMarketplaceBlueprintsRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const api = new MarketplaceApi();
 
   const body = {

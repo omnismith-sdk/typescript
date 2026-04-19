@@ -25,11 +25,11 @@ Create a new block in a dashboard
 import {
   Configuration,
   DashboardBlocksApi,
-} from '@omnismith/sdk-typescript';
-import type { CreateDashboardBlockOperationRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { CreateDashboardBlockOperationRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -100,11 +100,11 @@ Delete a dashboard block
 import {
   Configuration,
   DashboardBlocksApi,
-} from '@omnismith/sdk-typescript';
-import type { DeleteDashboardBlockRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { DeleteDashboardBlockRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -173,11 +173,11 @@ Get a dashboard block by ID
 import {
   Configuration,
   DashboardBlocksApi,
-} from '@omnismith/sdk-typescript';
-import type { GetDashboardBlockRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { GetDashboardBlockRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -246,11 +246,11 @@ List all blocks in a dashboard
 import {
   Configuration,
   DashboardBlocksApi,
-} from '@omnismith/sdk-typescript';
-import type { ListDashboardBlocksRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { ListDashboardBlocksRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -317,11 +317,11 @@ Executes the block configuration and returns computed values based on block type
 import {
   Configuration,
   DashboardBlocksApi,
-} from '@omnismith/sdk-typescript';
-import type { ResolveDashboardBlockRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { ResolveDashboardBlockRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -390,11 +390,11 @@ Update a dashboard block
 import {
   Configuration,
   DashboardBlocksApi,
-} from '@omnismith/sdk-typescript';
-import type { UpdateDashboardBlockOperationRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { UpdateDashboardBlockOperationRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",

@@ -29,11 +29,11 @@ Create a new role
 import {
   Configuration,
   RolesApi,
-} from '@omnismith/sdk-typescript';
-import type { CreateRoleOperationRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { CreateRoleOperationRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -102,11 +102,11 @@ Delete a role
 import {
   Configuration,
   RolesApi,
-} from '@omnismith/sdk-typescript';
-import type { DeleteRoleRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { DeleteRoleRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -174,11 +174,11 @@ Get a role
 import {
   Configuration,
   RolesApi,
-} from '@omnismith/sdk-typescript';
-import type { GetRoleRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { GetRoleRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -245,11 +245,11 @@ Get role permissions
 import {
   Configuration,
   RolesApi,
-} from '@omnismith/sdk-typescript';
-import type { GetRolePermissionsRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { GetRolePermissionsRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -316,11 +316,11 @@ Get role resource restrictions
 import {
   Configuration,
   RolesApi,
-} from '@omnismith/sdk-typescript';
-import type { GetRoleResourcesRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { GetRoleResourcesRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -389,11 +389,11 @@ Returns all user-assignable permissions grouped by module. Excludes internal-onl
 import {
   Configuration,
   RolesApi,
-} from '@omnismith/sdk-typescript';
-import type { ListAvailablePermissionsRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { ListAvailablePermissionsRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -451,11 +451,11 @@ List roles
 import {
   Configuration,
   RolesApi,
-} from '@omnismith/sdk-typescript';
-import type { ListRolesRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { ListRolesRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -513,11 +513,11 @@ Set role permissions
 import {
   Configuration,
   RolesApi,
-} from '@omnismith/sdk-typescript';
-import type { SetRolePermissionsOperationRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { SetRolePermissionsOperationRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -590,11 +590,11 @@ Set role resource restrictions
 import {
   Configuration,
   RolesApi,
-} from '@omnismith/sdk-typescript';
-import type { SetRoleResourcesOperationRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { SetRoleResourcesOperationRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -667,11 +667,11 @@ Update a role
 import {
   Configuration,
   RolesApi,
-} from '@omnismith/sdk-typescript';
-import type { UpdateRoleOperationRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { UpdateRoleOperationRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",

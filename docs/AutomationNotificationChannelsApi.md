@@ -25,11 +25,11 @@ Create a new notification channel
 import {
   Configuration,
   AutomationNotificationChannelsApi,
-} from '@omnismith/sdk-typescript';
-import type { CreateNotificationChannelOperationRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { CreateNotificationChannelOperationRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -98,11 +98,11 @@ Delete a notification channel
 import {
   Configuration,
   AutomationNotificationChannelsApi,
-} from '@omnismith/sdk-typescript';
-import type { DeleteNotificationChannelRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { DeleteNotificationChannelRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -169,11 +169,11 @@ Get a notification channel
 import {
   Configuration,
   AutomationNotificationChannelsApi,
-} from '@omnismith/sdk-typescript';
-import type { GetNotificationChannelRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { GetNotificationChannelRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -240,11 +240,11 @@ List all notification channels
 import {
   Configuration,
   AutomationNotificationChannelsApi,
-} from '@omnismith/sdk-typescript';
-import type { ListNotificationChannelsRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { ListNotificationChannelsRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -302,11 +302,11 @@ Send a test message via the notification channel
 import {
   Configuration,
   AutomationNotificationChannelsApi,
-} from '@omnismith/sdk-typescript';
-import type { TestNotificationChannelOperationRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { TestNotificationChannelOperationRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -377,11 +377,11 @@ Update a notification channel
 import {
   Configuration,
   AutomationNotificationChannelsApi,
-} from '@omnismith/sdk-typescript';
-import type { UpdateNotificationChannelOperationRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { UpdateNotificationChannelOperationRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",

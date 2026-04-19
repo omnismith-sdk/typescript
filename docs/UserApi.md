@@ -22,11 +22,11 @@ Confirm a user\&#39;s email address using a confirmation token
 import {
   Configuration,
   UserApi,
-} from '@omnismith/sdk-typescript';
-import type { ConfirmUserEmailRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { ConfirmUserEmailRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const api = new UserApi();
 
   const body = {
@@ -89,11 +89,11 @@ Register a new user
 import {
   Configuration,
   UserApi,
-} from '@omnismith/sdk-typescript';
-import type { RegisterUserOperationRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { RegisterUserOperationRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const api = new UserApi();
 
   const body = {
@@ -157,11 +157,11 @@ Resend the email confirmation link
 import {
   Configuration,
   UserApi,
-} from '@omnismith/sdk-typescript';
-import type { ResendConfirmationEmailOperationRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { ResendConfirmationEmailOperationRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const api = new UserApi();
 
   const body = {

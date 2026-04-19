@@ -22,11 +22,11 @@ List the current user\&#39;s registered push devices
 import {
   Configuration,
   AutomationPushDevicesApi,
-} from '@omnismith/sdk-typescript';
-import type { ListPushDevicesRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { ListPushDevicesRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -84,11 +84,11 @@ Register a push notification device token
 import {
   Configuration,
   AutomationPushDevicesApi,
-} from '@omnismith/sdk-typescript';
-import type { RegisterPushDeviceOperationRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { RegisterPushDeviceOperationRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -155,11 +155,11 @@ Unregister a push notification device token
 import {
   Configuration,
   AutomationPushDevicesApi,
-} from '@omnismith/sdk-typescript';
-import type { UnregisterPushDeviceOperationRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { UnregisterPushDeviceOperationRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",

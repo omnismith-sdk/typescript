@@ -33,11 +33,11 @@ Create a new attribute
 import {
   Configuration,
   AttributesApi,
-} from '@omnismith/sdk-typescript';
-import type { CreateAttributeOperationRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { CreateAttributeOperationRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -106,11 +106,11 @@ Add a list item to an attribute
 import {
   Configuration,
   AttributesApi,
-} from '@omnismith/sdk-typescript';
-import type { CreateAttributeItemRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { CreateAttributeItemRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -180,11 +180,11 @@ Delete an attribute
 import {
   Configuration,
   AttributesApi,
-} from '@omnismith/sdk-typescript';
-import type { DeleteAttributeRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { DeleteAttributeRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -251,11 +251,11 @@ Remove a list item from an attribute
 import {
   Configuration,
   AttributesApi,
-} from '@omnismith/sdk-typescript';
-import type { DeleteAttributeItemRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { DeleteAttributeItemRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -324,11 +324,11 @@ Delete reference configuration for an attribute
 import {
   Configuration,
   AttributesApi,
-} from '@omnismith/sdk-typescript';
-import type { DeleteAttributeReferenceConfigRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { DeleteAttributeReferenceConfigRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -393,11 +393,11 @@ Get an attribute
 import {
   Configuration,
   AttributesApi,
-} from '@omnismith/sdk-typescript';
-import type { GetAttributeRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { GetAttributeRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -464,11 +464,11 @@ Get reference configuration for an attribute
 import {
   Configuration,
   AttributesApi,
-} from '@omnismith/sdk-typescript';
-import type { GetAttributeReferenceConfigRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { GetAttributeReferenceConfigRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -536,11 +536,11 @@ Returns all attributes, templates, list items, and reference configs in a single
 import {
   Configuration,
   AttributesApi,
-} from '@omnismith/sdk-typescript';
-import type { GetProjectSchemaRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { GetProjectSchemaRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -598,11 +598,11 @@ List items of an attribute
 import {
   Configuration,
   AttributesApi,
-} from '@omnismith/sdk-typescript';
-import type { ListAttributeItemsRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { ListAttributeItemsRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -667,11 +667,11 @@ List attributes
 import {
   Configuration,
   AttributesApi,
-} from '@omnismith/sdk-typescript';
-import type { ListAttributesRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { ListAttributesRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -729,11 +729,11 @@ Set list items for an attribute (replaces all existing items)
 import {
   Configuration,
   AttributesApi,
-} from '@omnismith/sdk-typescript';
-import type { SetAttributeItemsRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { SetAttributeItemsRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -804,11 +804,11 @@ Set or update reference configuration for an attribute
 import {
   Configuration,
   AttributesApi,
-} from '@omnismith/sdk-typescript';
-import type { SetAttributeReferenceConfigRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { SetAttributeReferenceConfigRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -879,11 +879,11 @@ Update an attribute
 import {
   Configuration,
   AttributesApi,
-} from '@omnismith/sdk-typescript';
-import type { UpdateAttributeOperationRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { UpdateAttributeOperationRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -955,11 +955,11 @@ Update a list item of an attribute
 import {
   Configuration,
   AttributesApi,
-} from '@omnismith/sdk-typescript';
-import type { UpdateAttributeItemRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { UpdateAttributeItemRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",

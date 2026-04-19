@@ -27,11 +27,11 @@ Creates a LemonSqueezy checkout session to subscribe to a paid tier. Returns a U
 import {
   Configuration,
   BillingApi,
-} from '@omnismith/sdk-typescript';
-import type { CreateCheckoutOperationRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { CreateCheckoutOperationRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -99,11 +99,11 @@ List all available tiers
 import {
   Configuration,
   BillingApi,
-} from '@omnismith/sdk-typescript';
-import type { GetAllTiersRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { GetAllTiersRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const api = new BillingApi();
 
   try {
@@ -158,11 +158,11 @@ Returns a LemonSqueezy customer portal URL where users can manage their subscrip
 import {
   Configuration,
   BillingApi,
-} from '@omnismith/sdk-typescript';
-import type { GetPortalUrlRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { GetPortalUrlRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -221,11 +221,11 @@ Get current tier usage insights
 import {
   Configuration,
   BillingApi,
-} from '@omnismith/sdk-typescript';
-import type { GetUsageInsightsRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { GetUsageInsightsRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -283,11 +283,11 @@ Get current user tier
 import {
   Configuration,
   BillingApi,
-} from '@omnismith/sdk-typescript';
-import type { GetUserTierRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { GetUserTierRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -345,11 +345,11 @@ Log AI usage credits
 import {
   Configuration,
   BillingApi,
-} from '@omnismith/sdk-typescript';
-import type { LogAiUsageOperationRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { LogAiUsageOperationRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",

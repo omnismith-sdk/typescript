@@ -28,11 +28,11 @@ Returns the permissions for the authenticated user\&#39;s current role. Returns 
 import {
   Configuration,
   AuthApi,
-} from '@omnismith/sdk-typescript';
-import type { GetMyPermissionsRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { GetMyPermissionsRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -92,11 +92,11 @@ Authenticates a user using a Google ID token. If the user does not exist, a new 
 import {
   Configuration,
   AuthApi,
-} from '@omnismith/sdk-typescript';
-import type { GoogleLoginOperationRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { GoogleLoginOperationRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const api = new AuthApi();
 
   const body = {
@@ -160,11 +160,11 @@ List recent login sessions
 import {
   Configuration,
   AuthApi,
-} from '@omnismith/sdk-typescript';
-import type { ListSessionsRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { ListSessionsRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -222,11 +222,11 @@ Login user
 import {
   Configuration,
   AuthApi,
-} from '@omnismith/sdk-typescript';
-import type { LoginOperationRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { LoginOperationRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const api = new AuthApi();
 
   const body = {
@@ -292,11 +292,11 @@ Exchange a valid refresh token for a new access token and refresh token. The old
 import {
   Configuration,
   AuthApi,
-} from '@omnismith/sdk-typescript';
-import type { RefreshTokenOperationRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { RefreshTokenOperationRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const api = new AuthApi();
 
   const body = {
@@ -360,11 +360,11 @@ Revoke a login session
 import {
   Configuration,
   AuthApi,
-} from '@omnismith/sdk-typescript';
-import type { RevokeSessionRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { RevokeSessionRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -432,11 +432,11 @@ Switch active project context
 import {
   Configuration,
   AuthApi,
-} from '@omnismith/sdk-typescript';
-import type { SwitchProjectOperationRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { SwitchProjectOperationRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",

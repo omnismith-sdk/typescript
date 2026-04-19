@@ -28,11 +28,11 @@ Create a new entity
 import {
   Configuration,
   EntityApi,
-} from '@omnismith/sdk-typescript';
-import type { CreateEntityOperationRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { CreateEntityOperationRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -100,11 +100,11 @@ Delete an entity
 import {
   Configuration,
   EntityApi,
-} from '@omnismith/sdk-typescript';
-import type { DeleteEntityRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { DeleteEntityRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -172,11 +172,11 @@ Export entities matching the given filters to a CSV file. Uses the same filters 
 import {
   Configuration,
   EntityApi,
-} from '@omnismith/sdk-typescript';
-import type { ExportEntitiesOperationRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { ExportEntitiesOperationRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -253,11 +253,11 @@ Get an entity
 import {
   Configuration,
   EntityApi,
-} from '@omnismith/sdk-typescript';
-import type { GetEntityRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { GetEntityRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -323,11 +323,11 @@ Get entity chart time-series data
 import {
   Configuration,
   EntityApi,
-} from '@omnismith/sdk-typescript';
-import type { GetEntityChartRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { GetEntityChartRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const api = new EntityApi();
 
   const body = {
@@ -403,11 +403,11 @@ Get entity history
 import {
   Configuration,
   EntityApi,
-} from '@omnismith/sdk-typescript';
-import type { GetEntityHistoryRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { GetEntityHistoryRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const api = new EntityApi();
 
   const body = {
@@ -497,11 +497,11 @@ Import entities from a CSV file. Supports upsert: creates new entities or update
 import {
   Configuration,
   EntityApi,
-} from '@omnismith/sdk-typescript';
-import type { ImportEntitiesRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { ImportEntitiesRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -573,11 +573,11 @@ Search entities
 import {
   Configuration,
   EntityApi,
-} from '@omnismith/sdk-typescript';
-import type { SearchEntitiesOperationRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { SearchEntitiesOperationRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
@@ -657,11 +657,11 @@ Update an entity
 import {
   Configuration,
   EntityApi,
-} from '@omnismith/sdk-typescript';
-import type { UpdateEntityOperationRequest } from '@omnismith/sdk-typescript';
+} from '@omnismith-sdk/typescript';
+import type { UpdateEntityOperationRequest } from '@omnismith-sdk/typescript';
 
 async function example() {
-  console.log("🚀 Testing @omnismith/sdk-typescript SDK...");
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
   const config = new Configuration({ 
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
