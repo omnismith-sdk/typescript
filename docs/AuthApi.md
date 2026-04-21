@@ -142,7 +142,7 @@ No authorization required
 |-------------|-------------|------------------|
 | **200** | Login successful |  -  |
 | **422** | Validation Error |  -  |
-| **401** | Invalid Google token |  -  |
+| **401** | Unauthorized |  -  |
 | **500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
@@ -272,7 +272,7 @@ No authorization required
 |-------------|-------------|------------------|
 | **200** | Login successful |  -  |
 | **422** | Validation Error |  -  |
-| **401** | Invalid credentials |  -  |
+| **401** | Unauthorized |  -  |
 | **500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
@@ -487,7 +487,7 @@ example().catch(console.error);
 | **200** | Project switched successfully |  -  |
 | **422** | Validation Error |  -  |
 | **401** | Unauthorized |  -  |
-| **403** | Access Denied to Project |  -  |
+| **403** | Forbidden |  -  |
 | **500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)

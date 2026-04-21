@@ -453,7 +453,7 @@ example().catch(console.error);
 | **400** | Bad Request |  -  |
 | **401** | Unauthorized |  -  |
 | **422** | Validation Error |  -  |
-| **404** | Automation not found |  -  |
+| **404** | Not Found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
