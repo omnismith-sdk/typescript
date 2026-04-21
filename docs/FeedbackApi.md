@@ -77,7 +77,7 @@ example().catch(console.error);
 | **204** | Feedback submitted successfully |  -  |
 | **400** | Bad Request |  -  |
 | **401** | Unauthorized |  -  |
-| **422** | Validation Failed |  -  |
+| **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 

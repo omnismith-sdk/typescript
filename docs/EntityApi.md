@@ -227,13 +227,14 @@ example().catch(console.error);
 ### HTTP request headers
 
 - **Content-Type**: `application/json`
-- **Accept**: `text/csv`
+- **Accept**: `text/csv`, `application/json`
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | CSV file download |  * Content-Disposition - Attachment filename <br>  |
+| **422** | Validation Error |  -  |
 | **401** | Unauthorized |  -  |
 | **403** | Access denied |  -  |
 | **404** | Template not found |  -  |
@@ -554,6 +555,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Import completed |  -  |
 | **400** | Bad request (invalid CSV format) |  -  |
+| **422** | Validation Error |  -  |
 | **401** | Unauthorized |  -  |
 | **403** | Access denied |  -  |
 | **404** | Template not found |  -  |
@@ -641,6 +643,7 @@ example().catch(console.error);
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Search results |  -  |
+| **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -714,6 +717,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **204** | Entity updated |  -  |
 | **402** | Tier quota exceeded |  -  |
+| **422** | Validation Error |  -  |
 | **404** | Entity not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
