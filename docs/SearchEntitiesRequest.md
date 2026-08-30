@@ -1,13 +1,15 @@
 
 # SearchEntitiesRequest
 
+Filter and global search criteria for querying template entities
 
 ## Properties
 
 Name | Type
 ------------ | -------------
 `global_search` | string
-`filters` | [Array&lt;ExportEntitiesRequestFiltersInner&gt;](ExportEntitiesRequestFiltersInner.md)
+`filters` | [Array&lt;SearchEntitiesRequestFiltersInner&gt;](SearchEntitiesRequestFiltersInner.md)
+`attribute_key` | string
 
 ## Example
 
@@ -16,8 +18,9 @@ import type { SearchEntitiesRequest } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "global_search": null,
+  "global_search": Wireless,
   "filters": null,
+  "attribute_key": slug,
 } satisfies SearchEntitiesRequest
 
 console.log(example)

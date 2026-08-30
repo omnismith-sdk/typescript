@@ -9,22 +9,25 @@ All URIs are relative to *https://api.omnismith.io/v1*
 | [**deleteAttribute**](AttributesApi.md#deleteattribute) | **DELETE** /attributes/{id} | Delete an attribute |
 | [**deleteAttributeItem**](AttributesApi.md#deleteattributeitem) | **DELETE** /attributes/{id}/items/{itemId} | Remove a list item from an attribute |
 | [**deleteAttributeReferenceConfig**](AttributesApi.md#deleteattributereferenceconfig) | **DELETE** /attributes/{id}/reference | Delete reference configuration for an attribute |
-| [**getAttribute**](AttributesApi.md#getattribute) | **GET** /attributes/{id} | Get an attribute |
+| [**getAttribute**](AttributesApi.md#getattribute) | **GET** /attributes/{id} | Get an attribute by ID |
 | [**getAttributeReferenceConfig**](AttributesApi.md#getattributereferenceconfig) | **GET** /attributes/{id}/reference | Get reference configuration for an attribute |
 | [**listAttributeItems**](AttributesApi.md#listattributeitems) | **GET** /attributes/{id}/items | List items of an attribute |
-| [**listAttributes**](AttributesApi.md#listattributes) | **GET** /attributes | List attributes |
+| [**listAttributes**](AttributesApi.md#listattributes) | **GET** /attributes | List all attributes |
+| [**patchAttribute**](AttributesApi.md#patchattributeoperation) | **PATCH** /attributes/{id} | Patch an attribute (granular partial update) |
 | [**setAttributeItems**](AttributesApi.md#setattributeitems) | **PUT** /attributes/{id}/items | Set list items for an attribute (replaces all existing items) |
 | [**setAttributeReferenceConfig**](AttributesApi.md#setattributereferenceconfig) | **PUT** /attributes/{id}/reference | Set or update reference configuration for an attribute |
-| [**updateAttribute**](AttributesApi.md#updateattributeoperation) | **PUT** /attributes/{id} | Update an attribute |
+| [**updateAttribute**](AttributesApi.md#updateattributeoperation) | **PUT** /attributes/{id} | Update an attribute (full replacement) |
 | [**updateAttributeItem**](AttributesApi.md#updateattributeitem) | **PUT** /attributes/{id}/items/{itemId} | Update a list item of an attribute |
 
 
 
 ## createAttribute
 
-> CreateAttributeItem201Response createAttribute(createAttributeRequest)
+> CreateAttribute201Response createAttribute(createAttributeRequest)
 
 Create a new attribute
+
+Defines a new attribute in the project schema. Attributes can be of kind Dimension (0), Metric (1), List (2), or Reference (3). Specify the storage data type (String: 0, Number: 1, Boolean: 2, Datetime: 3, Date: 4, File: 5, Image: 6, Markdown: 7), name, optional project-unique slug (auto-generated from name if omitted), optional template associations, and an optional reference_config if kind is Reference (3). Subject to project tier quota constraints.
 
 ### Example
 
@@ -69,7 +72,7 @@ example().catch(console.error);
 
 ### Return type
 
-[**CreateAttributeItem201Response**](CreateAttributeItem201Response.md)
+[**CreateAttribute201Response**](CreateAttribute201Response.md)
 
 ### Authorization
 
@@ -84,10 +87,11 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **201** | Attribute created |  -  |
+| **201** | Attribute successfully created |  -  |
 | **400** | Bad Request |  -  |
 | **401** | Unauthorized |  -  |
 | **402** | Tier quota exceeded |  -  |
+| **409** | Conflict |  -  |
 | **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
@@ -98,6 +102,8 @@ example().catch(console.error);
 > CreateAttributeItem201Response createAttributeItem(id, addListItemRequest)
 
 Add a list item to an attribute
+
+Appends a single selectable choice option item to a List-type (attribute_type &#x3D; 2) attribute. Returns the generated or assigned UUID of the newly created list item.
 
 ### Example
 
@@ -117,8 +123,8 @@ async function example() {
   const api = new AttributesApi(config);
 
   const body = {
-    // string | Attribute ID
-    id: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | UUID of the List-type attribute
+    id: 018b2f1b-8c1a-75b3-8000-7f0000010000,
     // AddListItemRequest
     addListItemRequest: ...,
   } satisfies CreateAttributeItemRequest;
@@ -140,7 +146,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` | Attribute ID | [Defaults to `undefined`] |
+| **id** | `string` | UUID of the List-type attribute | [Defaults to `undefined`] |
 | **addListItemRequest** | [AddListItemRequest](AddListItemRequest.md) |  | |
 
 ### Return type
@@ -160,8 +166,10 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **201** | Item created |  -  |
-| **404** | Attribute not found |  -  |
+| **201** | List item created successfully |  -  |
+| **400** | Bad Request - Attribute is not a List type |  -  |
+| **401** | Unauthorized |  -  |
+| **404** | Not Found |  -  |
 | **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
@@ -172,6 +180,8 @@ example().catch(console.error);
 > deleteAttribute(id)
 
 Delete an attribute
+
+Soft-deletes an attribute from the project schema. Soft-deleted attributes are removed from active template projections and future queries, while existing historical dimension and telemetry records remain preserved for audit integrity.
 
 ### Example
 
@@ -191,8 +201,8 @@ async function example() {
   const api = new AttributesApi(config);
 
   const body = {
-    // string
-    id: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | UUID of the attribute to delete
+    id: 018b2f1b-8c1a-75b3-8000-7f0000010000,
   } satisfies DeleteAttributeRequest;
 
   try {
@@ -212,7 +222,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` |  | [Defaults to `undefined`] |
+| **id** | `string` | UUID of the attribute to delete | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -225,13 +235,13 @@ example().catch(console.error);
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: `application/json`
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **204** | Attribute deleted |  -  |
+| **204** | Attribute deleted successfully |  -  |
 | **401** | Unauthorized |  -  |
 | **404** | Not Found |  -  |
 
@@ -243,6 +253,8 @@ example().catch(console.error);
 > deleteAttributeItem(id, itemId)
 
 Remove a list item from an attribute
+
+Permanently deletes a specific selectable option item from a List-type (attribute_type &#x3D; 2) attribute. Validates that the list item exists and belongs to the specified attribute before deletion.
 
 ### Example
 
@@ -262,10 +274,10 @@ async function example() {
   const api = new AttributesApi(config);
 
   const body = {
-    // string | Attribute ID
-    id: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string | List Item ID
-    itemId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | UUID of the parent List attribute
+    id: 018b2f1b-8c1a-75b3-8000-7f0000010000,
+    // string | UUID of the list item to delete
+    itemId: 019a6b2c-8c3a-7c2e-8b3f-6c8a1a2b3c4d,
   } satisfies DeleteAttributeItemRequest;
 
   try {
@@ -285,8 +297,8 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` | Attribute ID | [Defaults to `undefined`] |
-| **itemId** | `string` | List Item ID | [Defaults to `undefined`] |
+| **id** | `string` | UUID of the parent List attribute | [Defaults to `undefined`] |
+| **itemId** | `string` | UUID of the list item to delete | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -299,14 +311,15 @@ example().catch(console.error);
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: `application/json`
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **204** | Item removed |  -  |
-| **404** | Item or Attribute not found |  -  |
+| **204** | List item deleted successfully |  -  |
+| **401** | Unauthorized |  -  |
+| **404** | Not Found - List item or Attribute not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -316,6 +329,8 @@ example().catch(console.error);
 > deleteAttributeReferenceConfig(id)
 
 Delete reference configuration for an attribute
+
+Removes the foreign entity reference configuration mapping from a Reference-type (attribute_type &#x3D; 3) attribute.
 
 ### Example
 
@@ -335,8 +350,8 @@ async function example() {
   const api = new AttributesApi(config);
 
   const body = {
-    // string | Attribute ID
-    id: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | UUID of the Reference attribute
+    id: 018b2f1b-8c1a-75b3-8000-7f0000010000,
   } satisfies DeleteAttributeReferenceConfigRequest;
 
   try {
@@ -356,7 +371,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` | Attribute ID | [Defaults to `undefined`] |
+| **id** | `string` | UUID of the Reference attribute | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -369,13 +384,15 @@ example().catch(console.error);
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: `application/json`
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **204** | Reference config deleted |  -  |
+| **204** | Reference configuration deleted successfully |  -  |
+| **401** | Unauthorized |  -  |
+| **404** | Not Found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -384,7 +401,9 @@ example().catch(console.error);
 
 > AttributeResponse getAttribute(id)
 
-Get an attribute
+Get an attribute by ID
+
+Retrieves complete attribute metadata by its UUID, including kind (Dimension: 0, Metric: 1, List: 2, Reference: 3), storage data type, assigned template IDs, creation timestamps, and reference configuration if applicable.
 
 ### Example
 
@@ -404,8 +423,8 @@ async function example() {
   const api = new AttributesApi(config);
 
   const body = {
-    // string
-    id: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | UUID of the attribute to fetch
+    id: 018b2f1b-8c1a-75b3-8000-7f0000010000,
   } satisfies GetAttributeRequest;
 
   try {
@@ -425,7 +444,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` |  | [Defaults to `undefined`] |
+| **id** | `string` | UUID of the attribute to fetch | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -457,6 +476,8 @@ example().catch(console.error);
 
 Get reference configuration for an attribute
 
+Retrieves the relational reference target configuration for a Reference-type (attribute_type &#x3D; 3) attribute. Returns the target template UUID and target display attribute UUID used for entity reference pointer resolution.
+
 ### Example
 
 ```ts
@@ -475,8 +496,8 @@ async function example() {
   const api = new AttributesApi(config);
 
   const body = {
-    // string | Attribute ID
-    id: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | UUID of the Reference attribute
+    id: 018b2f1b-8c1a-75b3-8000-7f0000010000,
   } satisfies GetAttributeReferenceConfigRequest;
 
   try {
@@ -496,7 +517,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` | Attribute ID | [Defaults to `undefined`] |
+| **id** | `string` | UUID of the Reference attribute | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -515,8 +536,9 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Reference config |  -  |
-| **404** | Reference config not found |  -  |
+| **200** | Reference configuration details |  -  |
+| **401** | Unauthorized |  -  |
+| **404** | Not Found - Reference configuration not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -526,6 +548,8 @@ example().catch(console.error);
 > ListAttributeItems200Response listAttributeItems(id)
 
 List items of an attribute
+
+Retrieves all selectable choice option items for a List-type (attribute_type &#x3D; 2) attribute in ascending sort order. Each item contains its UUID, parent attribute ID, string value, and sort rank.
 
 ### Example
 
@@ -545,8 +569,8 @@ async function example() {
   const api = new AttributesApi(config);
 
   const body = {
-    // string | Attribute ID
-    id: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | UUID of the List-type attribute
+    id: 018b2f1b-8c1a-75b3-8000-7f0000010000,
   } satisfies ListAttributeItemsRequest;
 
   try {
@@ -566,7 +590,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` | Attribute ID | [Defaults to `undefined`] |
+| **id** | `string` | UUID of the List-type attribute | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -585,7 +609,9 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | List of items |  -  |
+| **200** | List of option items for the attribute |  -  |
+| **401** | Unauthorized |  -  |
+| **404** | Not Found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -594,7 +620,9 @@ example().catch(console.error);
 
 > ListAttributes200Response listAttributes()
 
-List attributes
+List all attributes
+
+Retrieves all schema attributes defined in the active project. Attributes represent the core schema building blocks across 4 kinds: Dimension (0), Metric (1), List (2), and Reference (3). Each attribute defines its storage data type (String: 0, Number: 1, Boolean: 2, Datetime: 3, Date: 4, File: 5, Image: 6, Markdown: 7), unique slug, optional description, associated templates, and reference configurations.
 
 ### Example
 
@@ -646,8 +674,87 @@ This endpoint does not need any parameter.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | List of attributes |  -  |
+| **200** | List of all project attributes |  -  |
 | **401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## patchAttribute
+
+> patchAttribute(id, patchAttributeRequest)
+
+Patch an attribute (granular partial update)
+
+Applies partial modifications to an existing attribute without overwriting omitted fields. Allows independently changing name, description, slug, template associations, reference configuration, or transitioning data type. Lossless data type transition rules apply when updating data_type (Dimension only: Number(1)-&gt;String(0), Boolean(2)-&gt;String(0), Date(4)&lt;-&gt;Datetime(3), Date(4)/Datetime(3)-&gt;String(0), String(0)&lt;-&gt;Markdown(7)). Template associations merge and preserve restricted templates.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  AttributesApi,
+} from '@omnismith-sdk/typescript';
+import type { PatchAttributeOperationRequest } from '@omnismith-sdk/typescript';
+
+async function example() {
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
+  const config = new Configuration({ 
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new AttributesApi(config);
+
+  const body = {
+    // string | UUID of the attribute to patch
+    id: 018b2f1b-8c1a-75b3-8000-7f0000010000,
+    // PatchAttributeRequest
+    patchAttributeRequest: ...,
+  } satisfies PatchAttributeOperationRequest;
+
+  try {
+    const data = await api.patchAttribute(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | `string` | UUID of the attribute to patch | [Defaults to `undefined`] |
+| **patchAttributeRequest** | [PatchAttributeRequest](PatchAttributeRequest.md) |  | |
+
+### Return type
+
+`void` (Empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Attribute patched successfully |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **404** | Not Found |  -  |
+| **409** | Conflict |  -  |
+| **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -657,6 +764,8 @@ This endpoint does not need any parameter.
 > setAttributeItems(id, setListItemsRequest)
 
 Set list items for an attribute (replaces all existing items)
+
+Atomically replaces all selectable option items for a List-type (attribute_type &#x3D; 2) attribute. Existing list items for this attribute are removed and replaced with the provided array of items (with values, sort orders, and optional custom UUIDs). Returns HTTP 400 if the target attribute is not of List kind.
 
 ### Example
 
@@ -676,8 +785,8 @@ async function example() {
   const api = new AttributesApi(config);
 
   const body = {
-    // string | Attribute ID
-    id: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | UUID of the List-type attribute
+    id: 018b2f1b-8c1a-75b3-8000-7f0000010000,
     // SetListItemsRequest
     setListItemsRequest: ...,
   } satisfies SetAttributeItemsRequest;
@@ -699,7 +808,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` | Attribute ID | [Defaults to `undefined`] |
+| **id** | `string` | UUID of the List-type attribute | [Defaults to `undefined`] |
 | **setListItemsRequest** | [SetListItemsRequest](SetListItemsRequest.md) |  | |
 
 ### Return type
@@ -719,9 +828,10 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **204** | Items updated |  -  |
-| **400** | Attribute is not a List type |  -  |
-| **404** | Attribute not found |  -  |
+| **204** | List items replaced successfully |  -  |
+| **400** | Bad Request - Attribute is not a List type |  -  |
+| **401** | Unauthorized |  -  |
+| **404** | Not Found |  -  |
 | **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
@@ -732,6 +842,8 @@ example().catch(console.error);
 > setAttributeReferenceConfig(id, setReferenceConfigRequest)
 
 Set or update reference configuration for an attribute
+
+Sets or updates the target template and display attribute for a Reference-type (attribute_type &#x3D; 3) attribute. Enables relational linking and foreign entity display label resolution. Returns HTTP 400 if the target attribute is not of Reference kind.
 
 ### Example
 
@@ -751,8 +863,8 @@ async function example() {
   const api = new AttributesApi(config);
 
   const body = {
-    // string | Attribute ID
-    id: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | UUID of the Reference attribute
+    id: 018b2f1b-8c1a-75b3-8000-7f0000010000,
     // SetReferenceConfigRequest
     setReferenceConfigRequest: ...,
   } satisfies SetAttributeReferenceConfigRequest;
@@ -774,7 +886,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` | Attribute ID | [Defaults to `undefined`] |
+| **id** | `string` | UUID of the Reference attribute | [Defaults to `undefined`] |
 | **setReferenceConfigRequest** | [SetReferenceConfigRequest](SetReferenceConfigRequest.md) |  | |
 
 ### Return type
@@ -794,9 +906,10 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **204** | Reference config updated |  -  |
-| **400** | Attribute is not a Reference type |  -  |
-| **404** | Attribute not found |  -  |
+| **204** | Reference configuration updated successfully |  -  |
+| **400** | Bad Request - Attribute is not a Reference type |  -  |
+| **401** | Unauthorized |  -  |
+| **404** | Not Found |  -  |
 | **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
@@ -806,7 +919,9 @@ example().catch(console.error);
 
 > updateAttribute(id, updateAttributeRequest)
 
-Update an attribute
+Update an attribute (full replacement)
+
+Performs a full update of an existing attribute definition. Supports updating name, description, slug, template associations, reference configuration, and lossless data type transitions. Data type transitions are permitted only for Dimension (0) attributes and must follow lossless compatibility: Number(1) -&gt; String(0), Boolean(2) -&gt; String(0), Date(4) &lt;-&gt; Datetime(3), Date(4)/Datetime(3) -&gt; String(0), and String(0) &lt;-&gt; Markdown(7). Non-lossless transitions or transitions on non-dimension attributes will return HTTP 422. Template associations preserve restricted templates the caller cannot see.
 
 ### Example
 
@@ -826,8 +941,8 @@ async function example() {
   const api = new AttributesApi(config);
 
   const body = {
-    // string
-    id: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | UUID of the attribute to update
+    id: 018b2f1b-8c1a-75b3-8000-7f0000010000,
     // UpdateAttributeRequest
     updateAttributeRequest: ...,
   } satisfies UpdateAttributeOperationRequest;
@@ -849,7 +964,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` |  | [Defaults to `undefined`] |
+| **id** | `string` | UUID of the attribute to update | [Defaults to `undefined`] |
 | **updateAttributeRequest** | [UpdateAttributeRequest](UpdateAttributeRequest.md) |  | |
 
 ### Return type
@@ -869,10 +984,11 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **204** | Attribute updated |  -  |
+| **204** | Attribute updated successfully |  -  |
 | **400** | Bad Request |  -  |
 | **401** | Unauthorized |  -  |
 | **404** | Not Found |  -  |
+| **409** | Conflict |  -  |
 | **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
@@ -883,6 +999,8 @@ example().catch(console.error);
 > updateAttributeItem(id, itemId, updateListItemRequest)
 
 Update a list item of an attribute
+
+Updates the display value and/or sort order of an existing list item belonging to a List-type (attribute_type &#x3D; 2) attribute. Validates that the list item exists and belongs to the specified attribute.
 
 ### Example
 
@@ -902,10 +1020,10 @@ async function example() {
   const api = new AttributesApi(config);
 
   const body = {
-    // string | Attribute ID
-    id: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string | List Item ID
-    itemId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | UUID of the parent List attribute
+    id: 018b2f1b-8c1a-75b3-8000-7f0000010000,
+    // string | UUID of the list item to update
+    itemId: 019a6b2c-8c3a-7c2e-8b3f-6c8a1a2b3c4d,
     // UpdateListItemRequest
     updateListItemRequest: ...,
   } satisfies UpdateAttributeItemRequest;
@@ -927,8 +1045,8 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` | Attribute ID | [Defaults to `undefined`] |
-| **itemId** | `string` | List Item ID | [Defaults to `undefined`] |
+| **id** | `string` | UUID of the parent List attribute | [Defaults to `undefined`] |
+| **itemId** | `string` | UUID of the list item to update | [Defaults to `undefined`] |
 | **updateListItemRequest** | [UpdateListItemRequest](UpdateListItemRequest.md) |  | |
 
 ### Return type
@@ -948,8 +1066,10 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **204** | Item updated |  -  |
-| **404** | Item or Attribute not found |  -  |
+| **204** | List item updated successfully |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **404** | Not Found - List item or Attribute not found |  -  |
 | **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)

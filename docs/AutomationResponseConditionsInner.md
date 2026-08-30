@@ -18,9 +18,9 @@ import type { AutomationResponseConditionsInner } from '@omnismith-sdk/typescrip
 
 // TODO: Update the object below with actual values
 const example = {
-  "attributeId": null,
+  "attributeId": 01912ecb-4654-7890-a1b2-c3d4e5f60077,
   "operator": eq,
-  "value": null,
+  "value": active,
   "mode": current,
 } satisfies AutomationResponseConditionsInner
 

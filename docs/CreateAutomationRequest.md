@@ -21,7 +21,7 @@ import type { CreateAutomationRequest } from '@omnismith-sdk/typescript'
 // TODO: Update the object below with actual values
 const example = {
   "name": Notify on status change,
-  "description": Sends alert when status changes,
+  "description": Sends telegram alert when deal status changes to Won,
   "trigger": null,
   "conditions": null,
   "actions": null,

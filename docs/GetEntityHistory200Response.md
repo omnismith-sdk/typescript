@@ -17,7 +17,7 @@ import type { GetEntityHistory200Response } from '@omnismith-sdk/typescript'
 // TODO: Update the object below with actual values
 const example = {
   "items": null,
-  "total": null,
+  "total": 12,
 } satisfies GetEntityHistory200Response
 
 console.log(example)

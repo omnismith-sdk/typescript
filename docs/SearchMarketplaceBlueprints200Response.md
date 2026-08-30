@@ -6,7 +6,7 @@
 
 Name | Type
 ------------ | -------------
-`data` | Array&lt;any&gt;
+`data` | [Array&lt;MarketplaceBlueprintSummaryResponse&gt;](MarketplaceBlueprintSummaryResponse.md)
 `meta` | [SearchMarketplaceBlueprints200ResponseMeta](SearchMarketplaceBlueprints200ResponseMeta.md)
 
 ## Example

@@ -1,6 +1,7 @@
 
 # ListItemResponse
 
+Selectable choice option item for a List-type attribute.
 
 ## Properties
 
@@ -18,10 +19,10 @@ import type { ListItemResponse } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "id": null,
-  "attribute_id": null,
-  "value": null,
-  "sort_order": null,
+  "id": 019a6b2c-8c3a-7c2e-8b3f-6c8a1a2b3c4d,
+  "attribute_id": 018b2f1b-8c1a-75b3-8000-7f0000010000,
+  "value": Red,
+  "sort_order": 0,
 } satisfies ListItemResponse
 
 console.log(example)

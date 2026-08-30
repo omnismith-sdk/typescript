@@ -1,12 +1,13 @@
 
 # UpdateEntityRequest
 
+Payload containing attribute value mutations for an existing entity
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`attribute_values` | [Array&lt;CreateEntityRequestAttributeValuesInner&gt;](CreateEntityRequestAttributeValuesInner.md)
+`attribute_values` | [Array&lt;UpdateEntityRequestAttributeValuesInner&gt;](UpdateEntityRequestAttributeValuesInner.md)
 
 ## Example
 

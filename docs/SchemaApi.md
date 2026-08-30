@@ -4,7 +4,7 @@ All URIs are relative to *https://api.omnismith.io/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**getProjectSchema**](SchemaApi.md#getprojectschema) | **GET** /discovery/project-schema | Get complete project schema |
+| [**getProjectSchema**](SchemaApi.md#getprojectschema) | **GET** /discovery/project-schema | Get complete project schema graph |
 
 
 
@@ -12,9 +12,9 @@ All URIs are relative to *https://api.omnismith.io/v1*
 
 > ProjectSchemaResponse getProjectSchema()
 
-Get complete project schema
+Get complete project schema graph
 
-Returns all attributes, templates, list items, and reference configs in a single response
+Retrieves the complete consolidated schema graph for the active project in a single payload. Includes all active attributes, templates (with attribute bindings and UI layout groups), list choice items, and foreign entity reference configurations. Ideal for AI agents, client initialization, metadata caching, and schema introspection.
 
 ### Example
 
@@ -66,7 +66,7 @@ This endpoint does not need any parameter.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Project schema |  -  |
+| **200** | Consolidated project schema definition |  -  |
 | **401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)

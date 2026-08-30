@@ -11,6 +11,8 @@ Name | Type
 `originalFilename` | string
 `mimeType` | string
 `size` | number
+`context` | string
+`expiresAt` | Date
 
 ## Example
 
@@ -23,6 +25,8 @@ const example = {
   "originalFilename": null,
   "mimeType": null,
   "size": null,
+  "context": null,
+  "expiresAt": null,
 } satisfies FileAttachmentResponse
 
 console.log(example)

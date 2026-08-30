@@ -1,6 +1,7 @@
 
 # CreateAccessTokenRequest
 
+Payload for generating a new programmatic API access token
 
 ## Properties
 
@@ -16,8 +17,8 @@ import type { CreateAccessTokenRequest } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "name": null,
-  "expires_at": null,
+  "name": CI/CD Deployment Key,
+  "expires_at": 2026-12-31T23:59:59Z,
 } satisfies CreateAccessTokenRequest
 
 console.log(example)

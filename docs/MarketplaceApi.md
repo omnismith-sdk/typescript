@@ -7,7 +7,7 @@ All URIs are relative to *https://api.omnismith.io/v1*
 | [**deleteMarketplaceBlueprint**](MarketplaceApi.md#deletemarketplaceblueprint) | **DELETE** /marketplace/blueprints/{id} | Delete a marketplace blueprint |
 | [**getMarketplaceBlueprint**](MarketplaceApi.md#getmarketplaceblueprint) | **GET** /marketplace/blueprints/{id} | Get marketplace blueprint details |
 | [**installMarketplaceBlueprint**](MarketplaceApi.md#installmarketplaceblueprintoperation) | **POST** /marketplace/blueprints/{id}/install | Install a marketplace blueprint into a project |
-| [**listMarketplaceKeywords**](MarketplaceApi.md#listmarketplacekeywords) | **GET** /marketplace/keywords | List all marketplace keywords with blueprint counts |
+| [**listMarketplaceKeywords**](MarketplaceApi.md#listmarketplacekeywords) | **GET** /marketplace/keywords | List marketplace keywords |
 | [**publishMarketplaceBlueprint**](MarketplaceApi.md#publishmarketplaceblueprintoperation) | **POST** /marketplace/blueprints | Publish or update a marketplace blueprint |
 | [**searchMarketplaceBlueprints**](MarketplaceApi.md#searchmarketplaceblueprints) | **GET** /marketplace/blueprints | Search marketplace blueprints |
 
@@ -18,6 +18,8 @@ All URIs are relative to *https://api.omnismith.io/v1*
 > deleteMarketplaceBlueprint(id)
 
 Delete a marketplace blueprint
+
+Permanently removes a published blueprint from the marketplace catalog. Only the author who published the blueprint or a system administrator has permission to delete it.
 
 ### Example
 
@@ -37,8 +39,8 @@ async function example() {
   const api = new MarketplaceApi(config);
 
   const body = {
-    // string | Blueprint ID
-    id: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | Unique blueprint UUID to delete
+    id: 01912ecb-4654-7890-a1b2-c3d4e5f60003,
   } satisfies DeleteMarketplaceBlueprintRequest;
 
   try {
@@ -58,7 +60,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` | Blueprint ID | [Defaults to `undefined`] |
+| **id** | `string` | Unique blueprint UUID to delete | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -77,10 +79,10 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **204** | Blueprint deleted |  -  |
+| **204** | Blueprint successfully deleted |  -  |
 | **401** | Unauthorized |  -  |
-| **403** | Forbidden |  -  |
-| **404** | Not Found |  -  |
+| **403** | Forbidden - Not the owner of the blueprint |  -  |
+| **404** | Blueprint not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -90,6 +92,8 @@ example().catch(console.error);
 > GetMarketplaceBlueprint200Response getMarketplaceBlueprint(id)
 
 Get marketplace blueprint details
+
+Retrieves complete information for a specific marketplace blueprint by its UUID. Returns full blueprint metadata, publisher details, popularity metrics, and packaged blueprint schema definition containing template schemas, attribute configurations, and optional demo entities.
 
 ### Example
 
@@ -105,8 +109,8 @@ async function example() {
   const api = new MarketplaceApi();
 
   const body = {
-    // string | Blueprint ID
-    id: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | Unique marketplace blueprint UUID
+    id: 01912ecb-4654-7890-a1b2-c3d4e5f60003,
   } satisfies GetMarketplaceBlueprintRequest;
 
   try {
@@ -126,7 +130,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` | Blueprint ID | [Defaults to `undefined`] |
+| **id** | `string` | Unique marketplace blueprint UUID | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -145,8 +149,8 @@ No authorization required
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Blueprint detail |  -  |
-| **404** | Not Found |  -  |
+| **200** | Marketplace blueprint details |  -  |
+| **404** | Blueprint not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -156,6 +160,8 @@ No authorization required
 > installMarketplaceBlueprint(id, installMarketplaceBlueprintRequest)
 
 Install a marketplace blueprint into a project
+
+Installs a marketplace blueprint into the specified project context. Provisions all packaged templates, attributes, and relationships defined in the blueprint schema, and optionally populates sample demo entities. Automatically increments the installation count for the blueprint.
 
 ### Example
 
@@ -175,8 +181,8 @@ async function example() {
   const api = new MarketplaceApi(config);
 
   const body = {
-    // string | Blueprint ID
-    id: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | Unique UUID of the blueprint to install
+    id: 01912ecb-4654-7890-a1b2-c3d4e5f60003,
     // InstallMarketplaceBlueprintRequest
     installMarketplaceBlueprintRequest: ...,
   } satisfies InstallMarketplaceBlueprintOperationRequest;
@@ -198,7 +204,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` | Blueprint ID | [Defaults to `undefined`] |
+| **id** | `string` | Unique UUID of the blueprint to install | [Defaults to `undefined`] |
 | **installMarketplaceBlueprintRequest** | [InstallMarketplaceBlueprintRequest](InstallMarketplaceBlueprintRequest.md) |  | |
 
 ### Return type
@@ -218,9 +224,9 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **204** | Blueprint installed successfully |  -  |
+| **204** | Blueprint successfully installed into the target project |  -  |
 | **401** | Unauthorized |  -  |
-| **403** | Forbidden |  -  |
+| **403** | Forbidden - Insufficient project permissions |  -  |
 | **404** | Blueprint not found |  -  |
 | **422** | Validation Error |  -  |
 
@@ -231,7 +237,9 @@ example().catch(console.error);
 
 > ListMarketplaceKeywords200Response listMarketplaceKeywords()
 
-List all marketplace keywords with blueprint counts
+List marketplace keywords
+
+Retrieves all distinct categorization keywords and tags associated with published blueprints along with their total occurrence count, ordered by popularity descending. Useful for populating discovery tags, filters, and keyword clouds.
 
 ### Example
 
@@ -289,6 +297,8 @@ No authorization required
 > GetMarketplaceBlueprint200Response publishMarketplaceBlueprint(publishMarketplaceBlueprintRequest)
 
 Publish or update a marketplace blueprint
+
+Publishes a new blueprint to the public marketplace or updates an existing blueprint owned by the authenticated user. Snapshots selected templates, attributes, and optional sample entities into an exportable blueprint package with title, description, and searchable keywords.
 
 ### Example
 
@@ -348,10 +358,10 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **201** | Blueprint created |  -  |
-| **200** | Blueprint updated |  -  |
+| **201** | Blueprint successfully published |  -  |
+| **200** | Blueprint successfully updated |  -  |
 | **401** | Unauthorized |  -  |
-| **403** | Forbidden |  -  |
+| **403** | Forbidden - Not the owner of the blueprint |  -  |
 | **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
@@ -362,6 +372,8 @@ example().catch(console.error);
 > SearchMarketplaceBlueprints200Response searchMarketplaceBlueprints(search, keywords, limit, offset, sortBy, sortDirection, featured)
 
 Search marketplace blueprints
+
+Searches and lists public blueprints available in the marketplace catalog. Blueprints package reusable template schemas, attribute definitions, and sample data that users can install directly into their projects. Supports full-text search across titles and descriptions, keyword tag filtering, filtering by featured status, and sorting by creation date, install counts, or title.
 
 ### Example
 
@@ -377,19 +389,19 @@ async function example() {
   const api = new MarketplaceApi();
 
   const body = {
-    // string | Free-text search on title and description (optional)
-    search: search_example,
-    // string | Comma-separated keywords to filter by (optional)
-    keywords: keywords_example,
-    // number | Number of results per page (optional)
-    limit: 56,
-    // number | Pagination offset (optional)
-    offset: 56,
-    // 'created_at' | 'installs' | 'title' | Sort field (optional)
-    sortBy: sortBy_example,
-    // 'asc' | 'desc' | Sort direction (optional)
-    sortDirection: sortDirection_example,
-    // boolean | Filter by featured status (optional)
+    // string | Free-text search filter across blueprint title and description (optional)
+    search: crm pipeline,
+    // string | Comma-separated keywords or tags to filter blueprints (optional)
+    keywords: crm,sales,leads,
+    // number | Number of blueprint records to return per page (max 100) (optional)
+    limit: 20,
+    // number | Number of blueprint records to skip for pagination (optional)
+    offset: 0,
+    // 'created_at' | 'installs' | 'title' | Field to sort blueprint results by (optional)
+    sortBy: installs,
+    // 'asc' | 'desc' | Sort direction order (ascending or descending) (optional)
+    sortDirection: desc,
+    // boolean | Filter to return only curated and featured marketplace blueprints (optional)
     featured: true,
   } satisfies SearchMarketplaceBlueprintsRequest;
 
@@ -410,13 +422,13 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **search** | `string` | Free-text search on title and description | [Optional] [Defaults to `undefined`] |
-| **keywords** | `string` | Comma-separated keywords to filter by | [Optional] [Defaults to `undefined`] |
-| **limit** | `number` | Number of results per page | [Optional] [Defaults to `20`] |
-| **offset** | `number` | Pagination offset | [Optional] [Defaults to `0`] |
-| **sortBy** | `created_at`, `installs`, `title` | Sort field | [Optional] [Defaults to `&#39;created_at&#39;`] [Enum: created_at, installs, title] |
-| **sortDirection** | `asc`, `desc` | Sort direction | [Optional] [Defaults to `&#39;desc&#39;`] [Enum: asc, desc] |
-| **featured** | `boolean` | Filter by featured status | [Optional] [Defaults to `undefined`] |
+| **search** | `string` | Free-text search filter across blueprint title and description | [Optional] [Defaults to `undefined`] |
+| **keywords** | `string` | Comma-separated keywords or tags to filter blueprints | [Optional] [Defaults to `undefined`] |
+| **limit** | `number` | Number of blueprint records to return per page (max 100) | [Optional] [Defaults to `20`] |
+| **offset** | `number` | Number of blueprint records to skip for pagination | [Optional] [Defaults to `0`] |
+| **sortBy** | `created_at`, `installs`, `title` | Field to sort blueprint results by | [Optional] [Defaults to `&#39;created_at&#39;`] [Enum: created_at, installs, title] |
+| **sortDirection** | `asc`, `desc` | Sort direction order (ascending or descending) | [Optional] [Defaults to `&#39;desc&#39;`] [Enum: asc, desc] |
+| **featured** | `boolean` | Filter to return only curated and featured marketplace blueprints | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -435,7 +447,7 @@ No authorization required
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Marketplace blueprints list |  -  |
+| **200** | Paginated list of marketplace blueprints |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 

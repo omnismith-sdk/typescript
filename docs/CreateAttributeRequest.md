@@ -1,6 +1,7 @@
 
 # CreateAttributeRequest
 
+Payload for creating a new schema attribute definition.
 
 ## Properties
 
@@ -13,6 +14,7 @@ Name | Type
 `description` | string
 `reference_config` | [CreateAttributeRequestReferenceConfig](CreateAttributeRequestReferenceConfig.md)
 `id` | string
+`slug` | string
 
 ## Example
 
@@ -21,13 +23,14 @@ import type { CreateAttributeRequest } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "name": Color,
+  "name": Product Color,
   "attribute_type": 0,
   "data_type": 0,
   "template_ids": null,
-  "description": Product color,
+  "description": Product color specification,
   "reference_config": null,
   "id": 018b2f1b-8c1a-75b3-8000-7f0000010000,
+  "slug": product_color,
 } satisfies CreateAttributeRequest
 
 console.log(example)

@@ -1,13 +1,19 @@
 
 # UpdateNotificationChannelRequestCredentials
 
-Type-specific credentials
+Updated type-specific credentials payload (e.g. `bot_token` for Telegram; `url`, `auth_type`, `token`, `username`, `password`, `headers` for webhook)
 
 ## Properties
 
 Name | Type
 ------------ | -------------
 `bot_token` | string
+`url` | string
+`auth_type` | string
+`token` | string
+`username` | string
+`password` | string
+`headers` | { [key: string]: string; }
 
 ## Example
 
@@ -17,6 +23,12 @@ import type { UpdateNotificationChannelRequestCredentials } from '@omnismith-sdk
 // TODO: Update the object below with actual values
 const example = {
   "bot_token": 654321:NEW-TOKEN...,
+  "url": https://api.example.com/updated-webhook,
+  "auth_type": bearer,
+  "token": omni_live_secret_key_updated,
+  "username": new_user,
+  "password": new_secret,
+  "headers": null,
 } satisfies UpdateNotificationChannelRequestCredentials
 
 console.log(example)

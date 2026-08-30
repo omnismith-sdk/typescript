@@ -1,6 +1,7 @@
 
 # ResolvedChartBlockResponse
 
+Computed result for a time-series telemetry chart block aggregated across query intervals
 
 ## Properties
 
@@ -19,10 +20,10 @@ import type { ResolvedChartBlockResponse } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "block_id": null,
-  "title": null,
-  "type": null,
-  "bucket_width": null,
+  "block_id": 0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6c,
+  "title": Gateway Temperature History,
+  "type": chart,
+  "bucket_width": 1 hour,
   "series": null,
 } satisfies ResolvedChartBlockResponse
 

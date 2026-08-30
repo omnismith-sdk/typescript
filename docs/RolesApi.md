@@ -9,19 +9,23 @@ All URIs are relative to *https://api.omnismith.io/v1*
 | [**getRole**](RolesApi.md#getrole) | **GET** /roles/{id} | Get a role |
 | [**getRolePermissions**](RolesApi.md#getrolepermissions) | **GET** /roles/{id}/permissions | Get role permissions |
 | [**getRoleResources**](RolesApi.md#getroleresources) | **GET** /roles/{id}/resources | Get role resource restrictions |
+| [**getRoleScopes**](RolesApi.md#getrolescopes) | **GET** /roles/{id}/scopes | Get role entity-access scopes |
 | [**listAvailablePermissions**](RolesApi.md#listavailablepermissions) | **GET** /roles/permissions/available | List available permissions for role assignment |
 | [**listRoles**](RolesApi.md#listroles) | **GET** /roles | List roles |
 | [**setRolePermissions**](RolesApi.md#setrolepermissionsoperation) | **PUT** /roles/{id}/permissions | Set role permissions |
 | [**setRoleResources**](RolesApi.md#setroleresourcesoperation) | **PUT** /roles/{id}/resources | Set role resource restrictions |
+| [**setRoleScopes**](RolesApi.md#setrolescopesoperation) | **PUT** /roles/{id}/scopes | Set role entity-access scopes |
 | [**updateRole**](RolesApi.md#updateroleoperation) | **PUT** /roles/{id} | Update a role |
 
 
 
 ## createRole
 
-> CreateAttributeItem201Response createRole(createRoleRequest)
+> CreateProject201Response createRole(createRoleRequest)
 
 Create a new role
+
+Creates a new custom role within the project. Role permissions, resource restrictions, and entity scopes can be configured subsequently.
 
 ### Example
 
@@ -66,7 +70,7 @@ example().catch(console.error);
 
 ### Return type
 
-[**CreateAttributeItem201Response**](CreateAttributeItem201Response.md)
+[**CreateProject201Response**](CreateProject201Response.md)
 
 ### Authorization
 
@@ -96,6 +100,8 @@ example().catch(console.error);
 
 Delete a role
 
+Permanently deletes a custom role. System owner roles cannot be deleted. Any users assigned to this role must be reassigned.
+
 ### Example
 
 ```ts
@@ -114,8 +120,8 @@ async function example() {
   const api = new RolesApi(config);
 
   const body = {
-    // string | Role ID
-    id: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | Unique UUID of the role to delete
+    id: 018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7a,
   } satisfies DeleteRoleRequest;
 
   try {
@@ -135,7 +141,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` | Role ID | [Defaults to `undefined`] |
+| **id** | `string` | Unique UUID of the role to delete | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -168,6 +174,8 @@ example().catch(console.error);
 
 Get a role
 
+Retrieves role metadata (name, is_owner status, creation timestamp) by role UUID.
+
 ### Example
 
 ```ts
@@ -186,8 +194,8 @@ async function example() {
   const api = new RolesApi(config);
 
   const body = {
-    // string | Role ID
-    id: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | Unique UUID of the role
+    id: 018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7a,
   } satisfies GetRoleRequest;
 
   try {
@@ -207,7 +215,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` | Role ID | [Defaults to `undefined`] |
+| **id** | `string` | Unique UUID of the role | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -239,6 +247,8 @@ example().catch(console.error);
 
 Get role permissions
 
+Returns the array of permission keys (e.g. \&quot;template.view\&quot;, \&quot;entity.create\&quot;, \&quot;attribute.manage\&quot;) explicitly granted to the specified role.
+
 ### Example
 
 ```ts
@@ -257,8 +267,8 @@ async function example() {
   const api = new RolesApi(config);
 
   const body = {
-    // string | Role ID
-    id: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | Unique UUID of the role
+    id: 018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7a,
   } satisfies GetRolePermissionsRequest;
 
   try {
@@ -278,7 +288,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` | Role ID | [Defaults to `undefined`] |
+| **id** | `string` | Unique UUID of the role | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -310,6 +320,8 @@ example().catch(console.error);
 
 Get role resource restrictions
 
+Retrieves granular resource-level access restrictions configured for the role, specifying access levels (deny, view, edit, full) for particular templates or attributes.
+
 ### Example
 
 ```ts
@@ -328,8 +340,8 @@ async function example() {
   const api = new RolesApi(config);
 
   const body = {
-    // string | Role ID
-    id: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | Unique UUID of the role
+    id: 018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7a,
   } satisfies GetRoleResourcesRequest;
 
   try {
@@ -349,7 +361,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` | Role ID | [Defaults to `undefined`] |
+| **id** | `string` | Unique UUID of the role | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -369,6 +381,79 @@ example().catch(console.error);
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Role resource restrictions |  -  |
+| **401** | Unauthorized |  -  |
+| **404** | Not Found |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## getRoleScopes
+
+> GetRoleScopes200Response getRoleScopes(id)
+
+Get role entity-access scopes
+
+Retrieves row-level entity access scopes for the role, which restrict what entity records matching specific attribute conditions the role can access within given templates.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  RolesApi,
+} from '@omnismith-sdk/typescript';
+import type { GetRoleScopesRequest } from '@omnismith-sdk/typescript';
+
+async function example() {
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
+  const config = new Configuration({ 
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new RolesApi(config);
+
+  const body = {
+    // string | Unique UUID of the role
+    id: 018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7a,
+  } satisfies GetRoleScopesRequest;
+
+  try {
+    const data = await api.getRoleScopes(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | `string` | Unique UUID of the role | [Defaults to `undefined`] |
+
+### Return type
+
+[**GetRoleScopes200Response**](GetRoleScopes200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Role entity-access scopes |  -  |
 | **401** | Unauthorized |  -  |
 | **404** | Not Found |  -  |
 
@@ -445,6 +530,8 @@ This endpoint does not need any parameter.
 
 List roles
 
+Lists all custom and predefined roles defined within the current project, including the project owner role.
+
 ### Example
 
 ```ts
@@ -507,6 +594,8 @@ This endpoint does not need any parameter.
 
 Set role permissions
 
+Replaces the entire set of permission keys assigned to the role with the provided list. Use GET /roles/permissions/available to inspect valid keys.
+
 ### Example
 
 ```ts
@@ -525,8 +614,8 @@ async function example() {
   const api = new RolesApi(config);
 
   const body = {
-    // string | Role ID
-    id: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | Unique UUID of the role
+    id: 018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7a,
     // SetRolePermissionsRequest
     setRolePermissionsRequest: ...,
   } satisfies SetRolePermissionsOperationRequest;
@@ -548,7 +637,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` | Role ID | [Defaults to `undefined`] |
+| **id** | `string` | Unique UUID of the role | [Defaults to `undefined`] |
 | **setRolePermissionsRequest** | [SetRolePermissionsRequest](SetRolePermissionsRequest.md) |  | |
 
 ### Return type
@@ -584,6 +673,8 @@ example().catch(console.error);
 
 Set role resource restrictions
 
+Replaces all resource-level access restrictions for the role. Each item defines a resource type (\&quot;template\&quot; or \&quot;attribute\&quot;), target resource UUID, and granted access level (\&quot;deny\&quot;, \&quot;view\&quot;, \&quot;edit\&quot;, \&quot;full\&quot;).
+
 ### Example
 
 ```ts
@@ -602,8 +693,8 @@ async function example() {
   const api = new RolesApi(config);
 
   const body = {
-    // string | Role ID
-    id: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | Unique UUID of the role
+    id: 018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7a,
     // SetRoleResourcesRequest
     setRoleResourcesRequest: ...,
   } satisfies SetRoleResourcesOperationRequest;
@@ -625,7 +716,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` | Role ID | [Defaults to `undefined`] |
+| **id** | `string` | Unique UUID of the role | [Defaults to `undefined`] |
 | **setRoleResourcesRequest** | [SetRoleResourcesRequest](SetRoleResourcesRequest.md) |  | |
 
 ### Return type
@@ -655,11 +746,92 @@ example().catch(console.error);
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
+## setRoleScopes
+
+> setRoleScopes(id, setRoleScopesRequest)
+
+Set role entity-access scopes
+
+Replaces row-level entity access scopes for the role. Conditions filter entity visibility based on field/attribute comparisons (operators: eq, neq, gt, lt, like, not-like, empty, not-empty).
+
+### Example
+
+```ts
+import {
+  Configuration,
+  RolesApi,
+} from '@omnismith-sdk/typescript';
+import type { SetRoleScopesOperationRequest } from '@omnismith-sdk/typescript';
+
+async function example() {
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
+  const config = new Configuration({ 
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new RolesApi(config);
+
+  const body = {
+    // string | Unique UUID of the role
+    id: 018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7a,
+    // SetRoleScopesRequest
+    setRoleScopesRequest: ...,
+  } satisfies SetRoleScopesOperationRequest;
+
+  try {
+    const data = await api.setRoleScopes(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | `string` | Unique UUID of the role | [Defaults to `undefined`] |
+| **setRoleScopesRequest** | [SetRoleScopesRequest](SetRoleScopesRequest.md) |  | |
+
+### Return type
+
+`void` (Empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Entity-access scopes updated |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
 ## updateRole
 
 > updateRole(id, updateRoleRequest)
 
 Update a role
+
+Updates the display name of an existing custom role. System owner roles cannot be modified.
 
 ### Example
 
@@ -679,8 +851,8 @@ async function example() {
   const api = new RolesApi(config);
 
   const body = {
-    // string | Role ID
-    id: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | Unique UUID of the role
+    id: 018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7a,
     // UpdateRoleRequest
     updateRoleRequest: ...,
   } satisfies UpdateRoleOperationRequest;
@@ -702,7 +874,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` | Role ID | [Defaults to `undefined`] |
+| **id** | `string` | Unique UUID of the role | [Defaults to `undefined`] |
 | **updateRoleRequest** | [UpdateRoleRequest](UpdateRoleRequest.md) |  | |
 
 ### Return type

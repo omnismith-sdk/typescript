@@ -18,8 +18,8 @@ import type { TestNotificationChannelRequest } from '@omnismith-sdk/typescript'
 // TODO: Update the object below with actual values
 const example = {
   "chat_id": 123456789,
-  "message": Test message from Omnismith,
-  "title": null,
+  "message": Test notification from Omnismith Automation Engine,
+  "title": Omnismith Alert Test,
 } satisfies TestNotificationChannelRequest
 
 console.log(example)

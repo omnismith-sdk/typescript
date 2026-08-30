@@ -1,6 +1,7 @@
 
 # SetListItemsRequest
 
+Payload containing the full replacement set of choice option items for a List-type attribute.
 
 ## Properties
 

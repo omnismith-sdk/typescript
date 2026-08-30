@@ -1,7 +1,7 @@
 
 # RoleResponse
 
-Role details
+Metadata describing a system or custom user role
 
 ## Properties
 
@@ -19,10 +19,10 @@ import type { RoleResponse } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "id": null,
-  "name": null,
-  "is_owner": null,
-  "created_at": null,
+  "id": 018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7a,
+  "name": Data Analyst,
+  "is_owner": false,
+  "created_at": 2026-08-26T12:00Z,
 } satisfies RoleResponse
 
 console.log(example)

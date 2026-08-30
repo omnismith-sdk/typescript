@@ -17,9 +17,9 @@ import type { ExportEntitiesRequestFiltersInner } from '@omnismith-sdk/typescrip
 
 // TODO: Update the object below with actual values
 const example = {
-  "field": null,
-  "operator": null,
-  "value": null,
+  "field": price,
+  "operator": gt,
+  "value": 50.00,
 } satisfies ExportEntitiesRequestFiltersInner
 
 console.log(example)

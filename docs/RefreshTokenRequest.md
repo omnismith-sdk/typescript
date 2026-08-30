@@ -1,7 +1,7 @@
 
 # RefreshTokenRequest
 
-Payload for refreshing an access token
+Payload for rotating a refresh token and obtaining a new JWT access token
 
 ## Properties
 

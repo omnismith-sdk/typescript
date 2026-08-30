@@ -1,7 +1,7 @@
 
 # DashboardBlockResponse
 
-Dashboard block details
+Dashboard visualization block details including type, title, grid placement, and query configurations
 
 ## Properties
 
@@ -22,13 +22,13 @@ import type { DashboardBlockResponse } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "id": null,
-  "dashboard_id": null,
-  "type": null,
-  "title": null,
-  "config": null,
-  "created_at": null,
-  "updated_at": null,
+  "id": 0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6c,
+  "dashboard_id": 0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6b,
+  "type": chart,
+  "title": Gateway Temperature History,
+  "config": {"template_id":"0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6b","metric_attribute_id":"0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6d","aggregate":"avg","bucket_width":"1 hour","time_window":86400,"x":0,"y":0,"cols":6,"rows":4},
+  "created_at": 2026-08-26T12:00Z,
+  "updated_at": 2026-08-26T12:30Z,
 } satisfies DashboardBlockResponse
 
 console.log(example)

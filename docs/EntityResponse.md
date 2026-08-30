@@ -1,6 +1,7 @@
 
 # EntityResponse
 
+Hydrated dynamic entity record conforming to a template schema, including all dimension and metric attribute values
 
 ## Properties
 
@@ -8,8 +9,9 @@ Name | Type
 ------------ | -------------
 `id` | string
 `template_id` | string
-`created_at` | string
-`updated_at` | string
+`template_slug` | string
+`created_at` | Date
+`updated_at` | Date
 `attribute_values` | [{ [key: string]: EntityAttributeValue; }](EntityAttributeValue.md)
 
 ## Example
@@ -19,10 +21,11 @@ import type { EntityResponse } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "id": null,
-  "template_id": null,
-  "created_at": null,
-  "updated_at": null,
+  "id": 018b2f1b-8c1a-75b3-8000-7f0000010000,
+  "template_id": 018b2f1b-8c1a-75b3-8000-7f0000010001,
+  "template_slug": product_catalog,
+  "created_at": 2026-08-26T12:00Z,
+  "updated_at": 2026-08-26T12:05Z,
   "attribute_values": null,
 } satisfies EntityResponse
 

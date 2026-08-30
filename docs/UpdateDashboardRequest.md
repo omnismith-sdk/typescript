@@ -1,6 +1,7 @@
 
 # UpdateDashboardRequest
 
+Payload for updating dashboard metadata, 12-column canvas parameters, and auto-refresh settings
 
 ## Properties
 
@@ -8,7 +9,7 @@ Name | Type
 ------------ | -------------
 `name` | string
 `description` | string
-`config` | object
+`config` | [UpdateDashboardRequestConfig](UpdateDashboardRequestConfig.md)
 
 ## Example
 
@@ -17,8 +18,8 @@ import type { UpdateDashboardRequest } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "name": My Dashboard,
-  "description": Dashboard description,
+  "name": Infrastructure & Operations Hub,
+  "description": Live overview of cloud server fleet health and CPU telemetry.,
   "config": null,
 } satisfies UpdateDashboardRequest
 

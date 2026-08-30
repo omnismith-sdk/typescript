@@ -1,7 +1,7 @@
 
 # SessionResponse
 
-Login session details
+Detailed metadata describing a user login session and token status
 
 ## Properties
 
@@ -27,18 +27,18 @@ import type { SessionResponse } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "id": null,
-  "user_id": null,
-  "email": null,
-  "role_id": null,
+  "id": 018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7a,
+  "user_id": 018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7b,
+  "email": demo@omnismith.io,
+  "role_id": 018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7c,
   "ip_address": 192.168.1.1,
-  "user_agent": null,
-  "created_at": null,
-  "expires_at": null,
+  "user_agent": Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7),
+  "created_at": 2026-08-26T12:00Z,
+  "expires_at": 2026-09-26T12:00Z,
   "revoked_at": null,
   "revoked_by": null,
   "revoked_reason": null,
-  "status": null,
+  "status": active,
 } satisfies SessionResponse
 
 console.log(example)

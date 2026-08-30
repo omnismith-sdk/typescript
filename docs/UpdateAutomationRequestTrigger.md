@@ -1,6 +1,7 @@
 
 # UpdateAutomationRequestTrigger
 
+Updated event trigger criteria
 
 ## Properties
 
@@ -18,8 +19,8 @@ import type { UpdateAutomationRequestTrigger } from '@omnismith-sdk/typescript'
 // TODO: Update the object below with actual values
 const example = {
   "type": on_attribute_changed,
-  "templateId": null,
-  "attributeId": null,
+  "templateId": 01912ecb-4654-7890-a1b2-c3d4e5f60088,
+  "attributeId": 01912ecb-4654-7890-a1b2-c3d4e5f60077,
 } satisfies UpdateAutomationRequestTrigger
 
 console.log(example)

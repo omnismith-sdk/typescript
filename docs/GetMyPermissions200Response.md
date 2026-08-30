@@ -15,7 +15,7 @@ import type { GetMyPermissions200Response } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "data": ["entity.view","entity.create","dashboard.view"],
+  "data": ["entity.view","entity.create","template.view","dashboard.view"],
 } satisfies GetMyPermissions200Response
 
 console.log(example)

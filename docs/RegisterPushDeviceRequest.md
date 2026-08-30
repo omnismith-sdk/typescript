@@ -16,7 +16,7 @@ import type { RegisterPushDeviceRequest } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "token": null,
+  "token": dK1_f92La...xR8_token,
   "device_name": Pixel 9 Pro,
 } satisfies RegisterPushDeviceRequest
 

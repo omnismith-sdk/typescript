@@ -17,7 +17,7 @@ import type { ListAutomationExecutions200Response } from '@omnismith-sdk/typescr
 // TODO: Update the object below with actual values
 const example = {
   "data": null,
-  "total": null,
+  "total": 42,
 } satisfies ListAutomationExecutions200Response
 
 console.log(example)

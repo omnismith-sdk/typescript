@@ -4,9 +4,9 @@ All URIs are relative to *https://api.omnismith.io/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**listPushDevices**](AutomationPushDevicesApi.md#listpushdevices) | **GET** /automation/push-devices | List the current user\&#39;s registered push devices |
-| [**registerPushDevice**](AutomationPushDevicesApi.md#registerpushdeviceoperation) | **POST** /automation/push-devices | Register a push notification device token |
-| [**unregisterPushDevice**](AutomationPushDevicesApi.md#unregisterpushdeviceoperation) | **DELETE** /automation/push-devices | Unregister a push notification device token |
+| [**listPushDevices**](AutomationPushDevicesApi.md#listpushdevices) | **GET** /automation/push-devices | List registered push devices |
+| [**registerPushDevice**](AutomationPushDevicesApi.md#registerpushdeviceoperation) | **POST** /automation/push-devices | Register a mobile push notification device |
+| [**unregisterPushDevice**](AutomationPushDevicesApi.md#unregisterpushdeviceoperation) | **DELETE** /automation/push-devices | Unregister a mobile push notification device |
 
 
 
@@ -14,7 +14,9 @@ All URIs are relative to *https://api.omnismith.io/v1*
 
 > ListPushDevices200Response listPushDevices()
 
-List the current user\&#39;s registered push devices
+List registered push devices
+
+Retrieves all Firebase Cloud Messaging (FCM) mobile push devices registered under the authenticated user account for receiving automated push alerts. Device registration tokens are masked in the output for security.
 
 ### Example
 
@@ -66,7 +68,7 @@ This endpoint does not need any parameter.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | List of push devices |  -  |
+| **200** | List of registered push notification devices |  -  |
 | **401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
@@ -74,9 +76,11 @@ This endpoint does not need any parameter.
 
 ## registerPushDevice
 
-> CreateAttributeItem201Response registerPushDevice(registerPushDeviceRequest)
+> RegisterPushDevice201Response registerPushDevice(registerPushDeviceRequest)
 
-Register a push notification device token
+Register a mobile push notification device
+
+Registers an FCM device token under the authenticated user account to receive real-time push notifications from automation action triggers. If the token is already registered, its device name and activity timestamp are updated.
 
 ### Example
 
@@ -121,7 +125,7 @@ example().catch(console.error);
 
 ### Return type
 
-[**CreateAttributeItem201Response**](CreateAttributeItem201Response.md)
+[**RegisterPushDevice201Response**](RegisterPushDevice201Response.md)
 
 ### Authorization
 
@@ -136,7 +140,7 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **201** | Device registered |  -  |
+| **201** | Push device successfully registered |  -  |
 | **401** | Unauthorized |  -  |
 | **422** | Validation Error |  -  |
 
@@ -147,7 +151,9 @@ example().catch(console.error);
 
 > unregisterPushDevice(unregisterPushDeviceRequest)
 
-Unregister a push notification device token
+Unregister a mobile push notification device
+
+Removes an FCM push notification device token from the authenticated user profile, stopping all future automation push notifications directed to that device.
 
 ### Example
 
@@ -207,7 +213,7 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **204** | Device unregistered |  -  |
+| **204** | Push device successfully unregistered |  -  |
 | **401** | Unauthorized |  -  |
 | **422** | Validation Error |  -  |
 

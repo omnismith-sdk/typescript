@@ -15,7 +15,7 @@ import type { CreateAttributeItem201Response } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "id": null,
+  "id": 019a6b2c-8c3a-7c2e-8b3f-6c8a1a2b3c4d,
 } satisfies CreateAttributeItem201Response
 
 console.log(example)

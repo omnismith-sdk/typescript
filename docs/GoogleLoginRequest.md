@@ -1,7 +1,7 @@
 
 # GoogleLoginRequest
 
-Payload for Google Sign-In authentication
+Payload for authenticating or signing up via Google Identity Services
 
 ## Properties
 
@@ -16,7 +16,7 @@ import type { GoogleLoginRequest } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "credential": eyJhbGciOiJSUzI1NiIs...,
+  "credential": eyJhbGciOiJSUzI1NiIsImtpZCI6Ij...,
 } satisfies GoogleLoginRequest
 
 console.log(example)

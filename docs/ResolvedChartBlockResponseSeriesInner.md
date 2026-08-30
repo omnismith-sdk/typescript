@@ -8,7 +8,7 @@ Name | Type
 ------------ | -------------
 `entity_id` | string
 `entity_name` | string
-`data_points` | [Array&lt;GetEntityChart200ResponseSeriesInnerDataInner&gt;](GetEntityChart200ResponseSeriesInnerDataInner.md)
+`data_points` | [Array&lt;ResolvedChartBlockResponseSeriesInnerDataPointsInner&gt;](ResolvedChartBlockResponseSeriesInnerDataPointsInner.md)
 
 ## Example
 
@@ -17,8 +17,8 @@ import type { ResolvedChartBlockResponseSeriesInner } from '@omnismith-sdk/types
 
 // TODO: Update the object below with actual values
 const example = {
-  "entity_id": null,
-  "entity_name": null,
+  "entity_id": 0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6b,
+  "entity_name": Gateway Alpha,
   "data_points": null,
 } satisfies ResolvedChartBlockResponseSeriesInner
 

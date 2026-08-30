@@ -1,6 +1,7 @@
 
 # UpdateListItemRequest
 
+Payload for updating an existing list item.
 
 ## Properties
 
@@ -16,7 +17,7 @@ import type { UpdateListItemRequest } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "value": blue,
+  "value": Blue,
   "sort_order": 1,
 } satisfies UpdateListItemRequest
 

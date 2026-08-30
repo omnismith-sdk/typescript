@@ -7,6 +7,8 @@
 Name | Type
 ------------ | -------------
 `entity_id` | string
+`created_at` | Date
+`updated_at` | Date
 `attributes` | object
 
 ## Example
@@ -16,8 +18,10 @@ import type { ResolvedListBlockResponseItemsInner } from '@omnismith-sdk/typescr
 
 // TODO: Update the object below with actual values
 const example = {
-  "entity_id": null,
-  "attributes": null,
+  "entity_id": 0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6b,
+  "created_at": 2026-08-26T12:00Z,
+  "updated_at": 2026-08-26T12:30Z,
+  "attributes": {"name":"Gateway Alpha","status":"active"},
 } satisfies ResolvedListBlockResponseItemsInner
 
 console.log(example)

@@ -17,7 +17,7 @@ import type { ListMarketplaceKeywords200ResponseDataInner } from '@omnismith-sdk
 // TODO: Update the object below with actual values
 const example = {
   "keyword": crm,
-  "count": 5,
+  "count": 8,
 } satisfies ListMarketplaceKeywords200ResponseDataInner
 
 console.log(example)

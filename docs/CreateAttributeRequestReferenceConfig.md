@@ -1,7 +1,7 @@
 
 # CreateAttributeRequestReferenceConfig
 
-Optional reference configuration
+Required when attribute_type is 3 (Reference). Configures foreign entity relationship target template and display attribute.
 
 ## Properties
 
@@ -17,8 +17,8 @@ import type { CreateAttributeRequestReferenceConfig } from '@omnismith-sdk/types
 
 // TODO: Update the object below with actual values
 const example = {
-  "target_template_id": null,
-  "target_attribute_id": null,
+  "target_template_id": 018b2f1b-8c1a-75b3-8000-7f0000010002,
+  "target_attribute_id": 018b2f1b-8c1a-75b3-8000-7f0000010003,
 } satisfies CreateAttributeRequestReferenceConfig
 
 console.log(example)

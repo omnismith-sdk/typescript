@@ -1,6 +1,7 @@
 
 # SearchMarketplaceBlueprints200ResponseMeta
 
+Pagination metadata
 
 ## Properties
 
@@ -15,7 +16,7 @@ import type { SearchMarketplaceBlueprints200ResponseMeta } from '@omnismith-sdk/
 
 // TODO: Update the object below with actual values
 const example = {
-  "total": null,
+  "total": 15,
 } satisfies SearchMarketplaceBlueprints200ResponseMeta
 
 console.log(example)

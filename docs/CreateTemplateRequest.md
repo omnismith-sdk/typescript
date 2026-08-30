@@ -1,16 +1,21 @@
 
 # CreateTemplateRequest
 
+Payload for creating a new dynamic schema template (content type).
 
 ## Properties
 
 Name | Type
 ------------ | -------------
+`attributes` | [Array&lt;TemplateAttributeInput&gt;](TemplateAttributeInput.md)
+`groups` | [Array&lt;TemplateGroupInput&gt;](TemplateGroupInput.md)
 `name` | string
 `description` | string
 `category` | string
 `attribute_ids` | Array&lt;string&gt;
+`attribute_slugs` | Array&lt;string&gt;
 `id` | string
+`slug` | string
 
 ## Example
 
@@ -19,11 +24,15 @@ import type { CreateTemplateRequest } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "name": Product Template,
-  "description": Template for products,
-  "category": E-commerce,
+  "attributes": null,
+  "groups": null,
+  "name": Product SKU,
+  "description": E-commerce physical product catalog schema,
+  "category": Catalog,
   "attribute_ids": null,
-  "id": 018b2f1b-8c1a-75b3-8000-7f0000010000,
+  "attribute_slugs": null,
+  "id": 018b2f1b-8c1a-75b3-8000-7f0000010010,
+  "slug": product_sku,
 } satisfies CreateTemplateRequest
 
 console.log(example)

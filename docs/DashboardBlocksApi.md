@@ -15,9 +15,11 @@ All URIs are relative to *https://api.omnismith.io/v1*
 
 ## createDashboardBlock
 
-> CreateAttributeItem201Response createDashboardBlock(dashboardId, createDashboardBlockRequest)
+> CreateDashboardBlock201Response createDashboardBlock(dashboardId, createDashboardBlockRequest)
 
 Create a new block in a dashboard
+
+Creates a new visualization block widget on a dashboard canvas. Supports four block types: stat (single KPI counter of matching entities), chart (time-series telemetry multi-line/bar graph aggregating metric data), gauge (metric threshold gauge with min/max bounds and percentage progress), and list (filtered and sorted entity table). Grid placement is defined via x, y, cols, rows layout parameters.
 
 ### Example
 
@@ -37,9 +39,9 @@ async function example() {
   const api = new DashboardBlocksApi(config);
 
   const body = {
-    // string | Dashboard ID
-    dashboardId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // CreateDashboardBlockRequest
+    // string | Target dashboard unique identifier (UUID)
+    dashboardId: 0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6b,
+    // CreateDashboardBlockRequest | Dashboard block creation payload
     createDashboardBlockRequest: ...,
   } satisfies CreateDashboardBlockOperationRequest;
 
@@ -60,12 +62,12 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **dashboardId** | `string` | Dashboard ID | [Defaults to `undefined`] |
-| **createDashboardBlockRequest** | [CreateDashboardBlockRequest](CreateDashboardBlockRequest.md) |  | |
+| **dashboardId** | `string` | Target dashboard unique identifier (UUID) | [Defaults to `undefined`] |
+| **createDashboardBlockRequest** | [CreateDashboardBlockRequest](CreateDashboardBlockRequest.md) | Dashboard block creation payload | |
 
 ### Return type
 
-[**CreateAttributeItem201Response**](CreateAttributeItem201Response.md)
+[**CreateDashboardBlock201Response**](CreateDashboardBlock201Response.md)
 
 ### Authorization
 
@@ -80,8 +82,9 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **201** | Block created |  -  |
-| **404** | Dashboard not found |  -  |
+| **201** | Dashboard block created successfully |  -  |
+| **401** | Unauthorized |  -  |
+| **404** | Not Found |  -  |
 | **422** | Validation Error |  -  |
 | **500** | Internal Server Error |  -  |
 
@@ -93,6 +96,8 @@ example().catch(console.error);
 > deleteDashboardBlock(dashboardId, blockId)
 
 Delete a dashboard block
+
+Permanently removes a visualization block widget from the specified dashboard canvas.
 
 ### Example
 
@@ -112,10 +117,10 @@ async function example() {
   const api = new DashboardBlocksApi(config);
 
   const body = {
-    // string | Dashboard ID
-    dashboardId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string | Block ID
-    blockId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | Parent dashboard unique identifier (UUID)
+    dashboardId: 0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6b,
+    // string | Dashboard block unique identifier (UUID) to delete
+    blockId: 0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6c,
   } satisfies DeleteDashboardBlockRequest;
 
   try {
@@ -135,8 +140,8 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **dashboardId** | `string` | Dashboard ID | [Defaults to `undefined`] |
-| **blockId** | `string` | Block ID | [Defaults to `undefined`] |
+| **dashboardId** | `string` | Parent dashboard unique identifier (UUID) | [Defaults to `undefined`] |
+| **blockId** | `string` | Dashboard block unique identifier (UUID) to delete | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -149,14 +154,16 @@ example().catch(console.error);
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: `application/json`
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **204** | Block deleted |  -  |
-| **404** | Block not found |  -  |
+| **204** | Dashboard block deleted successfully |  -  |
+| **401** | Unauthorized |  -  |
+| **404** | Not Found |  -  |
+| **500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -166,6 +173,8 @@ example().catch(console.error);
 > DashboardBlockResponse getDashboardBlock(dashboardId, blockId)
 
 Get a dashboard block by ID
+
+Retrieves the configuration details, grid coordinates, and data query definitions for an individual visualization block.
 
 ### Example
 
@@ -185,10 +194,10 @@ async function example() {
   const api = new DashboardBlocksApi(config);
 
   const body = {
-    // string | Dashboard ID
-    dashboardId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string | Block ID
-    blockId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | Parent dashboard unique identifier (UUID)
+    dashboardId: 0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6b,
+    // string | Dashboard block unique identifier (UUID)
+    blockId: 0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6c,
   } satisfies GetDashboardBlockRequest;
 
   try {
@@ -208,8 +217,8 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **dashboardId** | `string` | Dashboard ID | [Defaults to `undefined`] |
-| **blockId** | `string` | Block ID | [Defaults to `undefined`] |
+| **dashboardId** | `string` | Parent dashboard unique identifier (UUID) | [Defaults to `undefined`] |
+| **blockId** | `string` | Dashboard block unique identifier (UUID) | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -228,8 +237,10 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Block details |  -  |
-| **404** | Block not found |  -  |
+| **200** | Dashboard block details |  -  |
+| **401** | Unauthorized |  -  |
+| **404** | Not Found |  -  |
+| **500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -239,6 +250,8 @@ example().catch(console.error);
 > ListDashboardBlocks200Response listDashboardBlocks(dashboardId)
 
 List all blocks in a dashboard
+
+Retrieves all visualization blocks mounted on a dashboard canvas, including widget types (stat KPI card, time-series chart, gauge meter, entity list), grid position coordinates (x, y, cols, rows), template filters, and aggregation configs.
 
 ### Example
 
@@ -258,8 +271,8 @@ async function example() {
   const api = new DashboardBlocksApi(config);
 
   const body = {
-    // string | Dashboard ID
-    dashboardId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | Parent dashboard unique identifier (UUID)
+    dashboardId: 0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6b,
   } satisfies ListDashboardBlocksRequest;
 
   try {
@@ -279,7 +292,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **dashboardId** | `string` | Dashboard ID | [Defaults to `undefined`] |
+| **dashboardId** | `string` | Parent dashboard unique identifier (UUID) | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -298,7 +311,10 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | List of blocks |  -  |
+| **200** | List of dashboard blocks |  -  |
+| **401** | Unauthorized |  -  |
+| **404** | Not Found |  -  |
+| **500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -309,7 +325,7 @@ example().catch(console.error);
 
 Resolve a dashboard block to its computed data
 
-Executes the block configuration and returns computed values based on block type (stat count, gauge value, chart series, or list items)
+Executes the underlying data query for a dashboard block and returns computed real-time aggregated metrics and time-series telemetry. Returns a typed payload matching the block type: stat (matching entity count), gauge (current metric value, min/max bounds, progress percentage), chart (time-series data point series bucketed by time intervals with aggregation functions), or list (hydrated entity items with dynamic attributes).
 
 ### Example
 
@@ -329,10 +345,10 @@ async function example() {
   const api = new DashboardBlocksApi(config);
 
   const body = {
-    // string | Dashboard ID
-    dashboardId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string | Block ID
-    blockId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | Parent dashboard unique identifier (UUID)
+    dashboardId: 0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6b,
+    // string | Dashboard block unique identifier (UUID) to resolve and compute
+    blockId: 0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6c,
   } satisfies ResolveDashboardBlockRequest;
 
   try {
@@ -352,8 +368,8 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **dashboardId** | `string` | Dashboard ID | [Defaults to `undefined`] |
-| **blockId** | `string` | Block ID | [Defaults to `undefined`] |
+| **dashboardId** | `string` | Parent dashboard unique identifier (UUID) | [Defaults to `undefined`] |
+| **blockId** | `string` | Dashboard block unique identifier (UUID) to resolve and compute | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -372,8 +388,10 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Resolved block data |  -  |
-| **404** | Block not found |  -  |
+| **200** | Resolved block computed data payload |  -  |
+| **401** | Unauthorized |  -  |
+| **404** | Not Found |  -  |
+| **500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -383,6 +401,8 @@ example().catch(console.error);
 > updateDashboardBlock(dashboardId, blockId, updateDashboardBlockRequest)
 
 Update a dashboard block
+
+Updates the display title, grid placement (x, y, cols, rows), metric queries, time-series aggregation buckets, gauge bounds, or filtering rules of an existing visualization block.
 
 ### Example
 
@@ -402,11 +422,11 @@ async function example() {
   const api = new DashboardBlocksApi(config);
 
   const body = {
-    // string | Dashboard ID
-    dashboardId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string | Block ID
-    blockId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // UpdateDashboardBlockRequest
+    // string | Parent dashboard unique identifier (UUID)
+    dashboardId: 0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6b,
+    // string | Dashboard block unique identifier (UUID) to update
+    blockId: 0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6c,
+    // UpdateDashboardBlockRequest | Dashboard block update payload
     updateDashboardBlockRequest: ...,
   } satisfies UpdateDashboardBlockOperationRequest;
 
@@ -427,9 +447,9 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **dashboardId** | `string` | Dashboard ID | [Defaults to `undefined`] |
-| **blockId** | `string` | Block ID | [Defaults to `undefined`] |
-| **updateDashboardBlockRequest** | [UpdateDashboardBlockRequest](UpdateDashboardBlockRequest.md) |  | |
+| **dashboardId** | `string` | Parent dashboard unique identifier (UUID) | [Defaults to `undefined`] |
+| **blockId** | `string` | Dashboard block unique identifier (UUID) to update | [Defaults to `undefined`] |
+| **updateDashboardBlockRequest** | [UpdateDashboardBlockRequest](UpdateDashboardBlockRequest.md) | Dashboard block update payload | |
 
 ### Return type
 
@@ -448,9 +468,11 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Block updated |  -  |
-| **404** | Block not found |  -  |
+| **204** | Dashboard block updated successfully |  -  |
+| **401** | Unauthorized |  -  |
+| **404** | Not Found |  -  |
 | **422** | Validation Error |  -  |
+| **500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 

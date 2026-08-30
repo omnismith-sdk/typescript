@@ -1,6 +1,7 @@
 
 # CreateEntityRequest
 
+Payload for creating a new dynamic entity conforming to a template schema
 
 ## Properties
 
@@ -9,6 +10,7 @@ Name | Type
 `template_id` | string
 `attribute_values` | [Array&lt;CreateEntityRequestAttributeValuesInner&gt;](CreateEntityRequestAttributeValuesInner.md)
 `id` | string
+`template_slug` | string
 
 ## Example
 
@@ -17,9 +19,10 @@ import type { CreateEntityRequest } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "template_id": null,
+  "template_id": 018b2f1b-8c1a-75b3-8000-7f0000010001,
   "attribute_values": null,
   "id": 018b2f1b-8c1a-75b3-8000-7f0000010000,
+  "template_slug": product_catalog,
 } satisfies CreateEntityRequest
 
 console.log(example)

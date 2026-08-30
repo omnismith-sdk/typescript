@@ -1,7 +1,7 @@
 
 # DashboardResponse
 
-Dashboard details
+Dashboard configuration and metadata
 
 ## Properties
 
@@ -21,12 +21,12 @@ import type { DashboardResponse } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "id": null,
-  "name": null,
-  "description": null,
-  "config": null,
-  "created_at": null,
-  "updated_at": null,
+  "id": 0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6b,
+  "name": Executive Overview,
+  "description": Key metrics and time-series telemetry,
+  "config": {"refresh_interval":30},
+  "created_at": 2026-08-26T12:00Z,
+  "updated_at": 2026-08-26T12:30Z,
 } satisfies DashboardResponse
 
 console.log(example)

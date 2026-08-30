@@ -25,7 +25,7 @@ import type { AutomationResponse } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "id": null,
+  "id": 01912ecb-4654-7890-a1b2-c3d4e5f60001,
   "name": Notify on status change,
   "description": Sends alert when status attribute changes,
   "isEnabled": true,
@@ -33,9 +33,9 @@ const example = {
   "conditions": null,
   "actions": null,
   "cooldownSeconds": 60,
-  "lastTriggeredAt": null,
-  "createdAt": null,
-  "updatedAt": null,
+  "lastTriggeredAt": 2026-08-26T12:00Z,
+  "createdAt": 2026-08-26T10:00Z,
+  "updatedAt": 2026-08-26T11:00Z,
 } satisfies AutomationResponse
 
 console.log(example)

@@ -1,6 +1,7 @@
 
 # AccessTokenResponse
 
+Metadata describing an API access token (raw secret key is omitted for security)
 
 ## Properties
 
@@ -19,11 +20,11 @@ import type { AccessTokenResponse } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "id": null,
-  "name": null,
-  "expires_at": null,
-  "created_at": null,
-  "last_used_at": null,
+  "id": 0192a543-7f28-72b1-9b7e-97c997321034,
+  "name": CI/CD Deployment Key,
+  "expires_at": 2026-12-31T23:59:59Z,
+  "created_at": 2026-08-26T12:00Z,
+  "last_used_at": 2026-08-26T14:30Z,
 } satisfies AccessTokenResponse
 
 console.log(example)

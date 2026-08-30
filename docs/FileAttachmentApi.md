@@ -18,6 +18,8 @@ All URIs are relative to *https://api.omnismith.io/v1*
 
 Delete a file attachment
 
+Permanently deletes a file attachment and its stored content from disk. If the file is referenced by entity attribute values (file or image data type), those references will become stale. Returns 204 on success.
+
 ### Example
 
 ```ts
@@ -36,8 +38,8 @@ async function example() {
   const api = new FileAttachmentApi(config);
 
   const body = {
-    // string
-    id: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | File attachment UUID to delete
+    id: 018b2f1b-8c1a-75b3-8000-7f0000010000,
   } satisfies DeleteFileAttachmentRequest;
 
   try {
@@ -57,7 +59,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` |  | [Defaults to `undefined`] |
+| **id** | `string` | File attachment UUID to delete | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -88,6 +90,8 @@ example().catch(console.error);
 
 Download a file attachment
 
+Returns the raw binary file content for a given file attachment ID. The response Content-Type header matches the original uploaded file MIME type. The file must belong to the authenticated user\&#39;s project.
+
 ### Example
 
 ```ts
@@ -106,8 +110,8 @@ async function example() {
   const api = new FileAttachmentApi(config);
 
   const body = {
-    // string
-    id: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | Unique UUID identifier of the file attachment to download
+    id: 018b2f1b-8c1a-75b3-8000-7f0000010000,
   } satisfies DownloadFileAttachmentRequest;
 
   try {
@@ -127,7 +131,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` |  | [Defaults to `undefined`] |
+| **id** | `string` | Unique UUID identifier of the file attachment to download | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -158,6 +162,8 @@ example().catch(console.error);
 
 Get file metadata without downloading content
 
+Returns metadata for a file attachment (original filename, MIME type, file size in bytes, upload timestamp, context) without streaming the binary content. Use this to inspect file properties before deciding whether to download.
+
 ### Example
 
 ```ts
@@ -176,8 +182,8 @@ async function example() {
   const api = new FileAttachmentApi(config);
 
   const body = {
-    // string
-    id: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | Unique UUID identifier of the file attachment
+    id: 018b2f1b-8c1a-75b3-8000-7f0000010000,
   } satisfies GetFileAttachmentMetadataRequest;
 
   try {
@@ -197,7 +203,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` |  | [Defaults to `undefined`] |
+| **id** | `string` | Unique UUID identifier of the file attachment | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -228,6 +234,8 @@ example().catch(console.error);
 
 Get image thumbnail
 
+Generates and returns a resized thumbnail for image-type file attachments (JPEG, PNG, WebP, GIF). Optional &#x60;width&#x60; and &#x60;height&#x60; query parameters control output dimensions (range 50–1000px, default 200×200). Returns 400 if the file is not an image type. The thumbnail is returned as JPEG binary.
+
 ### Example
 
 ```ts
@@ -246,12 +254,12 @@ async function example() {
   const api = new FileAttachmentApi(config);
 
   const body = {
-    // string
-    id: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // number (optional)
-    width: 56,
-    // number (optional)
-    height: 56,
+    // string | Unique UUID identifier of the image file attachment
+    id: 018b2f1b-8c1a-75b3-8000-7f0000010000,
+    // number | Target thumbnail width in pixels (range 50 to 1000, default 200) (optional)
+    width: 200,
+    // number | Target thumbnail height in pixels (range 50 to 1000, default 200) (optional)
+    height: 200,
   } satisfies GetFileAttachmentThumbnailRequest;
 
   try {
@@ -271,9 +279,9 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` |  | [Defaults to `undefined`] |
-| **width** | `number` |  | [Optional] [Defaults to `200`] |
-| **height** | `number` |  | [Optional] [Defaults to `200`] |
+| **id** | `string` | Unique UUID identifier of the image file attachment | [Defaults to `undefined`] |
+| **width** | `number` | Target thumbnail width in pixels (range 50 to 1000, default 200) | [Optional] [Defaults to `200`] |
+| **height** | `number` | Target thumbnail height in pixels (range 50 to 1000, default 200) | [Optional] [Defaults to `200`] |
 
 ### Return type
 
@@ -301,9 +309,11 @@ example().catch(console.error);
 
 ## uploadFileAttachment
 
-> FileAttachmentResponse uploadFileAttachment(file, id)
+> FileAttachmentResponse uploadFileAttachment(file, id, context, ttlHours)
 
 Upload a file attachment
+
+Uploads a file as a multipart/form-data request. Supported MIME types include images (JPEG, PNG, WebP, GIF, SVG), documents (PDF), spreadsheets (CSV, XLSX), and structured data (JSON, YAML). An optional pre-generated UUIDv7 &#x60;id&#x60; can be supplied; otherwise the server generates one. The &#x60;context&#x60; field controls storage lifecycle: \&quot;entity\&quot; files are permanent, \&quot;chat\&quot; files are temporary with configurable &#x60;ttl_hours&#x60; (default 48h). Returns the file metadata including the assigned ID for use in entity attribute values.
 
 ### Example
 
@@ -327,6 +337,10 @@ async function example() {
     file: BINARY_DATA_HERE,
     // string (optional)
     id: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string (optional)
+    context: context_example,
+    // number (optional)
+    ttlHours: 56,
   } satisfies UploadFileAttachmentRequest;
 
   try {
@@ -348,6 +362,8 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **file** | `Blob` |  | [Defaults to `undefined`] |
 | **id** | `string` |  | [Optional] [Defaults to `undefined`] |
+| **context** | `entity`, `chat` |  | [Optional] [Defaults to `&#39;entity&#39;`] [Enum: entity, chat] |
+| **ttlHours** | `number` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 

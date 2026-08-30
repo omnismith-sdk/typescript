@@ -16,7 +16,7 @@ import type { UpdateNotificationChannelRequest } from '@omnismith-sdk/typescript
 
 // TODO: Update the object below with actual values
 const example = {
-  "name": Updated Bot Name,
+  "name": Updated Alerts Bot,
   "credentials": null,
 } satisfies UpdateNotificationChannelRequest
 

@@ -1,7 +1,7 @@
 
 # RoleResourceAccessResponse
 
-Resource access entry for a role
+Resource-level access restriction or override rule assigned to a role
 
 ## Properties
 
@@ -18,9 +18,9 @@ import type { RoleResourceAccessResponse } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "resource_type": null,
-  "resource_id": null,
-  "access_level": null,
+  "resource_type": template,
+  "resource_id": 018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7a,
+  "access_level": view,
 } satisfies RoleResourceAccessResponse
 
 console.log(example)

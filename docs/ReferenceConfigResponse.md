@@ -1,7 +1,7 @@
 
 # ReferenceConfigResponse
 
-Reference configuration for a Reference-type attribute
+Reference configuration mapping for a Reference-type attribute
 
 ## Properties
 
@@ -18,9 +18,9 @@ import type { ReferenceConfigResponse } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "attribute_id": null,
-  "target_template_id": null,
-  "target_attribute_id": null,
+  "attribute_id": 018b2f1b-8c1a-75b3-8000-7f0000010000,
+  "target_template_id": 018b2f1b-8c1a-75b3-8000-7f0000010002,
+  "target_attribute_id": 018b2f1b-8c1a-75b3-8000-7f0000010003,
 } satisfies ReferenceConfigResponse
 
 console.log(example)

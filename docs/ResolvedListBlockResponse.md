@@ -1,6 +1,7 @@
 
 # ResolvedListBlockResponse
 
+Computed result for a filtered entity list block
 
 ## Properties
 
@@ -19,11 +20,11 @@ import type { ResolvedListBlockResponse } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "block_id": null,
-  "title": null,
-  "type": null,
+  "block_id": 0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6c,
+  "title": High Priority Gateways,
+  "type": list,
   "items": null,
-  "total_count": null,
+  "total_count": 10,
 } satisfies ResolvedListBlockResponse
 
 console.log(example)

@@ -9,6 +9,7 @@ Name | Type
 ------------ | -------------
 `email` | string
 `password` | string
+`captchaToken` | string
 
 ## Example
 
@@ -19,6 +20,7 @@ import type { RegisterUserRequest } from '@omnismith-sdk/typescript'
 const example = {
   "email": user@example.com,
   "password": securePassword123,
+  "captchaToken": 0.XT2...gX,
 } satisfies RegisterUserRequest
 
 console.log(example)

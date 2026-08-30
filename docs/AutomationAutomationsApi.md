@@ -4,11 +4,11 @@ All URIs are relative to *https://api.omnismith.io/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createAutomation**](AutomationAutomationsApi.md#createautomationoperation) | **POST** /automation/automations | Create a new automation |
+| [**createAutomation**](AutomationAutomationsApi.md#createautomationoperation) | **POST** /automation/automations | Create an automation rule |
 | [**deleteAutomation**](AutomationAutomationsApi.md#deleteautomation) | **DELETE** /automation/automations/{id} | Delete an automation |
 | [**getAutomation**](AutomationAutomationsApi.md#getautomation) | **GET** /automation/automations/{id} | Get an automation by ID |
-| [**listAutomationExecutions**](AutomationAutomationsApi.md#listautomationexecutions) | **GET** /automation/automations/{id}/executions | List automation executions |
-| [**listAutomations**](AutomationAutomationsApi.md#listautomations) | **GET** /automation/automations | List automations |
+| [**listAutomationExecutions**](AutomationAutomationsApi.md#listautomationexecutions) | **GET** /automation/automations/{id}/executions | List automation execution logs |
+| [**listAutomations**](AutomationAutomationsApi.md#listautomations) | **GET** /automation/automations | List project automations |
 | [**toggleAutomation**](AutomationAutomationsApi.md#toggleautomationoperation) | **PATCH** /automation/automations/{id}/toggle | Toggle automation enabled status |
 | [**updateAutomation**](AutomationAutomationsApi.md#updateautomationoperation) | **PUT** /automation/automations/{id} | Update an automation |
 
@@ -16,9 +16,11 @@ All URIs are relative to *https://api.omnismith.io/v1*
 
 ## createAutomation
 
-> CreateAttributeItem201Response createAutomation(createAutomationRequest)
+> CreateAutomation201Response createAutomation(createAutomationRequest)
 
-Create a new automation
+Create an automation rule
+
+Creates a new event-driven automation rule within the current project. Configures event trigger criteria (such as &#x60;on_entity_created&#x60;, &#x60;on_entity_updated&#x60;, or &#x60;on_attribute_changed&#x60;), multi-condition filters evaluating attribute values (using operators &#x60;eq&#x60;, &#x60;neq&#x60;, &#x60;gt&#x60;, &#x60;gte&#x60;, &#x60;lt&#x60;, &#x60;lte&#x60;, &#x60;contains&#x60;, &#x60;not_contains&#x60;, &#x60;is_empty&#x60;, &#x60;is_not_empty&#x60; across current value or delta modes), automated action targets (&#x60;telegram&#x60;, &#x60;webhook&#x60;, &#x60;push&#x60;), and an optional cooldown window in seconds to throttle repeated firings for the same entity.
 
 ### Example
 
@@ -63,7 +65,7 @@ example().catch(console.error);
 
 ### Return type
 
-[**CreateAttributeItem201Response**](CreateAttributeItem201Response.md)
+[**CreateAutomation201Response**](CreateAutomation201Response.md)
 
 ### Authorization
 
@@ -78,7 +80,7 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **201** | Automation created |  -  |
+| **201** | Automation successfully created |  -  |
 | **400** | Bad Request |  -  |
 | **401** | Unauthorized |  -  |
 | **402** | Tier quota exceeded |  -  |
@@ -92,6 +94,8 @@ example().catch(console.error);
 > deleteAutomation(id)
 
 Delete an automation
+
+Permanently deletes an automation rule by UUID, unbinding event listeners and stopping all future evaluations and action dispatches for that rule.
 
 ### Example
 
@@ -111,8 +115,8 @@ async function example() {
   const api = new AutomationAutomationsApi(config);
 
   const body = {
-    // string
-    id: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | Unique automation UUID to delete
+    id: 01912ecb-4654-7890-a1b2-c3d4e5f60001,
   } satisfies DeleteAutomationRequest;
 
   try {
@@ -132,7 +136,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` |  | [Defaults to `undefined`] |
+| **id** | `string` | Unique automation UUID to delete | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -151,7 +155,7 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **204** | Automation deleted |  -  |
+| **204** | Automation successfully deleted |  -  |
 | **401** | Unauthorized |  -  |
 | **404** | Automation not found |  -  |
 
@@ -163,6 +167,8 @@ example().catch(console.error);
 > AutomationResponse getAutomation(id)
 
 Get an automation by ID
+
+Retrieves the complete configuration of a specific automation rule by its UUID, including trigger event types, template/attribute references, condition comparison expressions, action payloads, execution cooldown interval, and the timestamp of its last execution.
 
 ### Example
 
@@ -182,8 +188,8 @@ async function example() {
   const api = new AutomationAutomationsApi(config);
 
   const body = {
-    // string
-    id: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | Unique automation UUID
+    id: 01912ecb-4654-7890-a1b2-c3d4e5f60001,
   } satisfies GetAutomationRequest;
 
   try {
@@ -203,7 +209,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` |  | [Defaults to `undefined`] |
+| **id** | `string` | Unique automation UUID | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -233,7 +239,9 @@ example().catch(console.error);
 
 > ListAutomationExecutions200Response listAutomationExecutions(id, limit, offset, status)
 
-List automation executions
+List automation execution logs
+
+Retrieves paginated execution logs and audit history for a specific automation rule. Each execution log records the triggering entity ID, trigger timestamp, execution completion time, final status (&#x60;pending&#x60;, &#x60;success&#x60;, &#x60;partial_failure&#x60;, &#x60;failed&#x60;), detailed action dispatch outcomes with error messages, and top-level execution errors.
 
 ### Example
 
@@ -253,14 +261,14 @@ async function example() {
   const api = new AutomationAutomationsApi(config);
 
   const body = {
-    // string | Automation ID
-    id: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // number | Number of results (optional)
-    limit: 56,
-    // number | Pagination offset (optional)
-    offset: 56,
-    // 'pending' | 'success' | 'partial_failure' | 'failed' | Filter by status (optional)
-    status: status_example,
+    // string | Automation UUID to fetch execution history for
+    id: 01912ecb-4654-7890-a1b2-c3d4e5f60001,
+    // number | Maximum number of execution log entries to return per page (optional)
+    limit: 20,
+    // number | Number of execution log records to skip for pagination (optional)
+    offset: 0,
+    // 'pending' | 'success' | 'partial_failure' | 'failed' | Filter execution logs by execution outcome status (optional)
+    status: success,
   } satisfies ListAutomationExecutionsRequest;
 
   try {
@@ -280,10 +288,10 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` | Automation ID | [Defaults to `undefined`] |
-| **limit** | `number` | Number of results | [Optional] [Defaults to `20`] |
-| **offset** | `number` | Pagination offset | [Optional] [Defaults to `0`] |
-| **status** | `pending`, `success`, `partial_failure`, `failed` | Filter by status | [Optional] [Defaults to `undefined`] [Enum: pending, success, partial_failure, failed] |
+| **id** | `string` | Automation UUID to fetch execution history for | [Defaults to `undefined`] |
+| **limit** | `number` | Maximum number of execution log entries to return per page | [Optional] [Defaults to `20`] |
+| **offset** | `number` | Number of execution log records to skip for pagination | [Optional] [Defaults to `0`] |
+| **status** | `pending`, `success`, `partial_failure`, `failed` | Filter execution logs by execution outcome status | [Optional] [Defaults to `undefined`] [Enum: pending, success, partial_failure, failed] |
 
 ### Return type
 
@@ -302,7 +310,7 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | List of executions |  -  |
+| **200** | Paginated list of execution logs |  -  |
 | **401** | Unauthorized |  -  |
 | **404** | Automation not found |  -  |
 
@@ -313,7 +321,9 @@ example().catch(console.error);
 
 > Array&lt;AutomationResponse&gt; listAutomations(templateId, isEnabled)
 
-List automations
+List project automations
+
+Retrieves all automation rules configured within the current project context. Automations define event-driven workflows triggered by entity lifecycle events (such as entity creation, attribute updates, or metric threshold changes), evaluated against multi-attribute conditions, and dispatched to configured action channels (Telegram, webhooks, mobile push). Results can be filtered by entity template or active status.
 
 ### Example
 
@@ -333,9 +343,9 @@ async function example() {
   const api = new AutomationAutomationsApi(config);
 
   const body = {
-    // string | Filter by template ID (optional)
-    templateId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // boolean | Filter by enabled status (optional)
+    // string | Filter automations scoped to a specific entity template UUID (optional)
+    templateId: 01912ecb-4654-7890-a1b2-c3d4e5f60088,
+    // boolean | Filter automations by active enabled status (true for active rules, false for paused rules) (optional)
     isEnabled: true,
   } satisfies ListAutomationsRequest;
 
@@ -356,8 +366,8 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **templateId** | `string` | Filter by template ID | [Optional] [Defaults to `undefined`] |
-| **isEnabled** | `boolean` | Filter by enabled status | [Optional] [Defaults to `undefined`] |
+| **templateId** | `string` | Filter automations scoped to a specific entity template UUID | [Optional] [Defaults to `undefined`] |
+| **isEnabled** | `boolean` | Filter automations by active enabled status (true for active rules, false for paused rules) | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -376,7 +386,7 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | List of automations |  -  |
+| **200** | List of automation rules |  -  |
 | **401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
@@ -387,6 +397,8 @@ example().catch(console.error);
 > AutomationResponse toggleAutomation(id, toggleAutomationRequest)
 
 Toggle automation enabled status
+
+Enables or pauses an automation rule without altering its trigger definitions, condition criteria, or action configurations. Paused automations are ignored during event processing.
 
 ### Example
 
@@ -406,8 +418,8 @@ async function example() {
   const api = new AutomationAutomationsApi(config);
 
   const body = {
-    // string
-    id: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | Unique automation UUID to toggle
+    id: 01912ecb-4654-7890-a1b2-c3d4e5f60001,
     // ToggleAutomationRequest
     toggleAutomationRequest: ...,
   } satisfies ToggleAutomationOperationRequest;
@@ -429,7 +441,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` |  | [Defaults to `undefined`] |
+| **id** | `string` | Unique automation UUID to toggle | [Defaults to `undefined`] |
 | **toggleAutomationRequest** | [ToggleAutomationRequest](ToggleAutomationRequest.md) |  | |
 
 ### Return type
@@ -449,11 +461,11 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Automation toggled |  -  |
+| **200** | Automation status successfully toggled |  -  |
 | **400** | Bad Request |  -  |
 | **401** | Unauthorized |  -  |
-| **422** | Validation Error |  -  |
 | **404** | Not Found |  -  |
+| **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -463,6 +475,8 @@ example().catch(console.error);
 > updateAutomation(id, updateAutomationRequest)
 
 Update an automation
+
+Updates an existing automation rule by UUID. Supports modifying rule name, description, trigger event definitions, condition filter criteria, action dispatches, and cooldown throttle settings.
 
 ### Example
 
@@ -482,8 +496,8 @@ async function example() {
   const api = new AutomationAutomationsApi(config);
 
   const body = {
-    // string
-    id: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | Unique automation UUID to update
+    id: 01912ecb-4654-7890-a1b2-c3d4e5f60001,
     // UpdateAutomationRequest
     updateAutomationRequest: ...,
   } satisfies UpdateAutomationOperationRequest;
@@ -505,7 +519,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` |  | [Defaults to `undefined`] |
+| **id** | `string` | Unique automation UUID to update | [Defaults to `undefined`] |
 | **updateAutomationRequest** | [UpdateAutomationRequest](UpdateAutomationRequest.md) |  | |
 
 ### Return type
@@ -525,7 +539,7 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **204** | Automation updated |  -  |
+| **204** | Automation successfully updated |  -  |
 | **400** | Bad Request |  -  |
 | **401** | Unauthorized |  -  |
 | **404** | Automation not found |  -  |

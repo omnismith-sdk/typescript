@@ -16,6 +16,8 @@ All URIs are relative to *https://api.omnismith.io/v1*
 
 Confirm a user\&#39;s email address using a confirmation token
 
+Validates an email confirmation token sent to a newly registered user\&#39;s email address and activates the account upon success. If the token is valid, returns a success confirmation message.
+
 ### Example
 
 ```ts
@@ -30,8 +32,8 @@ async function example() {
   const api = new UserApi();
 
   const body = {
-    // string | The email confirmation token
-    token: token_example,
+    // string | The email confirmation token received via email
+    token: cf_token_abc123xyz,
   } satisfies ConfirmUserEmailRequest;
 
   try {
@@ -51,7 +53,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **token** | `string` | The email confirmation token | [Defaults to `undefined`] |
+| **token** | `string` | The email confirmation token received via email | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -79,9 +81,11 @@ No authorization required
 
 ## registerUser
 
-> CreateAttributeItem201Response registerUser(registerUserRequest)
+> CreateProject201Response registerUser(registerUserRequest)
 
 Register a new user
+
+Registers a new user account with email and password. For unauthenticated / public signups, a Cloudflare Turnstile &#x60;captchaToken&#x60; is required to prevent bot abuse. Sends a confirmation link to the provided email address upon creation.
 
 ### Example
 
@@ -122,7 +126,7 @@ example().catch(console.error);
 
 ### Return type
 
-[**CreateAttributeItem201Response**](CreateAttributeItem201Response.md)
+[**CreateProject201Response**](CreateProject201Response.md)
 
 ### Authorization
 
@@ -150,6 +154,8 @@ No authorization required
 > ResendConfirmationEmail200Response resendConfirmationEmail(resendConfirmationEmailRequest)
 
 Resend the email confirmation link
+
+Resends the account verification email with an activation link for unconfirmed accounts. Rate-limited to prevent abuse. Silently succeeds if the email is not registered for security.
 
 ### Example
 

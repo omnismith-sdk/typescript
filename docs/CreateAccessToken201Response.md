@@ -19,11 +19,11 @@ import type { CreateAccessToken201Response } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "id": null,
-  "name": null,
-  "api_key": null,
-  "expires_at": null,
-  "created_at": null,
+  "id": 0192a543-7f28-72b1-9b7e-97c997321034,
+  "name": CI/CD Deployment Key,
+  "api_key": omni_live_secret_key_9f83b27c1a4e6d80,
+  "expires_at": 2026-12-31T23:59:59Z,
+  "created_at": 2026-08-26T12:00Z,
 } satisfies CreateAccessToken201Response
 
 console.log(example)

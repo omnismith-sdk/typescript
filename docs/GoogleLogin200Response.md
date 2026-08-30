@@ -18,10 +18,10 @@ import type { GoogleLogin200Response } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "access_token": null,
-  "expires_at": null,
-  "refresh_token": null,
-  "refresh_expires_at": null,
+  "access_token": eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...,
+  "expires_at": 1724688000,
+  "refresh_token": dGhpcyBpcyBhIHNhbXBsZSByZWZyZXNoIHRva2Vu,
+  "refresh_expires_at": 1727280000,
 } satisfies GoogleLogin200Response
 
 console.log(example)

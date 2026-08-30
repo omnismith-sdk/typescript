@@ -1,6 +1,7 @@
 
 # ResolvedStatBlockResponse
 
+Computed result for a stat KPI counter block
 
 ## Properties
 
@@ -18,10 +19,10 @@ import type { ResolvedStatBlockResponse } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "block_id": null,
-  "title": null,
-  "type": null,
-  "count": null,
+  "block_id": 0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6c,
+  "title": Active Gateways Count,
+  "type": stat,
+  "count": 42,
 } satisfies ResolvedStatBlockResponse
 
 console.log(example)

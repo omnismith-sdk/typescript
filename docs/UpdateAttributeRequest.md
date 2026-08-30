@@ -1,6 +1,7 @@
 
 # UpdateAttributeRequest
 
+Payload for full attribute update.
 
 ## Properties
 
@@ -8,7 +9,10 @@ Name | Type
 ------------ | -------------
 `name` | string
 `template_ids` | Array&lt;string&gt;
-`reference_config` | [UpdateAttributeRequestReferenceConfig](UpdateAttributeRequestReferenceConfig.md)
+`description` | string
+`reference_config` | [PatchAttributeRequestReferenceConfig](PatchAttributeRequestReferenceConfig.md)
+`data_type` | number
+`slug` | string
 
 ## Example
 
@@ -17,9 +21,12 @@ import type { UpdateAttributeRequest } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "name": Color,
+  "name": Product Color Variant,
   "template_ids": null,
+  "description": Color variant of product SKU,
   "reference_config": null,
+  "data_type": 0,
+  "slug": product_color_variant,
 } satisfies UpdateAttributeRequest
 
 console.log(example)

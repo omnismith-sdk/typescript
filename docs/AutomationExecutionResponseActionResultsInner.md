@@ -21,7 +21,7 @@ const example = {
   "action_index": 0,
   "success": true,
   "error_message": null,
-  "executed_at": null,
+  "executed_at": 2026-08-26T12:00:01Z,
 } satisfies AutomationExecutionResponseActionResultsInner
 
 console.log(example)

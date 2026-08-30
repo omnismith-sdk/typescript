@@ -1,6 +1,7 @@
 
 # NotificationChannelResponse
 
+Notification delivery channel configuration
 
 ## Properties
 
@@ -20,12 +21,12 @@ import type { NotificationChannelResponse } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "id": null,
-  "type": null,
-  "name": null,
+  "id": 01912ecb-4654-7890-a1b2-c3d4e5f60002,
+  "type": telegram,
+  "name": Alerts Bot,
   "credentials": null,
-  "created_at": null,
-  "updated_at": null,
+  "created_at": 2026-08-26T12:00Z,
+  "updated_at": 2026-08-26T12:00Z,
 } satisfies NotificationChannelResponse
 
 console.log(example)

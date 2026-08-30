@@ -1,7 +1,7 @@
 
 # ProjectSchemaResponse
 
-Complete project schema including attributes, templates, list items, and reference configs
+Complete project schema graph containing all active attributes, templates, list choice items, and reference configurations.
 
 ## Properties
 

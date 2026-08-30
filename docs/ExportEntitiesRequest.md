@@ -1,6 +1,7 @@
 
 # ExportEntitiesRequest
 
+Filter and search criteria for scoping entity CSV export
 
 ## Properties
 
@@ -16,7 +17,7 @@ import type { ExportEntitiesRequest } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "global_search": null,
+  "global_search": Wireless,
   "filters": null,
 } satisfies ExportEntitiesRequest
 

@@ -1,7 +1,7 @@
 
 # ResolvedBlockResponse
 
-Resolved block data with computed values
+Polymorphic container for resolved dashboard block data computed from time-series telemetry and entity repositories
 
 ## Properties
 
@@ -27,18 +27,18 @@ import type { ResolvedBlockResponse } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "block_id": null,
-  "title": null,
-  "type": null,
-  "count": null,
-  "value": null,
-  "min": null,
-  "max": null,
-  "percentage": null,
-  "bucket_width": null,
+  "block_id": 0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6c,
+  "title": High Priority Gateways,
+  "type": stat,
+  "count": 42,
+  "value": 73.5,
+  "min": 0,
+  "max": 100,
+  "percentage": 73.5,
+  "bucket_width": 1 hour,
   "series": null,
   "items": null,
-  "total_count": null,
+  "total_count": 10,
 } satisfies ResolvedBlockResponse
 
 console.log(example)

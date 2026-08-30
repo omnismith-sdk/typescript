@@ -22,11 +22,11 @@ import type { AutomationExecutionResponse } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "id": null,
-  "automation_id": null,
-  "entity_id": null,
-  "triggered_at": null,
-  "completed_at": null,
+  "id": 01912ecb-4654-7890-a1b2-c3d4e5f60010,
+  "automation_id": 01912ecb-4654-7890-a1b2-c3d4e5f60001,
+  "entity_id": 01912ecb-4654-7890-a1b2-c3d4e5f60099,
+  "triggered_at": 2026-08-26T12:00Z,
+  "completed_at": 2026-08-26T12:00:01Z,
   "status": success,
   "action_results": null,
   "error_message": null,

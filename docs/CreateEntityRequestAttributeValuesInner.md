@@ -7,6 +7,7 @@
 Name | Type
 ------------ | -------------
 `attribute_id` | string
+`attribute_slug` | string
 `value` | string
 `updated_at` | Date
 
@@ -17,9 +18,10 @@ import type { CreateEntityRequestAttributeValuesInner } from '@omnismith-sdk/typ
 
 // TODO: Update the object below with actual values
 const example = {
-  "attribute_id": null,
-  "value": null,
-  "updated_at": null,
+  "attribute_id": 018b2f1b-8c1a-75b3-8000-7f0000010002,
+  "attribute_slug": unit_price,
+  "value": 149.99,
+  "updated_at": 2026-08-26T12:00Z,
 } satisfies CreateEntityRequestAttributeValuesInner
 
 console.log(example)

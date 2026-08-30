@@ -22,8 +22,8 @@ const example = {
   "type": error/unauthorized,
   "title": Unauthorized,
   "status": 401,
-  "detail": null,
-  "code": null,
+  "detail": The refresh token has expired.,
+  "code": REFRESH_TOKEN_EXPIRED,
 } satisfies RefreshToken401Response
 
 console.log(example)

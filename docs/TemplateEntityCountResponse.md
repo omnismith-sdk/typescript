@@ -1,7 +1,7 @@
 
 # TemplateEntityCountResponse
 
-Entity count for a template
+Total entity record count for a template.
 
 ## Properties
 
@@ -17,7 +17,7 @@ import type { TemplateEntityCountResponse } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "template_id": null,
+  "template_id": 018b2f1b-8c1a-75b3-8000-7f0000010010,
   "entity_count": 42,
 } satisfies TemplateEntityCountResponse
 

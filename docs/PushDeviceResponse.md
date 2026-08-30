@@ -1,6 +1,7 @@
 
 # PushDeviceResponse
 
+Registered mobile push notification device token record
 
 ## Properties
 
@@ -19,11 +20,11 @@ import type { PushDeviceResponse } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "id": null,
-  "token": null,
-  "device_name": null,
-  "created_at": null,
-  "updated_at": null,
+  "id": 01912ecb-4654-7890-a1b2-c3d4e5f60005,
+  "token": fcm_token_...abc123,
+  "device_name": Pixel 9 Pro,
+  "created_at": 2026-08-26T12:00Z,
+  "updated_at": 2026-08-26T12:00Z,
 } satisfies PushDeviceResponse
 
 console.log(example)

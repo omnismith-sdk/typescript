@@ -1,7 +1,7 @@
 
 # AttributeResponseReferenceConfig
 
-Configuration for Reference attributes
+Relational target configuration for Reference (3) attributes (null for non-reference attributes)
 
 ## Properties
 
@@ -17,8 +17,8 @@ import type { AttributeResponseReferenceConfig } from '@omnismith-sdk/typescript
 
 // TODO: Update the object below with actual values
 const example = {
-  "target_template_id": null,
-  "target_attribute_id": null,
+  "target_template_id": 018b2f1b-8c1a-75b3-8000-7f0000010002,
+  "target_attribute_id": 018b2f1b-8c1a-75b3-8000-7f0000010003,
 } satisfies AttributeResponseReferenceConfig
 
 console.log(example)

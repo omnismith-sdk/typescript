@@ -23,6 +23,8 @@ All URIs are relative to *https://api.omnismith.io/v1*
 
 Assign user to project
 
+Assigns a user to a project with a specific role ID. Both the project and user must exist. Requires the caller to have project administration permissions.
+
 ### Example
 
 ```ts
@@ -41,8 +43,8 @@ async function example() {
   const api = new ProjectsApi(config);
 
   const body = {
-    // string
-    id: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | Project ID
+    id: 018b2f1b-8c1a-75b3-8000-7f0000010000,
     // AssignUserToProjectRequest
     assignUserToProjectRequest: ...,
   } satisfies AssignUserToProjectOperationRequest;
@@ -64,7 +66,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` |  | [Defaults to `undefined`] |
+| **id** | `string` | Project ID | [Defaults to `undefined`] |
 | **assignUserToProjectRequest** | [AssignUserToProjectRequest](AssignUserToProjectRequest.md) |  | |
 
 ### Return type
@@ -93,9 +95,11 @@ example().catch(console.error);
 
 ## createProject
 
-> CreateAttributeItem201Response createProject(createProjectRequest)
+> CreateProject201Response createProject(createProjectRequest)
 
 Create a new project
+
+Creates a new workspace project. A project is an isolated multi-tenant boundary grouping templates, attributes, entities, dashboards, and automations. An optional client-generated UUIDv7 &#x60;id&#x60; can be supplied.
 
 ### Example
 
@@ -140,7 +144,7 @@ example().catch(console.error);
 
 ### Return type
 
-[**CreateAttributeItem201Response**](CreateAttributeItem201Response.md)
+[**CreateProject201Response**](CreateProject201Response.md)
 
 ### Authorization
 
@@ -168,6 +172,8 @@ example().catch(console.error);
 
 Delete a project
 
+Soft-deletes a project and archives all associated entities, templates, attributes, and dashboards. Requires project owner permissions.
+
 ### Example
 
 ```ts
@@ -186,8 +192,8 @@ async function example() {
   const api = new ProjectsApi(config);
 
   const body = {
-    // string
-    id: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | Project ID to delete
+    id: 018b2f1b-8c1a-75b3-8000-7f0000010000,
   } satisfies DeleteProjectRequest;
 
   try {
@@ -207,7 +213,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` |  | [Defaults to `undefined`] |
+| **id** | `string` | Project ID to delete | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -258,8 +264,8 @@ async function example() {
   const api = new ProjectsApi(config);
 
   const body = {
-    // string
-    id: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | Unique UUID identifier of the project
+    id: 018b2f1b-8c1a-75b3-8000-7f0000010000,
   } satisfies DismissProjectTourRequest;
 
   try {
@@ -279,7 +285,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` |  | [Defaults to `undefined`] |
+| **id** | `string` | Unique UUID identifier of the project | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -310,6 +316,8 @@ example().catch(console.error);
 
 Get a project by ID
 
+Retrieves details for a specific project by its UUID, including name, description, tour status, owner email, and timestamps.
+
 ### Example
 
 ```ts
@@ -328,8 +336,8 @@ async function example() {
   const api = new ProjectsApi(config);
 
   const body = {
-    // string
-    id: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | Project ID
+    id: 018b2f1b-8c1a-75b3-8000-7f0000010000,
   } satisfies GetProjectRequest;
 
   try {
@@ -349,7 +357,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` |  | [Defaults to `undefined`] |
+| **id** | `string` | Project ID | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -456,6 +464,8 @@ example().catch(console.error);
 
 List users in project
 
+Returns all users assigned to the specified project along with their roles (Admin, Editor, Viewer, etc.), email addresses, and join dates.
+
 ### Example
 
 ```ts
@@ -474,8 +484,8 @@ async function example() {
   const api = new ProjectsApi(config);
 
   const body = {
-    // string
-    id: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | Project ID
+    id: 018b2f1b-8c1a-75b3-8000-7f0000010000,
   } satisfies ListProjectUsersRequest;
 
   try {
@@ -495,7 +505,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` |  | [Defaults to `undefined`] |
+| **id** | `string` | Project ID | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -524,6 +534,8 @@ example().catch(console.error);
 > ListProjects200Response listProjects()
 
 List all projects
+
+Returns all projects accessible to the authenticated user, including their assigned role and owner information.
 
 ### Example
 
@@ -586,6 +598,8 @@ This endpoint does not need any parameter.
 
 Remove user from project
 
+Removes a user membership from the project. The user will immediately lose access to the project\&#39;s data.
+
 ### Example
 
 ```ts
@@ -604,10 +618,10 @@ async function example() {
   const api = new ProjectsApi(config);
 
   const body = {
-    // string
-    id: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string
-    userId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | Project ID
+    id: 018b2f1b-8c1a-75b3-8000-7f0000010000,
+    // string | User ID to remove from project
+    userId: 018b2f1b-8c1a-75b3-8000-7f0000010000,
   } satisfies RemoveUserFromProjectRequest;
 
   try {
@@ -627,8 +641,8 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` |  | [Defaults to `undefined`] |
-| **userId** | `string` |  | [Defaults to `undefined`] |
+| **id** | `string` | Project ID | [Defaults to `undefined`] |
+| **userId** | `string` | User ID to remove from project | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -659,6 +673,8 @@ example().catch(console.error);
 
 Update a project
 
+Updates project metadata such as name and description. Requires project administrator permissions.
+
 ### Example
 
 ```ts
@@ -677,8 +693,8 @@ async function example() {
   const api = new ProjectsApi(config);
 
   const body = {
-    // string
-    id: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | Project ID
+    id: 018b2f1b-8c1a-75b3-8000-7f0000010000,
     // UpdateProjectRequest
     updateProjectRequest: ...,
   } satisfies UpdateProjectOperationRequest;
@@ -700,7 +716,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` |  | [Defaults to `undefined`] |
+| **id** | `string` | Project ID | [Defaults to `undefined`] |
 | **updateProjectRequest** | [UpdateProjectRequest](UpdateProjectRequest.md) |  | |
 
 ### Return type

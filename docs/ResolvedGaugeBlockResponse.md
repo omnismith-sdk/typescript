@@ -1,6 +1,7 @@
 
 # ResolvedGaugeBlockResponse
 
+Computed result for a gauge meter block
 
 ## Properties
 
@@ -21,13 +22,13 @@ import type { ResolvedGaugeBlockResponse } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "block_id": null,
-  "title": null,
-  "type": null,
-  "value": null,
-  "min": null,
-  "max": null,
-  "percentage": null,
+  "block_id": 0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6c,
+  "title": CPU Load Average,
+  "type": gauge,
+  "value": 73.5,
+  "min": 0,
+  "max": 100,
+  "percentage": 73.5,
 } satisfies ResolvedGaugeBlockResponse
 
 console.log(example)

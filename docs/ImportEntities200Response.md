@@ -11,6 +11,7 @@ Name | Type
 `updated` | number
 `skipped` | number
 `failed` | number
+`affected_entities` | [Array&lt;ImportEntities200ResponseAffectedEntitiesInner&gt;](ImportEntities200ResponseAffectedEntitiesInner.md)
 `errors` | [Array&lt;ImportEntities200ResponseErrorsInner&gt;](ImportEntities200ResponseErrorsInner.md)
 
 ## Example
@@ -25,6 +26,7 @@ const example = {
   "updated": null,
   "skipped": null,
   "failed": null,
+  "affected_entities": null,
   "errors": null,
 } satisfies ImportEntities200Response
 

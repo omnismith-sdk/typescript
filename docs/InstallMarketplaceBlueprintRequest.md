@@ -16,8 +16,8 @@ import type { InstallMarketplaceBlueprintRequest } from '@omnismith-sdk/typescri
 
 // TODO: Update the object below with actual values
 const example = {
-  "project_id": null,
-  "include_demo_data": null,
+  "project_id": 01912ecb-4654-7890-a1b2-c3d4e5f60011,
+  "include_demo_data": false,
 } satisfies InstallMarketplaceBlueprintRequest
 
 console.log(example)

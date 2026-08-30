@@ -6,7 +6,7 @@
 
 Name | Type
 ------------ | -------------
-`data` | any
+`data` | [MarketplaceBlueprintDetailResponse](MarketplaceBlueprintDetailResponse.md)
 
 ## Example
 

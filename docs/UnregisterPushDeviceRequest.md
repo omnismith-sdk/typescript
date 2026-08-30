@@ -15,7 +15,7 @@ import type { UnregisterPushDeviceRequest } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "token": null,
+  "token": dK1_f92La...xR8_token,
 } satisfies UnregisterPushDeviceRequest
 
 console.log(example)

@@ -1,13 +1,14 @@
 
 # AttributeResponse
 
-Attribute details
+Complete schema attribute metadata and configuration.
 
 ## Properties
 
 Name | Type
 ------------ | -------------
 `id` | string
+`slug` | string
 `name` | string
 `description` | string
 `attribute_type` | number
@@ -25,15 +26,16 @@ import type { AttributeResponse } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "id": null,
-  "name": null,
-  "description": null,
-  "attribute_type": null,
-  "data_type": null,
+  "id": 018b2f1b-8c1a-75b3-8000-7f0000010000,
+  "slug": product_color,
+  "name": Product Color,
+  "description": Product color specification,
+  "attribute_type": 0,
+  "data_type": 0,
   "template_ids": null,
   "reference_config": null,
-  "created_at": null,
-  "updated_at": null,
+  "created_at": 2026-01-15T10:30Z,
+  "updated_at": 2026-01-15T10:30Z,
   "deleted_at": null,
 } satisfies AttributeResponse
 

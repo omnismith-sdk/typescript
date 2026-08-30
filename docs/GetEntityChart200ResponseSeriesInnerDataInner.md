@@ -16,8 +16,8 @@ import type { GetEntityChart200ResponseSeriesInnerDataInner } from '@omnismith-s
 
 // TODO: Update the object below with actual values
 const example = {
-  "time": null,
-  "value": null,
+  "time": 2026-08-26T12:00Z,
+  "value": 24.5,
 } satisfies GetEntityChart200ResponseSeriesInnerDataInner
 
 console.log(example)

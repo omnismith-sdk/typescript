@@ -8,6 +8,7 @@ Name | Type
 ------------ | -------------
 `created_at` | Date
 `attribute_id` | string
+`old_value` | string
 `value` | string
 `entity_id` | string
 `author_email` | string
@@ -19,11 +20,12 @@ import type { GetEntityHistory200ResponseItemsInner } from '@omnismith-sdk/types
 
 // TODO: Update the object below with actual values
 const example = {
-  "created_at": null,
-  "attribute_id": null,
-  "value": null,
-  "entity_id": null,
-  "author_email": null,
+  "created_at": 2026-08-26T12:05Z,
+  "attribute_id": 018b2f1b-8c1a-75b3-8000-7f0000010002,
+  "old_value": 129.99,
+  "value": 149.99,
+  "entity_id": 018b2f1b-8c1a-75b3-8000-7f0000010000,
+  "author_email": demo@omnismith.io,
 } satisfies GetEntityHistory200ResponseItemsInner
 
 console.log(example)

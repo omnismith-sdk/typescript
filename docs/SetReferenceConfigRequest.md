@@ -1,6 +1,7 @@
 
 # SetReferenceConfigRequest
 
+Payload specifying target template and display attribute for a reference relationship.
 
 ## Properties
 
@@ -16,8 +17,8 @@ import type { SetReferenceConfigRequest } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "target_template_id": null,
-  "target_attribute_id": null,
+  "target_template_id": 018b2f1b-8c1a-75b3-8000-7f0000010002,
+  "target_attribute_id": 018b2f1b-8c1a-75b3-8000-7f0000010003,
 } satisfies SetReferenceConfigRequest
 
 console.log(example)

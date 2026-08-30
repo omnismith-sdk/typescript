@@ -1,6 +1,7 @@
 
 # ListItemInput
 
+Specification for an individual list item option.
 
 ## Properties
 
@@ -17,7 +18,7 @@ import type { ListItemInput } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "value": red,
+  "value": Red,
   "sort_order": 0,
   "id": 019a6b2c-8c3a-7c2e-8b3f-6c8a1a2b3c4d,
 } satisfies ListItemInput

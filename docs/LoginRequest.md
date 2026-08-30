@@ -1,7 +1,7 @@
 
 # LoginRequest
 
-Payload for user login
+Payload for authenticating a user with email and password
 
 ## Properties
 
@@ -17,8 +17,8 @@ import type { LoginRequest } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "email": user@example.com,
-  "password": securePassword123,
+  "email": demo@omnismith.io,
+  "password": omni_live_secret_demo_password,
 } satisfies LoginRequest
 
 console.log(example)

@@ -19,11 +19,11 @@ import type { PublishMarketplaceBlueprintRequest } from '@omnismith-sdk/typescri
 
 // TODO: Update the object below with actual values
 const example = {
-  "title": CRM Pipeline,
-  "description": A complete CRM pipeline template,
-  "keywords": null,
-  "template_ids": null,
-  "id": null,
+  "title": CRM Pipeline & Lead Tracker,
+  "description": A complete CRM pipeline template with contacts, deals, and activities.,
+  "keywords": ["crm","sales","deals"],
+  "template_ids": ["01912ecb-4654-7890-a1b2-c3d4e5f60088","01912ecb-4654-7890-a1b2-c3d4e5f60089"],
+  "id": 01912ecb-4654-7890-a1b2-c3d4e5f60003,
 } satisfies PublishMarketplaceBlueprintRequest
 
 console.log(example)

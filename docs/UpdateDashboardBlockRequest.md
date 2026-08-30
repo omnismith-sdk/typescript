@@ -1,13 +1,14 @@
 
 # UpdateDashboardBlockRequest
 
+Payload for updating a dashboard block configuration, query parameters, or 12-column grid placement
 
 ## Properties
 
 Name | Type
 ------------ | -------------
 `title` | string
-`config` | object
+`config` | [UpdateDashboardBlockRequestConfig](UpdateDashboardBlockRequestConfig.md)
 
 ## Example
 
@@ -16,7 +17,7 @@ import type { UpdateDashboardBlockRequest } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "title": My Block,
+  "title": CPU Utilization — Time Series,
   "config": null,
 } satisfies UpdateDashboardBlockRequest
 

@@ -1,6 +1,7 @@
 
 # CreateDashboardRequest
 
+Payload for creating a new analytics and telemetry dashboard canvas. Omnismith dashboards utilize a 12-column grid layout.
 
 ## Properties
 
@@ -8,7 +9,7 @@ Name | Type
 ------------ | -------------
 `name` | string
 `description` | string
-`config` | object
+`config` | [CreateDashboardRequestConfig](CreateDashboardRequestConfig.md)
 
 ## Example
 
@@ -17,9 +18,9 @@ import type { CreateDashboardRequest } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "name": My Dashboard,
-  "description": Dashboard description,
-  "config": {},
+  "name": Infrastructure & Operations Hub,
+  "description": Live overview of cloud server fleet health and CPU telemetry.,
+  "config": null,
 } satisfies CreateDashboardRequest
 
 console.log(example)

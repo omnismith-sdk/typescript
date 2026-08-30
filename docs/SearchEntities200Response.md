@@ -19,9 +19,9 @@ import type { SearchEntities200Response } from '@omnismith-sdk/typescript'
 // TODO: Update the object below with actual values
 const example = {
   "data": null,
-  "total": null,
-  "limit": null,
-  "offset": null,
+  "total": 142,
+  "limit": 50,
+  "offset": 0,
 } satisfies SearchEntities200Response
 
 console.log(example)

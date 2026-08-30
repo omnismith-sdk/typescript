@@ -16,7 +16,7 @@ import type { GetEntityChart200ResponseSeriesInner } from '@omnismith-sdk/typesc
 
 // TODO: Update the object below with actual values
 const example = {
-  "attribute_id": null,
+  "attribute_id": 018b2f1b-8c1a-75b3-8000-7f0000010010,
   "data": null,
 } satisfies GetEntityChart200ResponseSeriesInner
 

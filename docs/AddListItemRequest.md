@@ -1,6 +1,7 @@
 
 # AddListItemRequest
 
+Payload for adding a new item to a List attribute.
 
 ## Properties
 
@@ -17,8 +18,8 @@ import type { AddListItemRequest } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "value": red,
-  "sort_order": 0,
+  "value": Green,
+  "sort_order": 1,
   "id": 019a6b2c-8c3a-7c2e-8b3f-6c8a1a2b3c4d,
 } satisfies AddListItemRequest
 

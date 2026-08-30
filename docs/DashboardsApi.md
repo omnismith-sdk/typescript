@@ -14,9 +14,11 @@ All URIs are relative to *https://api.omnismith.io/v1*
 
 ## createDashboard
 
-> CreateAttributeItem201Response createDashboard(createDashboardRequest)
+> CreateDashboard201Response createDashboard(createDashboardRequest)
 
 Create a new dashboard
+
+Creates a new analytics and telemetry dashboard canvas for organizing metric KPIs, charts, gauges, and entity tables within a customizable grid layout.
 
 ### Example
 
@@ -36,7 +38,7 @@ async function example() {
   const api = new DashboardsApi(config);
 
   const body = {
-    // CreateDashboardRequest
+    // CreateDashboardRequest | Dashboard creation payload
     createDashboardRequest: ...,
   } satisfies CreateDashboardOperationRequest;
 
@@ -57,11 +59,11 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **createDashboardRequest** | [CreateDashboardRequest](CreateDashboardRequest.md) |  | |
+| **createDashboardRequest** | [CreateDashboardRequest](CreateDashboardRequest.md) | Dashboard creation payload | |
 
 ### Return type
 
-[**CreateAttributeItem201Response**](CreateAttributeItem201Response.md)
+[**CreateDashboard201Response**](CreateDashboard201Response.md)
 
 ### Authorization
 
@@ -76,7 +78,8 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **201** | Dashboard created |  -  |
+| **201** | Dashboard created successfully |  -  |
+| **401** | Unauthorized |  -  |
 | **402** | Tier quota exceeded |  -  |
 | **422** | Validation Error |  -  |
 | **500** | Internal Server Error |  -  |
@@ -89,6 +92,8 @@ example().catch(console.error);
 > deleteDashboard(id)
 
 Delete a dashboard
+
+Permanently removes a dashboard and all attached visualization blocks, metric widgets, and configurations.
 
 ### Example
 
@@ -108,8 +113,8 @@ async function example() {
   const api = new DashboardsApi(config);
 
   const body = {
-    // string | Dashboard ID
-    id: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | Dashboard unique identifier (UUID) to delete
+    id: 0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6b,
   } satisfies DeleteDashboardRequest;
 
   try {
@@ -129,7 +134,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` | Dashboard ID | [Defaults to `undefined`] |
+| **id** | `string` | Dashboard unique identifier (UUID) to delete | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -142,14 +147,16 @@ example().catch(console.error);
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: `application/json`
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **204** | Dashboard deleted |  -  |
-| **404** | Dashboard not found |  -  |
+| **204** | Dashboard deleted successfully |  -  |
+| **401** | Unauthorized |  -  |
+| **404** | Not Found |  -  |
+| **500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -159,6 +166,8 @@ example().catch(console.error);
 > DashboardResponse getDashboard(id)
 
 Get a dashboard by ID
+
+Retrieves metadata and top-level configuration for a specific dashboard by its unique identifier.
 
 ### Example
 
@@ -178,8 +187,8 @@ async function example() {
   const api = new DashboardsApi(config);
 
   const body = {
-    // string | Dashboard ID
-    id: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | Dashboard unique identifier (UUID)
+    id: 0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6b,
   } satisfies GetDashboardRequest;
 
   try {
@@ -199,7 +208,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` | Dashboard ID | [Defaults to `undefined`] |
+| **id** | `string` | Dashboard unique identifier (UUID) | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -219,7 +228,9 @@ example().catch(console.error);
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Dashboard details |  -  |
-| **404** | Dashboard not found |  -  |
+| **401** | Unauthorized |  -  |
+| **404** | Not Found |  -  |
+| **500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -229,6 +240,8 @@ example().catch(console.error);
 > ListDashboards200Response listDashboards()
 
 List all dashboards
+
+Retrieves all analytics dashboards configured within the authenticated project context, including dashboard metadata, layout settings, and visualization configurations.
 
 ### Example
 
@@ -281,6 +294,8 @@ This endpoint does not need any parameter.
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | List of dashboards |  -  |
+| **401** | Unauthorized |  -  |
+| **500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -290,6 +305,8 @@ This endpoint does not need any parameter.
 > updateDashboard(id, updateDashboardRequest)
 
 Update a dashboard
+
+Updates dashboard metadata including its display name, description, and canvas layout settings.
 
 ### Example
 
@@ -309,9 +326,9 @@ async function example() {
   const api = new DashboardsApi(config);
 
   const body = {
-    // string | Dashboard ID
-    id: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // UpdateDashboardRequest
+    // string | Dashboard unique identifier (UUID) to update
+    id: 0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6b,
+    // UpdateDashboardRequest | Dashboard update payload
     updateDashboardRequest: ...,
   } satisfies UpdateDashboardOperationRequest;
 
@@ -332,8 +349,8 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` | Dashboard ID | [Defaults to `undefined`] |
-| **updateDashboardRequest** | [UpdateDashboardRequest](UpdateDashboardRequest.md) |  | |
+| **id** | `string` | Dashboard unique identifier (UUID) to update | [Defaults to `undefined`] |
+| **updateDashboardRequest** | [UpdateDashboardRequest](UpdateDashboardRequest.md) | Dashboard update payload | |
 
 ### Return type
 
@@ -352,9 +369,11 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Dashboard updated |  -  |
-| **404** | Dashboard not found |  -  |
+| **204** | Dashboard updated successfully |  -  |
+| **401** | Unauthorized |  -  |
+| **404** | Not Found |  -  |
 | **422** | Validation Error |  -  |
+| **500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 

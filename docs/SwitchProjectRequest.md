@@ -1,7 +1,7 @@
 
 # SwitchProjectRequest
 
-Payload for switching the active project context
+Payload for switching the active multi-tenancy project context
 
 ## Properties
 
