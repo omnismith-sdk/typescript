@@ -136,7 +136,6 @@ docs/ListWorkspaces200Response.md
 docs/LogAiUsage200Response.md
 docs/LogAiUsageRequest.md
 docs/LoginRequest.md
-docs/MCPApi.md
 docs/MarketplaceApi.md
 docs/MarketplaceBlueprintDetailResponse.md
 docs/MarketplaceBlueprintDetailResponseMetadata.md
@@ -263,7 +262,6 @@ src/apis/DashboardsApi.ts
 src/apis/EntityApi.ts
 src/apis/FeedbackApi.ts
 src/apis/FileAttachmentApi.ts
-src/apis/MCPApi.ts
 src/apis/MarketplaceApi.ts
 src/apis/OAuthApi.ts
 src/apis/ProjectsApi.ts

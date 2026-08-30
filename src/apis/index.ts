@@ -14,7 +14,6 @@ export * from './DashboardsApi';
 export * from './EntityApi';
 export * from './FeedbackApi';
 export * from './FileAttachmentApi';
-export * from './MCPApi';
 export * from './MarketplaceApi';
 export * from './OAuthApi';
 export * from './ProjectsApi';
