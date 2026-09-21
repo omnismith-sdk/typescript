@@ -23,13 +23,13 @@ import type { UpdateWorkspaceViewRequest } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "name": Active Gateways,
-  "filters": [{"field":"status","operator":"eq","value":"active","is_active":true}],
-  "search_string": gateway,
+  "name": Telegram Channel Hub,
+  "filters": [{"field":"platform","operator":"eq","value":"telegram","is_active":true}],
+  "search_string": manifesto,
   "search_mode": keyword,
   "sort": null,
   "display_mode": table,
-  "displayed_columns": ["name","status","ip_address","created_at"],
+  "displayed_columns": ["title","platform","status","scheduled_date"],
   "pane_order": 1,
 } satisfies UpdateWorkspaceViewRequest
 

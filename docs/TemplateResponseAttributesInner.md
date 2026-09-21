@@ -17,7 +17,7 @@ import type { TemplateResponseAttributesInner } from '@omnismith-sdk/typescript'
 // TODO: Update the object below with actual values
 const example = {
   "attribute_id": 018b2f1b-8c1a-75b3-8000-7f0000010000,
-  "default_value": Red,
+  "default_value": 019a6b2c-8c3a-7c2e-8b3f-6c8a1a2b3c4d,
 } satisfies TemplateResponseAttributesInner
 
 console.log(example)

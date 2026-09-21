@@ -11,6 +11,7 @@ Name | Type
 `title` | string
 `status` | number
 `detail` | string
+`code` | string
 
 ## Example
 
@@ -23,6 +24,7 @@ const example = {
   "title": Internal Server Error,
   "status": 500,
   "detail": An unexpected error occurred.,
+  "code": no_project_selected,
 } satisfies ErrorResponse
 
 console.log(example)

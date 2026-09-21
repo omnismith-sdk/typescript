@@ -22,6 +22,8 @@ Name | Type
 `limit` | number
 `sort` | object
 `visible_attributes` | Array&lt;string&gt;
+`group_by` | Array&lt;string&gt;
+`aggregations` | [Array&lt;UpdateDashboardBlockRequestConfigAggregationsInner&gt;](UpdateDashboardBlockRequestConfigAggregationsInner.md)
 `filters` | Array&lt;object&gt;
 `x` | number
 `y` | number
@@ -50,6 +52,8 @@ const example = {
   "limit": 10,
   "sort": {"created_at":"desc"},
   "visible_attributes": null,
+  "group_by": ["stage"],
+  "aggregations": [{"op":"sum","field":"mrr"}],
   "filters": null,
   "x": 0,
   "y": 0,

@@ -1,6 +1,7 @@
 
 # UpdateProjectRequest
 
+Payload for updating project metadata. Name and description are optional; omitted fields are preserved.
 
 ## Properties
 

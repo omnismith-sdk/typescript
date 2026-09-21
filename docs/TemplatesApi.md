@@ -16,7 +16,7 @@ All URIs are relative to *https://api.omnismith.io/v1*
 
 ## createTemplate
 
-> CreateTemplate201Response createTemplate(createTemplateRequest)
+> CreateTemplate201Response createTemplate(createTemplateRequest, xOmnismithProjectId)
 
 Create a new template
 
@@ -42,6 +42,8 @@ async function example() {
   const body = {
     // CreateTemplateRequest
     createTemplateRequest: ...,
+    // string | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential\'s `projects` claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code `stale_project_grant`; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 `no_project_selected`. Two clients holding the same credential may send different values at the same time. (optional)
+    xOmnismithProjectId: 018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7d,
   } satisfies CreateTemplateOperationRequest;
 
   try {
@@ -62,6 +64,7 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **createTemplateRequest** | [CreateTemplateRequest](CreateTemplateRequest.md) |  | |
+| **xOmnismithProjectId** | `string` | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential\&#39;s &#x60;projects&#x60; claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code &#x60;stale_project_grant&#x60;; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 &#x60;no_project_selected&#x60;. Two clients holding the same credential may send different values at the same time. | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -84,7 +87,7 @@ example().catch(console.error);
 | **400** | Bad Request |  -  |
 | **401** | Unauthorized |  -  |
 | **402** | Tier quota exceeded |  -  |
-| **409** | Conflict |  -  |
+| **409** | Conflict. Either the request collides with existing state, or no project is selected — the caller is authenticated but this operation is tenant-scoped. The two are told apart by the body\&#39;s &#x60;code&#x60; field, which is &#x60;no_project_selected&#x60; in the second case and absent in the first. |  -  |
 | **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
@@ -92,7 +95,7 @@ example().catch(console.error);
 
 ## deleteTemplate
 
-> deleteTemplate(id)
+> deleteTemplate(id, xOmnismithProjectId)
 
 Delete a template
 
@@ -118,6 +121,8 @@ async function example() {
   const body = {
     // string | UUID or unique slug of the template to delete
     id: 018b2f1b-8c1a-75b3-8000-7f0000010010,
+    // string | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential\'s `projects` claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code `stale_project_grant`; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 `no_project_selected`. Two clients holding the same credential may send different values at the same time. (optional)
+    xOmnismithProjectId: 018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7d,
   } satisfies DeleteTemplateRequest;
 
   try {
@@ -138,6 +143,7 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **id** | `string` | UUID or unique slug of the template to delete | [Defaults to `undefined`] |
+| **xOmnismithProjectId** | `string` | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential\&#39;s &#x60;projects&#x60; claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code &#x60;stale_project_grant&#x60;; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 &#x60;no_project_selected&#x60;. Two clients holding the same credential may send different values at the same time. | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -159,13 +165,14 @@ example().catch(console.error);
 | **204** | Template deleted successfully |  -  |
 | **401** | Unauthorized |  -  |
 | **404** | Not Found |  -  |
+| **409** | No project is selected. The caller is authenticated but the request is tenant-scoped, so a project must be selected before it can be answered. The response body carries &#x60;\&quot;code\&quot;: \&quot;no_project_selected\&quot;&#x60;, which clients branch on to offer a project picker rather than an access-denied message. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
 ## getTemplate
 
-> TemplateResponse getTemplate(id)
+> TemplateResponse getTemplate(id, xOmnismithProjectId)
 
 Get a template by ID or slug
 
@@ -191,6 +198,8 @@ async function example() {
   const body = {
     // string | UUID or unique slug of the template to retrieve
     id: 018b2f1b-8c1a-75b3-8000-7f0000010010,
+    // string | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential\'s `projects` claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code `stale_project_grant`; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 `no_project_selected`. Two clients holding the same credential may send different values at the same time. (optional)
+    xOmnismithProjectId: 018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7d,
   } satisfies GetTemplateRequest;
 
   try {
@@ -211,6 +220,7 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **id** | `string` | UUID or unique slug of the template to retrieve | [Defaults to `undefined`] |
+| **xOmnismithProjectId** | `string` | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential\&#39;s &#x60;projects&#x60; claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code &#x60;stale_project_grant&#x60;; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 &#x60;no_project_selected&#x60;. Two clients holding the same credential may send different values at the same time. | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -232,13 +242,14 @@ example().catch(console.error);
 | **200** | Template details |  -  |
 | **401** | Unauthorized |  -  |
 | **404** | Not Found |  -  |
+| **409** | No project is selected. The caller is authenticated but the request is tenant-scoped, so a project must be selected before it can be answered. The response body carries &#x60;\&quot;code\&quot;: \&quot;no_project_selected\&quot;&#x60;, which clients branch on to offer a project picker rather than an access-denied message. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
 ## listTemplateEntityCounts
 
-> ListTemplateEntityCounts200Response listTemplateEntityCounts()
+> ListTemplateEntityCounts200Response listTemplateEntityCounts(xOmnismithProjectId)
 
 List entity counts per template
 
@@ -261,8 +272,13 @@ async function example() {
   });
   const api = new TemplatesApi(config);
 
+  const body = {
+    // string | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential\'s `projects` claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code `stale_project_grant`; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 `no_project_selected`. Two clients holding the same credential may send different values at the same time. (optional)
+    xOmnismithProjectId: 018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7d,
+  } satisfies ListTemplateEntityCountsRequest;
+
   try {
-    const data = await api.listTemplateEntityCounts();
+    const data = await api.listTemplateEntityCounts(body);
     console.log(data);
   } catch (error) {
     console.error(error);
@@ -275,7 +291,10 @@ example().catch(console.error);
 
 ### Parameters
 
-This endpoint does not need any parameter.
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **xOmnismithProjectId** | `string` | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential\&#39;s &#x60;projects&#x60; claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code &#x60;stale_project_grant&#x60;; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 &#x60;no_project_selected&#x60;. Two clients holding the same credential may send different values at the same time. | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -296,13 +315,14 @@ This endpoint does not need any parameter.
 |-------------|-------------|------------------|
 | **200** | Entity counts per template |  -  |
 | **401** | Unauthorized |  -  |
+| **409** | No project is selected. The caller is authenticated but the request is tenant-scoped, so a project must be selected before it can be answered. The response body carries &#x60;\&quot;code\&quot;: \&quot;no_project_selected\&quot;&#x60;, which clients branch on to offer a project picker rather than an access-denied message. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
 ## listTemplates
 
-> ListTemplates200Response listTemplates()
+> ListTemplates200Response listTemplates(xOmnismithProjectId)
 
 List all templates
 
@@ -325,8 +345,13 @@ async function example() {
   });
   const api = new TemplatesApi(config);
 
+  const body = {
+    // string | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential\'s `projects` claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code `stale_project_grant`; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 `no_project_selected`. Two clients holding the same credential may send different values at the same time. (optional)
+    xOmnismithProjectId: 018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7d,
+  } satisfies ListTemplatesRequest;
+
   try {
-    const data = await api.listTemplates();
+    const data = await api.listTemplates(body);
     console.log(data);
   } catch (error) {
     console.error(error);
@@ -339,7 +364,10 @@ example().catch(console.error);
 
 ### Parameters
 
-This endpoint does not need any parameter.
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **xOmnismithProjectId** | `string` | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential\&#39;s &#x60;projects&#x60; claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code &#x60;stale_project_grant&#x60;; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 &#x60;no_project_selected&#x60;. Two clients holding the same credential may send different values at the same time. | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -360,13 +388,14 @@ This endpoint does not need any parameter.
 |-------------|-------------|------------------|
 | **200** | List of all project templates |  -  |
 | **401** | Unauthorized |  -  |
+| **409** | No project is selected. The caller is authenticated but the request is tenant-scoped, so a project must be selected before it can be answered. The response body carries &#x60;\&quot;code\&quot;: \&quot;no_project_selected\&quot;&#x60;, which clients branch on to offer a project picker rather than an access-denied message. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
 ## patchTemplate
 
-> patchTemplate(id, patchTemplateRequest)
+> patchTemplate(id, patchTemplateRequest, xOmnismithProjectId)
 
 Patch a template (granular partial update)
 
@@ -394,6 +423,8 @@ async function example() {
     id: 018b2f1b-8c1a-75b3-8000-7f0000010010,
     // PatchTemplateRequest
     patchTemplateRequest: ...,
+    // string | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential\'s `projects` claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code `stale_project_grant`; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 `no_project_selected`. Two clients holding the same credential may send different values at the same time. (optional)
+    xOmnismithProjectId: 018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7d,
   } satisfies PatchTemplateOperationRequest;
 
   try {
@@ -415,6 +446,7 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **id** | `string` | UUID or unique slug of the template to patch | [Defaults to `undefined`] |
 | **patchTemplateRequest** | [PatchTemplateRequest](PatchTemplateRequest.md) |  | |
+| **xOmnismithProjectId** | `string` | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential\&#39;s &#x60;projects&#x60; claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code &#x60;stale_project_grant&#x60;; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 &#x60;no_project_selected&#x60;. Two clients holding the same credential may send different values at the same time. | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -437,7 +469,7 @@ example().catch(console.error);
 | **400** | Bad Request |  -  |
 | **401** | Unauthorized |  -  |
 | **404** | Not Found |  -  |
-| **409** | Conflict |  -  |
+| **409** | Conflict. Either the request collides with existing state, or no project is selected — the caller is authenticated but this operation is tenant-scoped. The two are told apart by the body\&#39;s &#x60;code&#x60; field, which is &#x60;no_project_selected&#x60; in the second case and absent in the first. |  -  |
 | **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
@@ -445,7 +477,7 @@ example().catch(console.error);
 
 ## updateTemplate
 
-> updateTemplate(id, updateTemplateRequest)
+> updateTemplate(id, updateTemplateRequest, xOmnismithProjectId)
 
 Update a template (full replacement)
 
@@ -473,6 +505,8 @@ async function example() {
     id: 018b2f1b-8c1a-75b3-8000-7f0000010010,
     // UpdateTemplateRequest
     updateTemplateRequest: ...,
+    // string | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential\'s `projects` claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code `stale_project_grant`; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 `no_project_selected`. Two clients holding the same credential may send different values at the same time. (optional)
+    xOmnismithProjectId: 018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7d,
   } satisfies UpdateTemplateOperationRequest;
 
   try {
@@ -494,6 +528,7 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **id** | `string` | UUID or unique slug of the template to update | [Defaults to `undefined`] |
 | **updateTemplateRequest** | [UpdateTemplateRequest](UpdateTemplateRequest.md) |  | |
+| **xOmnismithProjectId** | `string` | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential\&#39;s &#x60;projects&#x60; claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code &#x60;stale_project_grant&#x60;; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 &#x60;no_project_selected&#x60;. Two clients holding the same credential may send different values at the same time. | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -516,7 +551,7 @@ example().catch(console.error);
 | **400** | Bad Request |  -  |
 | **401** | Unauthorized |  -  |
 | **404** | Not Found |  -  |
-| **409** | Conflict |  -  |
+| **409** | Conflict. Either the request collides with existing state, or no project is selected — the caller is authenticated but this operation is tenant-scoped. The two are told apart by the body\&#39;s &#x60;code&#x60; field, which is &#x60;no_project_selected&#x60; in the second case and absent in the first. |  -  |
 | **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)

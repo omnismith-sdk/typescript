@@ -10,6 +10,7 @@ Name | Type
 `type` | string
 `templateId` | string
 `attributeId` | string
+`actionId` | string
 
 ## Example
 
@@ -21,6 +22,7 @@ const example = {
   "type": on_attribute_changed,
   "templateId": 01912ecb-4654-7890-a1b2-c3d4e5f60088,
   "attributeId": 01912ecb-4654-7890-a1b2-c3d4e5f60077,
+  "actionId": 01a09900-0000-7000-8000-000000000001,
 } satisfies AutomationResponseTrigger
 
 console.log(example)

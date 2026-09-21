@@ -1,16 +1,16 @@
 
 # ProjectSchemaResponse
 
-Complete project schema graph containing all active attributes, templates, list choice items, and reference configurations.
+Consolidated schema graph containing templates, attributes, choice options, references, business rules, and actions in a concise, token-efficient shape.
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`attributes` | [Array&lt;AttributeResponse&gt;](AttributeResponse.md)
-`templates` | [Array&lt;TemplateResponse&gt;](TemplateResponse.md)
-`list_items` | [Array&lt;ListItemResponse&gt;](ListItemResponse.md)
-`reference_configs` | [Array&lt;ReferenceConfigResponse&gt;](ReferenceConfigResponse.md)
+`project_id` | string
+`project_name` | string
+`templates` | [Array&lt;TemplateOverviewResponse&gt;](TemplateOverviewResponse.md)
+`attributes` | [Array&lt;AttributeOverviewResponse&gt;](AttributeOverviewResponse.md)
 
 ## Example
 
@@ -19,10 +19,10 @@ import type { ProjectSchemaResponse } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "attributes": null,
+  "project_id": 018b2f1b-8c1a-75b3-8000-7f0000010000,
+  "project_name": Omnismith Production,
   "templates": null,
-  "list_items": null,
-  "reference_configs": null,
+  "attributes": null,
 } satisfies ProjectSchemaResponse
 
 console.log(example)

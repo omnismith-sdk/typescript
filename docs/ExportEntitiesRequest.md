@@ -8,7 +8,7 @@ Filter and search criteria for scoping entity CSV export
 Name | Type
 ------------ | -------------
 `global_search` | string
-`filters` | [Array&lt;ExportEntitiesRequestFiltersInner&gt;](ExportEntitiesRequestFiltersInner.md)
+`filter_groups` | Array&lt;Array&lt;EntityFilter&gt;&gt;
 
 ## Example
 
@@ -18,7 +18,7 @@ import type { ExportEntitiesRequest } from '@omnismith-sdk/typescript'
 // TODO: Update the object below with actual values
 const example = {
   "global_search": Wireless,
-  "filters": null,
+  "filter_groups": [[{"field":"price","operator":"gt","value":"50.00"}]],
 } satisfies ExportEntitiesRequest
 
 console.log(example)

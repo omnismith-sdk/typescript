@@ -4,24 +4,23 @@ All URIs are relative to *https://api.omnismith.io/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**getMyPermissions**](AuthApi.md#getmypermissions) | **GET** /auth/me/permissions | Get current user role permissions |
+| [**getMyPermissions**](AuthApi.md#getmypermissions) | **GET** /auth/me/permissions | Discover authenticated caller permissions and capabilities |
 | [**googleLogin**](AuthApi.md#googleloginoperation) | **POST** /auth/google-login | Authenticate or register with Google Sign-In |
 | [**googleLoginRedirect**](AuthApi.md#googleloginredirect) | **POST** /auth/google-login-redirect | Google OAuth callback redirect handler |
 | [**listSessions**](AuthApi.md#listsessions) | **GET** /auth/sessions | List active and historical user sessions |
 | [**login**](AuthApi.md#loginoperation) | **POST** /auth/login | Authenticate user with email and password |
 | [**refreshToken**](AuthApi.md#refreshtokenoperation) | **POST** /auth/refresh | Rotate refresh token and issue new access token |
 | [**revokeSession**](AuthApi.md#revokesession) | **DELETE** /auth/sessions/{id} | Revoke an active login session |
-| [**switchProject**](AuthApi.md#switchprojectoperation) | **POST** /auth/switch-project | Switch active project context |
 
 
 
 ## getMyPermissions
 
-> GetMyPermissions200Response getMyPermissions()
+> GetMyPermissions200Response getMyPermissions(xOmnismithProjectId)
 
-Get current user role permissions
+Discover authenticated caller permissions and capabilities
 
-Returns the complete list of permission strings granted to the authenticated user under their active project role. Returns &#x60;[\&quot;*\&quot;]&#x60; for project owners who possess full root administrative privileges, or an array of granular permission keys (e.g. &#x60;entity.view&#x60;, &#x60;template.create&#x60;, &#x60;billing.view_usage&#x60;) for custom assigned roles. Returns an empty array if no role is currently assigned.
+Returns the complete list of permission keys granted to the authenticated user or agent under their active project role. Call this endpoint before planning or executing multi-step schema modifications, role administration, or entity mutations to verify current operational capabilities. Returns &#x60;[\&quot;*\&quot;]&#x60; for project owners who possess root administrative privileges, or an array of granular permission keys (e.g. &#x60;entity.view&#x60;, &#x60;entity.create&#x60;, &#x60;template.create&#x60;, &#x60;billing.view_usage&#x60;) for assigned roles. Returns an empty array if no role is currently assigned.
 
 ### Example
 
@@ -40,8 +39,13 @@ async function example() {
   });
   const api = new AuthApi(config);
 
+  const body = {
+    // string | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential\'s `projects` claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code `stale_project_grant`; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 `no_project_selected`. Two clients holding the same credential may send different values at the same time. (optional)
+    xOmnismithProjectId: 018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7d,
+  } satisfies GetMyPermissionsRequest;
+
   try {
-    const data = await api.getMyPermissions();
+    const data = await api.getMyPermissions(body);
     console.log(data);
   } catch (error) {
     console.error(error);
@@ -54,7 +58,10 @@ example().catch(console.error);
 
 ### Parameters
 
-This endpoint does not need any parameter.
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **xOmnismithProjectId** | `string` | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential\&#39;s &#x60;projects&#x60; claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code &#x60;stale_project_grant&#x60;; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 &#x60;no_project_selected&#x60;. Two clients holding the same credential may send different values at the same time. | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -362,7 +369,7 @@ No authorization required
 
 Rotate refresh token and issue new access token
 
-Exchanges a valid refresh token for a newly issued JWT access token and a rotated refresh token. Implements strict single-use refresh token rotation: the supplied refresh token is permanently invalidated upon successful exchange. If an expired, already-rotated, or revoked token is presented, the request is rejected.
+Exchanges a valid refresh token for a newly issued JWT access token and a rotated refresh token. Implements strict single-use refresh token rotation: the supplied refresh token is permanently invalidated upon successful exchange. If an expired, already-rotated, or revoked token is presented, the request is rejected. The refresh token alone authenticates the call; no &#x60;Authorization&#x60; header is required, and one sent alongside is ignored.
 
 ### Example
 
@@ -496,82 +503,6 @@ example().catch(console.error);
 | **400** | Bad Request |  -  |
 | **401** | Unauthorized |  -  |
 | **404** | Not Found |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
-
-
-## switchProject
-
-> SwitchProject200Response switchProject(switchProjectRequest)
-
-Switch active project context
-
-Switches the active multi-tenancy project context for the authenticated user session. Verifies that the user is an active member or owner of the target project, then issues a new JWT access token and refresh token containing updated claims for the selected project_id and the user\&#39;s assigned role.
-
-### Example
-
-```ts
-import {
-  Configuration,
-  AuthApi,
-} from '@omnismith-sdk/typescript';
-import type { SwitchProjectOperationRequest } from '@omnismith-sdk/typescript';
-
-async function example() {
-  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
-  const config = new Configuration({ 
-    // Configure HTTP bearer authorization: bearerAuth
-    accessToken: "YOUR BEARER TOKEN",
-  });
-  const api = new AuthApi(config);
-
-  const body = {
-    // SwitchProjectRequest
-    switchProjectRequest: ...,
-  } satisfies SwitchProjectOperationRequest;
-
-  try {
-    const data = await api.switchProject(body);
-    console.log(data);
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-// Run the test
-example().catch(console.error);
-```
-
-### Parameters
-
-
-| Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **switchProjectRequest** | [SwitchProjectRequest](SwitchProjectRequest.md) |  | |
-
-### Return type
-
-[**SwitchProject200Response**](SwitchProject200Response.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: `application/json`
-- **Accept**: `application/json`
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | Project switched successfully with issued project-scoped JWT access and refresh tokens |  -  |
-| **400** | Bad Request |  -  |
-| **401** | Unauthorized |  -  |
-| **403** | Forbidden |  -  |
-| **422** | Validation Error |  -  |
-| **500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 

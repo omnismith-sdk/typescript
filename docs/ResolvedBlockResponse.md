@@ -19,6 +19,9 @@ Name | Type
 `series` | [Array&lt;ResolvedChartBlockResponseSeriesInner&gt;](ResolvedChartBlockResponseSeriesInner.md)
 `items` | [Array&lt;ResolvedListBlockResponseItemsInner&gt;](ResolvedListBlockResponseItemsInner.md)
 `total_count` | number
+`limit` | number
+`truncated` | boolean
+`groups` | [Array&lt;ResolvedAggregateBlockResponseGroupsInner&gt;](ResolvedAggregateBlockResponseGroupsInner.md)
 
 ## Example
 
@@ -28,7 +31,7 @@ import type { ResolvedBlockResponse } from '@omnismith-sdk/typescript'
 // TODO: Update the object below with actual values
 const example = {
   "block_id": 0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6c,
-  "title": High Priority Gateways,
+  "title": Deals by Stage,
   "type": stat,
   "count": 42,
   "value": 73.5,
@@ -39,6 +42,9 @@ const example = {
   "series": null,
   "items": null,
   "total_count": 10,
+  "limit": 50,
+  "truncated": false,
+  "groups": null,
 } satisfies ResolvedBlockResponse
 
 console.log(example)

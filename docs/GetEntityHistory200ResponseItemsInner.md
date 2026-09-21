@@ -12,6 +12,7 @@ Name | Type
 `value` | string
 `entity_id` | string
 `author_email` | string
+`action_slug` | string
 
 ## Example
 
@@ -26,6 +27,7 @@ const example = {
   "value": 149.99,
   "entity_id": 018b2f1b-8c1a-75b3-8000-7f0000010000,
   "author_email": demo@omnismith.io,
+  "action_slug": confirm_attendance,
 } satisfies GetEntityHistory200ResponseItemsInner
 
 console.log(example)

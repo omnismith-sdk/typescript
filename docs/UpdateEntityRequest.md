@@ -7,7 +7,7 @@ Payload containing attribute value mutations for an existing entity
 
 Name | Type
 ------------ | -------------
-`attribute_values` | [Array&lt;UpdateEntityRequestAttributeValuesInner&gt;](UpdateEntityRequestAttributeValuesInner.md)
+`attributes` | [{ [key: string]: EntityAttributesInputValue; }](EntityAttributesInputValue.md)
 
 ## Example
 
@@ -16,7 +16,7 @@ import type { UpdateEntityRequest } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "attribute_values": null,
+  "attributes": null,
 } satisfies UpdateEntityRequest
 
 console.log(example)

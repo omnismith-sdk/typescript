@@ -1,7 +1,7 @@
 
 # ApproveOAuthAuthorizationRequest
 
-Submits user consent approval for an authorized OAuth client and selected project workspace.
+Submits user consent approval for an authorized OAuth client and the set of projects it may reach.
 
 ## Properties
 
@@ -9,7 +9,7 @@ Name | Type
 ------------ | -------------
 `client_id` | string
 `redirect_uri` | string
-`project_id` | string
+`project_ids` | Array&lt;string&gt;
 `code_challenge` | string
 `code_challenge_method` | string
 `scopes` | Array&lt;string&gt;
@@ -24,7 +24,7 @@ import type { ApproveOAuthAuthorizationRequest } from '@omnismith-sdk/typescript
 const example = {
   "client_id": omni_client_0195a8f2c3e471238000000000000001,
   "redirect_uri": https://claude.ai/api/mcp/oauth_callback,
-  "project_id": 0195a8f2-c3e4-7123-8000-000000000001,
+  "project_ids": ["0195a8f2-c3e4-7123-8000-000000000001"],
   "code_challenge": E9Melhoa2OwvFrGMTJguCH5SZXgk6uKUaz312M20O48,
   "code_challenge_method": S256,
   "scopes": ["omnismith:all"],

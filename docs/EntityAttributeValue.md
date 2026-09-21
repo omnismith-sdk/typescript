@@ -1,17 +1,17 @@
 
 # EntityAttributeValue
 
-Structured attribute value representation including raw serialized value, resolved display value for references and list items, and attribute metadata
+Verbose attribute value item returned when `verbose=true`: raw serialized value, resolved display label for references and list items, and the attribute identity
 
 ## Properties
 
 Name | Type
 ------------ | -------------
+`id` | string
+`slug` | string
 `value` | string
 `custom_value` | string
 `reference_entity_id` | string
-`attribute_id` | string
-`attribute_slug` | string
 
 ## Example
 
@@ -20,11 +20,11 @@ import type { EntityAttributeValue } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
+  "id": 018b2f1b-8c1a-75b3-8000-7f0000010002,
+  "slug": price,
   "value": 129.99,
   "custom_value": Electronics > Audio,
   "reference_entity_id": 018b2f1b-8c1a-75b3-8000-7f0000010005,
-  "attribute_id": 018b2f1b-8c1a-75b3-8000-7f0000010002,
-  "attribute_slug": price,
 } satisfies EntityAttributeValue
 
 console.log(example)

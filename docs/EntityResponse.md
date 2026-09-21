@@ -12,7 +12,10 @@ Name | Type
 `template_slug` | string
 `created_at` | Date
 `updated_at` | Date
-`attribute_values` | [{ [key: string]: EntityAttributeValue; }](EntityAttributeValue.md)
+`attribute_values` | [EntityResponseAttributeValues](EntityResponseAttributeValues.md)
+`list_item_ids` | { [key: string]: string; }
+`reference_entity_ids` | { [key: string]: string; }
+`file_ids` | { [key: string]: string; }
 
 ## Example
 
@@ -27,6 +30,9 @@ const example = {
   "created_at": 2026-08-26T12:00Z,
   "updated_at": 2026-08-26T12:05Z,
   "attribute_values": null,
+  "list_item_ids": {"category":"018b2f1b-8c1a-75b3-8000-7f0000010020"},
+  "reference_entity_ids": {"supplier":"018b2f1b-8c1a-75b3-8000-7f0000010005"},
+  "file_ids": {"datasheet":"018b2f1b-8c1a-75b3-8000-7f0000010042"},
 } satisfies EntityResponse
 
 console.log(example)

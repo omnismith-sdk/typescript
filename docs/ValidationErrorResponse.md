@@ -12,6 +12,7 @@ Name | Type
 `status` | number
 `errors` | { [key: string]: Array&lt;string&gt;; }
 `detail` | string
+`violations` | [Array&lt;ValidationErrorResponseViolationsInner&gt;](ValidationErrorResponseViolationsInner.md)
 
 ## Example
 
@@ -25,6 +26,7 @@ const example = {
   "status": 422,
   "errors": {"email":["This value is not a valid email address."]},
   "detail": email: This value is not a valid email address. See errors for details.,
+  "violations": null,
 } satisfies ValidationErrorResponse
 
 console.log(example)

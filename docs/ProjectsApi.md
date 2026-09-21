@@ -13,7 +13,7 @@ All URIs are relative to *https://api.omnismith.io/v1*
 | [**listProjectUsers**](ProjectsApi.md#listprojectusers) | **GET** /projects/{id}/users | List users in project |
 | [**listProjects**](ProjectsApi.md#listprojects) | **GET** /projects | List all projects |
 | [**removeUserFromProject**](ProjectsApi.md#removeuserfromproject) | **DELETE** /projects/{id}/users/{userId} | Remove user from project |
-| [**updateProject**](ProjectsApi.md#updateprojectoperation) | **PUT** /projects/{id} | Update a project |
+| [**updateProject**](ProjectsApi.md#updateprojectoperation) | **PUT** /projects/{id} | Update project metadata |
 
 
 
@@ -671,9 +671,9 @@ example().catch(console.error);
 
 > updateProject(id, updateProjectRequest)
 
-Update a project
+Update project metadata
 
-Updates project metadata such as name and description. Requires project administrator permissions.
+Updates project metadata including display name and description (context, guidelines, or instructions). Requires project administrator permissions.
 
 ### Example
 

@@ -1,7 +1,7 @@
 
 # CreateWorkspaceRequest
 
-Payload for creating a new workspace workbench
+Payload for creating a new top-level operational workspace workbench
 
 ## Properties
 
@@ -20,11 +20,11 @@ import type { CreateWorkspaceRequest } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "name": Operations Hub,
-  "description": Daily fleet monitoring and telemetry operations workbench,
-  "layout": split-v,
+  "name": Editorial & Content Calendar,
+  "description": SMM content calendar, scheduling pipeline, and platform-specific publication hubs,
+  "layout": single,
   "is_default": false,
-  "initial_template_ids": ["0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6b"],
+  "initial_template_ids": ["content_item","0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6b"],
 } satisfies CreateWorkspaceRequest
 
 console.log(example)

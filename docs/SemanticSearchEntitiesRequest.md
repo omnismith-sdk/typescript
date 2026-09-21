@@ -11,7 +11,7 @@ Name | Type
 `template_id` | string
 `limit` | number
 `threshold` | number
-`attribute_key` | string
+`verbose` | boolean
 
 ## Example
 
@@ -24,7 +24,7 @@ const example = {
   "template_id": product_catalog,
   "limit": 10,
   "threshold": 0.75,
-  "attribute_key": slug,
+  "verbose": false,
 } satisfies SemanticSearchEntitiesRequest
 
 console.log(example)

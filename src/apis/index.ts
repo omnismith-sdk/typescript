@@ -12,6 +12,8 @@ export * from './BillingApi';
 export * from './DashboardBlocksApi';
 export * from './DashboardsApi';
 export * from './EntityApi';
+export * from './EntityActionApi';
+export * from './EntityRuleApi';
 export * from './FeedbackApi';
 export * from './FileAttachmentApi';
 export * from './MarketplaceApi';

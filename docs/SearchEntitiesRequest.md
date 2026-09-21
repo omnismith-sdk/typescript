@@ -8,8 +8,9 @@ Filter and global search criteria for querying template entities
 Name | Type
 ------------ | -------------
 `global_search` | string
-`filters` | [Array&lt;SearchEntitiesRequestFiltersInner&gt;](SearchEntitiesRequestFiltersInner.md)
-`attribute_key` | string
+`filter_groups` | Array&lt;Array&lt;EntityFilter&gt;&gt;
+`verbose` | boolean
+`fields` | Array&lt;string&gt;
 
 ## Example
 
@@ -19,8 +20,9 @@ import type { SearchEntitiesRequest } from '@omnismith-sdk/typescript'
 // TODO: Update the object below with actual values
 const example = {
   "global_search": Wireless,
-  "filters": null,
-  "attribute_key": slug,
+  "filter_groups": [[{"field":"status","operator":"in","value":["018b2f1b-8c1a-75b3-8000-7f0000010020"]},{"field":"price","operator":"gt","value":"100"}]],
+  "verbose": false,
+  "fields": ["title","status","scheduled_date"],
 } satisfies SearchEntitiesRequest
 
 console.log(example)

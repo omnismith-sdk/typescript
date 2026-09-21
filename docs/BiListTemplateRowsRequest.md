@@ -8,7 +8,8 @@ Filter and search criteria for querying tabular BI template rows
 Name | Type
 ------------ | -------------
 `global_search` | string
-`filters` | [Array&lt;BiListTemplateRowsRequestFiltersInner&gt;](BiListTemplateRowsRequestFiltersInner.md)
+`filter_groups` | Array&lt;Array&lt;EntityFilter&gt;&gt;
+`fields` | Array&lt;string&gt;
 
 ## Example
 
@@ -18,7 +19,8 @@ import type { BiListTemplateRowsRequest } from '@omnismith-sdk/typescript'
 // TODO: Update the object below with actual values
 const example = {
   "global_search": Headphones,
-  "filters": null,
+  "filter_groups": [[{"field":"price","operator":"gt","value":"100.00"}]],
+  "fields": ["price","sku"],
 } satisfies BiListTemplateRowsRequest
 
 console.log(example)
