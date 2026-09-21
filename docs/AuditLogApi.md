@@ -14,7 +14,7 @@ All URIs are relative to *https://api.omnismith.io/v1*
 
 List project audit logs
 
-Returns an immutable, time-ordered audit trail of user and system events for the current project context.  ### Security &amp; Authorization Restricted to authenticated users holding the Project Owner role.  ### Comprehensive Filtering &amp; Search - &#x60;event_type&#x60;: Filter by single or comma-separated event types (e.g. &#x60;entity.created&#x60;, &#x60;entity.updated&#x60;, &#x60;entity.deleted&#x60;, &#x60;template.created&#x60;). - &#x60;resource_type&#x60;: Filter by domain target (e.g. &#x60;entity&#x60;, &#x60;template&#x60;, &#x60;attribute&#x60;, &#x60;project&#x60;). - &#x60;resource_id&#x60;: Filter by exact resource UUID. - &#x60;author_email&#x60;: Filter by the actor email address. - &#x60;start&#x60; and &#x60;end&#x60;: Date-time window bounding event occurrence (ISO 8601 or &#x60;YYYY-MM-DD HH:MM:SS&#x60;). - &#x60;search&#x60;: Text search across event types, resource types, resource IDs, author emails, and value summaries.  ### Pagination &amp; Sorting Supports 1-indexed pagination (&#x60;page&#x60;, &#x60;limit&#x60; up to 100) and sorting by &#x60;occurred_at&#x60;, &#x60;event_type&#x60;, &#x60;resource_type&#x60;, &#x60;resource_id&#x60;, or &#x60;author_email&#x60; (&#x60;asc&#x60;/&#x60;desc&#x60;).
+Returns an immutable, time-ordered audit trail of user and system events for the current project context. Restricted to authenticated users holding the Project Owner role. Returns paginated &#x60;items&#x60;, each an event (&#x60;event_type&#x60;, &#x60;resource_type&#x60;/&#x60;resource_id&#x60;, &#x60;author_email&#x60;, a &#x60;value&#x60; summary, &#x60;occurred_at&#x60;) plus &#x60;total&#x60; matching records.
 
 ### Example
 

@@ -20,7 +20,7 @@ All URIs are relative to *https://api.omnismith.io/v1*
 
 Create an automation rule
 
-Creates a new event-driven automation rule within the current project. Configures event trigger criteria (such as &#x60;on_entity_created&#x60;, &#x60;on_entity_updated&#x60;, or &#x60;on_attribute_changed&#x60;), multi-condition filters evaluating attribute values (using operators &#x60;eq&#x60;, &#x60;neq&#x60;, &#x60;gt&#x60;, &#x60;gte&#x60;, &#x60;lt&#x60;, &#x60;lte&#x60;, &#x60;contains&#x60;, &#x60;not_contains&#x60;, &#x60;is_empty&#x60;, &#x60;is_not_empty&#x60; across current value or delta modes), automated action targets (&#x60;telegram&#x60;, &#x60;webhook&#x60;, &#x60;push&#x60;), and an optional cooldown window in seconds to throttle repeated firings for the same entity.
+Creates a new event-driven automation rule in the current project. See &#x60;trigger&#x60;, &#x60;conditions&#x60;, and &#x60;actions&#x60; for the available trigger types, condition operators, and action channels.
 
 ### Example
 
