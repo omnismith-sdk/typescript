@@ -1,6 +1,6 @@
 {
   "name": "@omnismith-sdk/typescript",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "OpenAPI client for @omnismith-sdk/typescript",
   "author": "OpenAPI-Generator",
   "repository": {
