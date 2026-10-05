@@ -10,6 +10,7 @@ Name | Type
 `id` | string
 `type` | string
 `name` | string
+`rate_limit_per_minute` | number
 `credentials` | { [key: string]: string; }
 `created_at` | Date
 `updated_at` | Date
@@ -24,6 +25,7 @@ const example = {
   "id": 01912ecb-4654-7890-a1b2-c3d4e5f60002,
   "type": telegram,
   "name": Alerts Bot,
+  "rate_limit_per_minute": 20,
   "credentials": null,
   "created_at": 2026-08-26T12:00Z,
   "updated_at": 2026-08-26T12:00Z,

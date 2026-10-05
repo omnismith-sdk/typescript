@@ -9,6 +9,7 @@ Name | Type
 `type` | string
 `name` | string
 `credentials` | [CreateNotificationChannelRequestCredentials](CreateNotificationChannelRequestCredentials.md)
+`rate_limit_per_minute` | number
 
 ## Example
 
@@ -20,6 +21,7 @@ const example = {
   "type": telegram,
   "name": Alerts Bot,
   "credentials": null,
+  "rate_limit_per_minute": 20,
 } satisfies CreateNotificationChannelRequest
 
 console.log(example)

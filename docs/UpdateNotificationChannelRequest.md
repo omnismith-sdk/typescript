@@ -8,6 +8,7 @@ Name | Type
 ------------ | -------------
 `name` | string
 `credentials` | [UpdateNotificationChannelRequestCredentials](UpdateNotificationChannelRequestCredentials.md)
+`rate_limit_per_minute` | number
 
 ## Example
 
@@ -18,6 +19,7 @@ import type { UpdateNotificationChannelRequest } from '@omnismith-sdk/typescript
 const example = {
   "name": Updated Alerts Bot,
   "credentials": null,
+  "rate_limit_per_minute": 20,
 } satisfies UpdateNotificationChannelRequest
 
 console.log(example)

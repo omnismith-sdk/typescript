@@ -19,7 +19,7 @@ All URIs are relative to *https://api.omnismith.io/v1*
 
 Create a notification channel
 
-Registers a new external notification channel for the current project. Channels can be of type &#x60;telegram&#x60; (configured with a Telegram bot token), &#x60;webhook&#x60; (configured with endpoint URL, custom HTTP headers, and authentication methods such as bearer token or basic auth), or &#x60;push&#x60; (FCM mobile push notifications). Configured channels can then be linked as target actions in automation rules.
+Registers a new external notification channel for the current project. Channels can be of type &#x60;telegram&#x60; (configured with a Telegram bot token), &#x60;webhook&#x60; (configured with endpoint URL, custom HTTP headers, and authentication methods such as bearer token or basic auth), or &#x60;push&#x60; (FCM mobile push notifications). Configured channels can then be linked as target actions in automation rules. Every send through a channel counts against its &#x60;rate_limit_per_minute&#x60; (default 20), shared by all automations and records, so a misconfigured automation cannot flood the destination.
 
 ### Example
 
@@ -406,7 +406,7 @@ example().catch(console.error);
 
 Update a notification channel
 
-Updates an existing notification channel configuration by UUID. Allows updating the channel display name or updating integration credentials (such as new bot tokens, webhook endpoints, or authentication credentials).
+Updates an existing notification channel configuration by UUID. Allows updating the channel display name, its per-minute send rate limit, or its integration credentials (such as new bot tokens, webhook endpoints, or authentication credentials). Omitted fields keep their current values.
 
 ### Example
 
