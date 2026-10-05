@@ -8,9 +8,9 @@ Name | Type
 ------------ | -------------
 `name` | string
 `description` | string
-`trigger` | [UpdateAutomationRequestTrigger](UpdateAutomationRequestTrigger.md)
+`trigger` | [AutomationTrigger](AutomationTrigger.md)
 `conditions` | [Array&lt;UpdateAutomationRequestConditionsInner&gt;](UpdateAutomationRequestConditionsInner.md)
-`actions` | [Array&lt;UpdateAutomationRequestActionsInner&gt;](UpdateAutomationRequestActionsInner.md)
+`actions` | [Array&lt;AutomationAction&gt;](AutomationAction.md)
 `cooldownSeconds` | number
 
 ## Example

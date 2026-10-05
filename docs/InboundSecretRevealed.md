@@ -1,24 +1,29 @@
 
-# CreateAutomationRequestActionsInner
+# InboundSecretRevealed
 
+A secret as it is issued. `value` is shown this once and never returned again: give it to whoever configures the sender and do not store it anywhere else.
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`type` | string
-`config` | object
+`id` | string
+`hint` | string
+`created_at` | Date
+`value` | string
 
 ## Example
 
 ```typescript
-import type { CreateAutomationRequestActionsInner } from '@omnismith-sdk/typescript'
+import type { InboundSecretRevealed } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "type": telegram,
-  "config": null,
-} satisfies CreateAutomationRequestActionsInner
+  "id": null,
+  "hint": x9Qa,
+  "created_at": null,
+  "value": omni_in_dummy_secret_value,
+} satisfies InboundSecretRevealed
 
 console.log(example)
 
@@ -27,7 +32,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as CreateAutomationRequestActionsInner
+const exampleParsed = JSON.parse(exampleJSON) as InboundSecretRevealed
 console.log(exampleParsed)
 ```
 

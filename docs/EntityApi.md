@@ -6,12 +6,13 @@ All URIs are relative to *https://api.omnismith.io/v1*
 |------------- | ------------- | -------------|
 | [**aggregateEntities**](EntityApi.md#aggregateentitiesoperation) | **POST** /entities/aggregate/{template_id} | Count, sum, average, min or max entities, optionally grouped by attributes |
 | [**batchExecuteEntityAction**](EntityApi.md#batchexecuteentityactionoperation) | **POST** /entities/batch/actions/{slug} | Execute an action on a selection of entities |
-| [**batchWriteEntities**](EntityApi.md#batchwriteentitiesoperation) | **POST** /entities/batch | Apply a batch of mixed entity creates, updates, replaces, and deletes |
+| [**batchWriteEntities**](EntityApi.md#batchwriteentitiesoperation) | **POST** /entities/batch | Apply a batch of mixed entity creates, updates, replaces, deletes, and upserts |
 | [**createEntity**](EntityApi.md#createentityoperation) | **POST** /entities/template/{template} | Create a new dynamic entity |
 | [**deleteEntity**](EntityApi.md#deleteentity) | **DELETE** /entities/{id} | Soft-delete an entity record |
 | [**executeEntityAction**](EntityApi.md#executeentityactionoperation) | **POST** /entities/{id}/actions/{slug} | Execute an action on an entity |
 | [**exportEntities**](EntityApi.md#exportentitiesoperation) | **POST** /entities/export/{template_id} | Export entities to structured CSV file |
 | [**getEntity**](EntityApi.md#getentity) | **GET** /entities/{id} | Get an entity record by ID |
+| [**getEntityByKey**](EntityApi.md#getentitybykey) | **GET** /entities/template/{template}/by-key | Get an entity record by its external key |
 | [**getEntityChart**](EntityApi.md#getentitychart) | **GET** /entities/{id}/chart | Get entity chart time-series data |
 | [**getEntityHistory**](EntityApi.md#getentityhistory) | **GET** /entities/{id}/history | Get entity dimension change history |
 | [**importEntities**](EntityApi.md#importentities) | **POST** /entities/import/{template_id} | Import entities from structured CSV file |
@@ -21,6 +22,7 @@ All URIs are relative to *https://api.omnismith.io/v1*
 | [**searchEntities**](EntityApi.md#searchentitiesoperation) | **POST** /entities/search/{template_id} | Search entities with filtering, sorting, and pagination |
 | [**semanticSearchEntities**](EntityApi.md#semanticsearchentitiesoperation) | **POST** /entities/semantic-search | Perform semantic vector similarity search on entities |
 | [**updateEntity**](EntityApi.md#updateentityoperation) | **PATCH** /entities/{id} | Update entity attribute values |
+| [**upsertEntityByKey**](EntityApi.md#upsertentitybykeyoperation) | **PUT** /entities/template/{template}/by-key | Create or update an entity by its external key |
 
 
 
@@ -30,7 +32,7 @@ All URIs are relative to *https://api.omnismith.io/v1*
 
 Count, sum, average, min or max entities, optionally grouped by attributes
 
-Answers \&quot;how many\&quot;, \&quot;how much\&quot; and \&quot;broken down by\&quot; questions in one call, computed by the database. Use it instead of paginating &#x60;search_entities&#x60; and tallying rows: a count or a per-status breakdown of a 10,000-record template is one small response. See &#x60;filter_groups&#x60;, &#x60;group_by&#x60; and &#x60;aggregations&#x60; for the request shape.  Each response group\&#39;s &#x60;key&#x60; mirrors &#x60;group_by&#x60; in order (&#x60;value&#x60; is the stored value, &#x60;custom_value&#x60; is the list item label or the referenced record\&#39;s display value; &#x60;null&#x60; groups the records that have no value for that attribute), and &#x60;aggregates&#x60; mirrors &#x60;aggregations&#x60; in order. Numbers come back as floats, dates as RFC 3339 strings, and &#x60;null&#x60; when no record in the group has a value. Metric attributes are rejected with a 400: they are time series, reduced over a time window with &#x60;get_entity_chart&#x60; instead — this endpoint reduces the current dimension values of records.  Groups are ordered by the first aggregation descending (nulls last), then by key. &#x60;limit&#x60; (1-100, default 50) caps the groups returned; &#x60;truncated: true&#x60; means more groups exist — narrow with &#x60;filter_groups&#x60; or group by fewer fields.  Read-only. Applies the caller\&#39;s template access and row scopes exactly as search does; restricted attributes are not valid fields.
+Answers \&quot;how many\&quot;, \&quot;how much\&quot; and \&quot;broken down by\&quot; questions in one call, computed by the database. Use it instead of paginating &#x60;search_entities&#x60; and tallying rows: a count or a per-status breakdown of a 10,000-record template is one small response. See &#x60;filter_groups&#x60;, &#x60;group_by&#x60; and &#x60;aggregations&#x60; for the request shape.  Each response group\&#39;s &#x60;key&#x60; mirrors &#x60;group_by&#x60; in order (&#x60;value&#x60; is the stored value, &#x60;custom_value&#x60; is the list item label or the referenced record\&#39;s display value; &#x60;null&#x60; groups the records that have no value for that attribute), and &#x60;aggregates&#x60; mirrors &#x60;aggregations&#x60; in order. Numbers come back as floats, dates as RFC 3339 strings, and &#x60;null&#x60; when no record in the group has a value. Metric attributes are rejected with a 400: they are time series, reduced over a time window with &#x60;get_entity_chart&#x60; instead — this endpoint reduces the current dimension values of records.  With &#x60;order: aggregate&#x60; (default) groups are ordered by the first aggregation descending (nulls last), then by key; with &#x60;order: key&#x60; they follow the key (list-item order for lists, ascending label or value otherwise) with the no-value group last. The &#x60;field&#x60; and &#x60;value&#x60; of any key entry can be passed back as &#x60;group_key&#x60; to &#x60;search_entities&#x60; to list exactly the records of that group. &#x60;limit&#x60; (1-100, default 50) caps the groups returned; &#x60;truncated: true&#x60; means more groups exist — narrow with &#x60;filter_groups&#x60; or group by fewer fields.  Read-only. Applies the caller\&#39;s template access and row scopes exactly as search does; restricted attributes are not valid fields.
 
 ### Example
 
@@ -96,7 +98,7 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Groups with their aggregates, ordered by the first aggregation descending |  -  |
+| **200** | Groups with their aggregates, in the requested order |  -  |
 | **400** | Bad Request |  -  |
 | **401** | Unauthorized |  -  |
 | **403** | Forbidden |  -  |
@@ -194,9 +196,9 @@ example().catch(console.error);
 
 > BatchWriteEntitiesResponse batchWriteEntities(batchWriteEntitiesRequest, xOmnismithProjectId)
 
-Apply a batch of mixed entity creates, updates, replaces, and deletes
+Apply a batch of mixed entity creates, updates, replaces, deletes, and upserts
 
-Applies an ordered, heterogeneous list of entity writes in a single call: update these twenty, create three, replace two, delete one.  This is distinct from CSV import, which moves a homogeneous set of new rows. Use this endpoint when the set of edits is already computed and addresses known records.  Operations: Every entry names an &#x60;op&#x60; and carries exactly the fields for it — nothing more, nothing less: - &#x60;create&#x60;  — &#x60;{ \&quot;op\&quot;: \&quot;create\&quot;, \&quot;template\&quot;: \&quot;&lt;slug|uuid&gt;\&quot;, \&quot;id\&quot;?: \&quot;&lt;uuidv7&gt;\&quot;, \&quot;attributes\&quot;: { ... } }&#x60; (&#x60;attributes&#x60; may be &#x60;{}&#x60;) - &#x60;update&#x60;  — &#x60;{ \&quot;op\&quot;: \&quot;update\&quot;, \&quot;id\&quot;: \&quot;&lt;uuid&gt;\&quot;, \&quot;attributes\&quot;: { ... } }&#x60; (non-empty; partial, like PATCH) - &#x60;replace&#x60; — &#x60;{ \&quot;op\&quot;: \&quot;replace\&quot;, \&quot;id\&quot;: \&quot;&lt;uuid&gt;\&quot;, \&quot;attributes\&quot;: { ... } }&#x60; (like PUT: attributes absent from the map are cleared; &#x60;{}&#x60; clears all; metrics rejected) - &#x60;delete&#x60;  — &#x60;{ \&quot;op\&quot;: \&quot;delete\&quot;, \&quot;id\&quot;: \&quot;&lt;uuid&gt;\&quot; }&#x60; (soft delete)  &#x60;id&#x60; always means the entity id; &#x60;template&#x60; always means the template slug or UUID. See &#x60;BatchOperationInput&#x60;\&#39;s &#x60;attributes&#x60; property for the accepted value shapes.  At most 100 operations per call. Larger sets must be split.  Failure handling: By default (&#x60;atomic: false&#x60;) every operation is attempted, successes stand, and each failure is reported against its index with the same error body the single-entity endpoint would have returned. The response is &#x60;200&#x60; regardless of how many entries failed; read &#x60;failed&#x60; and the per-item &#x60;status&#x60;.  With &#x60;atomic: true&#x60; the whole batch runs in one transaction and the first failure rolls all of it back. That case answers with the failing operation\&#39;s own error status and body plus &#x60;failed_index&#x60;, not with a results list. Atomic batches reject metric attribute values, because metric telemetry is published outside the transaction and cannot be rolled back.  Quotas: Tier quotas are evaluated for the whole batch before any of it is applied, so a batch that would cross the limit is refused as a unit rather than applied halfway.
+Applies an ordered, heterogeneous list of entity writes in a single call: update these twenty, create three, replace two, delete one.  This is distinct from CSV import, which moves a homogeneous set of new rows. Use this endpoint when the set of edits is already computed and addresses known records.  Operations: Every entry names an &#x60;op&#x60; and carries exactly the fields for it — nothing more, nothing less: - &#x60;create&#x60;  — &#x60;{ \&quot;op\&quot;: \&quot;create\&quot;, \&quot;template\&quot;: \&quot;&lt;slug|uuid&gt;\&quot;, \&quot;id\&quot;?: \&quot;&lt;uuidv7&gt;\&quot;, \&quot;external_key\&quot;?: \&quot;&lt;key&gt;\&quot;, \&quot;attributes\&quot;: { ... } }&#x60; (&#x60;attributes&#x60; may be &#x60;{}&#x60;) - &#x60;update&#x60;  — &#x60;{ \&quot;op\&quot;: \&quot;update\&quot;, \&quot;id\&quot;: \&quot;&lt;uuid&gt;\&quot;, \&quot;attributes\&quot;: { ... } }&#x60; (non-empty; partial, like PATCH) - &#x60;replace&#x60; — &#x60;{ \&quot;op\&quot;: \&quot;replace\&quot;, \&quot;id\&quot;: \&quot;&lt;uuid&gt;\&quot;, \&quot;attributes\&quot;: { ... } }&#x60; (like PUT: attributes absent from the map are cleared; &#x60;{}&#x60; clears all; metrics rejected) - &#x60;delete&#x60;  — &#x60;{ \&quot;op\&quot;: \&quot;delete\&quot;, \&quot;id\&quot;: \&quot;&lt;uuid&gt;\&quot; }&#x60; (soft delete) - &#x60;upsert&#x60;  — &#x60;{ \&quot;op\&quot;: \&quot;upsert\&quot;, \&quot;template\&quot;: \&quot;&lt;slug|uuid&gt;\&quot;, \&quot;external_key\&quot;: \&quot;&lt;key&gt;\&quot;, \&quot;attributes\&quot;: { ... } }&#x60; (creates the record with the key, or partially updates the live record that holds it; &#x60;results[].created&#x60; says which)  &#x60;id&#x60; always means the entity id; &#x60;template&#x60; always means the template slug or UUID. See &#x60;BatchOperationInput&#x60;\&#39;s &#x60;attributes&#x60; property for the accepted value shapes.  At most 100 operations per call. Larger sets must be split.  Failure handling: By default (&#x60;atomic: false&#x60;) every operation is attempted, successes stand, and each failure is reported against its index with the same error body the single-entity endpoint would have returned. The response is &#x60;200&#x60; regardless of how many entries failed; read &#x60;failed&#x60; and the per-item &#x60;status&#x60;.  With &#x60;atomic: true&#x60; the whole batch runs in one transaction and the first failure rolls all of it back. That case answers with the failing operation\&#39;s own error status and body plus &#x60;failed_index&#x60;, not with a results list. Atomic batches reject metric attribute values, because metric telemetry is published outside the transaction and cannot be rolled back. An upsert that races a concurrent write of the same key fails an atomic batch with &#x60;409&#x60;; resubmit it.  Quotas: Tier quotas are evaluated for the whole batch before any of it is applied, so a batch that would cross the limit is refused as a unit rather than applied halfway.
 
 ### Example
 
@@ -277,7 +279,7 @@ example().catch(console.error);
 
 Create a new dynamic entity
 
-Creates one entity of the template named in the path — &#x60;{template}&#x60; is the template\&#39;s slug or UUID — and returns its id. Pass &#x60;id&#x60; to choose the entity\&#39;s UUIDv7 yourself (cross-system keys); otherwise one is generated. An &#x60;id&#x60; that already exists — even a soft-deleted entity\&#39;s — is rejected with &#x60;409&#x60; rather than overwritten: if a retry might be hitting this because an earlier call\&#39;s response was lost, &#x60;GET /entities/{id}&#x60; first to check whether it already carries what you meant to write, rather than retrying blindly.  See the &#x60;attributes&#x60; property for the accepted value shapes.  &#x60;attributes&#x60; is required; send &#x60;{}&#x60; to create an entity with no values yet. Metric attributes in the map are appended to the entity\&#39;s time series; everything else becomes the entity\&#39;s initial state and is recorded in its history.  Errors: - &#x60;400&#x60; — the body is not the documented shape (missing &#x60;attributes&#x60;, a list instead of an object, unknown fields, wrong types). - &#x60;422&#x60; — the shape is right but the content is not: unknown attribute, attribute not on the template, duplicate attribute, bad &#x60;updated_at&#x60;, a value that fails its attribute type, or an operation on an attribute that is not a number. &#x60;errors&#x60; names the exact field, e.g. &#x60;attributes.status&#x60;. - &#x60;404&#x60; — no template with that slug or UUID in this project. - &#x60;409&#x60; — the given &#x60;id&#x60; already exists.
+Creates one entity of the template named in the path — &#x60;{template}&#x60; is the template\&#39;s slug or UUID — and returns its id. Pass &#x60;id&#x60; to choose the entity\&#39;s UUIDv7 yourself (cross-system keys); otherwise one is generated. An &#x60;id&#x60; that already exists — even a soft-deleted entity\&#39;s — is rejected with &#x60;409&#x60; rather than overwritten: if a retry might be hitting this because an earlier call\&#39;s response was lost, &#x60;GET /entities/{id}&#x60; first to check whether it already carries what you meant to write, rather than retrying blindly.  Pass &#x60;external_key&#x60; to record the id another system uses for this record. When you do not know whether the record exists yet, use &#x60;PUT /entities/template/{template}/by-key&#x60; (upsert) instead.  See the &#x60;attributes&#x60; property for the accepted value shapes.  &#x60;attributes&#x60; is required; send &#x60;{}&#x60; to create an entity with no values yet. Metric attributes in the map are appended to the entity\&#39;s time series; everything else becomes the entity\&#39;s initial state and is recorded in its history.  Errors: - &#x60;400&#x60; — the body is not the documented shape (missing &#x60;attributes&#x60;, a list instead of an object, unknown fields, wrong types). - &#x60;422&#x60; — the shape is right but the content is not: unknown attribute, attribute not on the template, duplicate attribute, bad &#x60;updated_at&#x60;, a value that fails its attribute type, or an operation on an attribute that is not a number. &#x60;errors&#x60; names the exact field, e.g. &#x60;attributes.status&#x60;. - &#x60;404&#x60; — no template with that slug or UUID in this project. - &#x60;409&#x60; — the given &#x60;id&#x60; already exists, or another live record of the template holds &#x60;external_key&#x60;.
 
 ### Example
 
@@ -349,7 +351,7 @@ example().catch(console.error);
 | **402** | Tier quota exceeded |  -  |
 | **404** | Not Found |  -  |
 | **422** | Validation Error |  -  |
-| **409** | The given &#x60;id&#x60; already exists (&#x60;type: error/conflict&#x60;), or no project is selected |  -  |
+| **409** | The given &#x60;id&#x60; already exists or &#x60;external_key&#x60; is held by another live record (&#x60;type: error/conflict&#x60;), or no project is selected |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -524,7 +526,7 @@ example().catch(console.error);
 
 Export entities to structured CSV file
 
-Exports entity records of a template schema matching filter criteria as a streaming CSV download.  ### Re-importable CSV Schema Format The generated CSV conforms to the Omnismith two-row metadata specification, making it directly compatible with &#x60;POST /entities/import/{template_id}&#x60;: - **Row 1**: Display column names and attribute aliases. - **Row 2**: Metadata row prefixed with &#x60;#&#x60; containing attribute UUIDs and column IDs (e.g. &#x60;#id&#x60;, &#x60;#018b2f1b-8c1a...&#x60;). - **Row 3+**: Entity data records.  Accepts the same &#x60;filter_groups&#x60; and &#x60;global_search&#x60; payload as &#x60;searchEntities&#x60;.  ### Filters (&#x60;filter_groups&#x60;) A list of groups; clauses inside a group are AND-ed, groups are OR-ed. &#x60;[[a, b]]&#x60; is &#x60;a AND b&#x60;; &#x60;[[a], [b, c]]&#x60; is &#x60;a OR (b AND c)&#x60;; &#x60;[]&#x60; applies no filter. &#x60;&#x60;&#x60;json [   [     {\&quot;field\&quot;: \&quot;status\&quot;, \&quot;operator\&quot;: \&quot;in\&quot;, \&quot;value\&quot;: [\&quot;018b…0020\&quot;, \&quot;018b…0021\&quot;]},     {\&quot;field\&quot;: \&quot;created_at\&quot;, \&quot;operator\&quot;: \&quot;between\&quot;, \&quot;value\&quot;: [\&quot;2026-01-01\&quot;, \&quot;2026-03-31\&quot;]},     {\&quot;field\&quot;: \&quot;customer.tier\&quot;, \&quot;operator\&quot;: \&quot;eq\&quot;, \&quot;value\&quot;: \&quot;018b…0042\&quot;}   ],   [{\&quot;field\&quot;: \&quot;priority\&quot;, \&quot;operator\&quot;: \&quot;eq\&quot;, \&quot;value\&quot;: \&quot;018b…0007\&quot;}] ] &#x60;&#x60;&#x60; - **&#x60;field&#x60;**: attribute slug or UUID, a standard field (&#x60;id&#x60;, &#x60;created_at&#x60;, &#x60;updated_at&#x60;), or a one-hop path &#x60;&lt;reference&gt;.&lt;attribute&gt;&#x60; that filters on an attribute of the referenced record (e.g. &#x60;customer.tier&#x60;). One hop only. - **&#x60;operator&#x60;** and **&#x60;value&#x60;**: &#x60;eq&#x60;, &#x60;neq&#x60;, &#x60;gt&#x60;, &#x60;lt&#x60;, &#x60;like&#x60; (case-insensitive substring), &#x60;not-like&#x60; take a string; &#x60;in&#x60;, &#x60;not-in&#x60; take a non-empty list of strings; &#x60;between&#x60; takes &#x60;[lower, upper]&#x60; (inclusive; number, date, datetime attributes and &#x60;created_at&#x60; / &#x60;updated_at&#x60;); &#x60;empty&#x60;, &#x60;not-empty&#x60; take no value. - List and reference attributes compare the stored id (from &#x60;list_item_ids&#x60; / &#x60;reference_entity_ids&#x60; or the schema), never the label. - Unknown fields, operators that do not fit the field, malformed values and paths that do not traverse a reference are refused with 400 naming the valid fields; a path into a template the caller may not view is 403.  ### Sorting Sort results via &#x60;sort_field&#x60; (attribute UUID, slug, or standard timestamp) and &#x60;sort_direction&#x60; (&#x60;asc&#x60;/&#x60;desc&#x60;).
+Exports entity records of a template schema matching filter criteria as a streaming CSV download.  ### Re-importable CSV Schema Format The generated CSV conforms to the Omnismith two-row metadata specification, making it directly compatible with &#x60;POST /entities/import/{template_id}&#x60;: - **Row 1**: Display column names and attribute aliases. - **Row 2**: Metadata row prefixed with &#x60;#&#x60; containing the standard columns &#x60;#id&#x60;, &#x60;#created_at&#x60;, &#x60;#updated_at&#x60;, &#x60;#external_key&#x60;, then attribute UUIDs (e.g. &#x60;#018b2f1b-8c1a...&#x60;). - **Row 3+**: Entity data records.  Accepts the same &#x60;filter_groups&#x60; and &#x60;global_search&#x60; payload as &#x60;searchEntities&#x60;.  ### Filters (&#x60;filter_groups&#x60;) A list of groups; clauses inside a group are AND-ed, groups are OR-ed. &#x60;[[a, b]]&#x60; is &#x60;a AND b&#x60;; &#x60;[[a], [b, c]]&#x60; is &#x60;a OR (b AND c)&#x60;; &#x60;[]&#x60; applies no filter. &#x60;&#x60;&#x60;json [   [     {\&quot;field\&quot;: \&quot;status\&quot;, \&quot;operator\&quot;: \&quot;in\&quot;, \&quot;value\&quot;: [\&quot;018b…0020\&quot;, \&quot;018b…0021\&quot;]},     {\&quot;field\&quot;: \&quot;created_at\&quot;, \&quot;operator\&quot;: \&quot;between\&quot;, \&quot;value\&quot;: [\&quot;2026-01-01\&quot;, \&quot;2026-03-31\&quot;]},     {\&quot;field\&quot;: \&quot;customer.tier\&quot;, \&quot;operator\&quot;: \&quot;eq\&quot;, \&quot;value\&quot;: \&quot;018b…0042\&quot;}   ],   [{\&quot;field\&quot;: \&quot;priority\&quot;, \&quot;operator\&quot;: \&quot;eq\&quot;, \&quot;value\&quot;: \&quot;018b…0007\&quot;}] ] &#x60;&#x60;&#x60; - **&#x60;field&#x60;**: attribute slug or UUID, a standard field (&#x60;id&#x60;, &#x60;created_at&#x60;, &#x60;updated_at&#x60;, &#x60;external_key&#x60;), or a one-hop path &#x60;&lt;reference&gt;.&lt;attribute&gt;&#x60; that filters on an attribute of the referenced record (e.g. &#x60;customer.tier&#x60;). One hop only. - **&#x60;operator&#x60;** and **&#x60;value&#x60;**: &#x60;eq&#x60;, &#x60;neq&#x60;, &#x60;gt&#x60;, &#x60;lt&#x60;, &#x60;like&#x60; (case-insensitive substring), &#x60;not-like&#x60; take a string; &#x60;in&#x60;, &#x60;not-in&#x60; take a non-empty list of strings; &#x60;between&#x60; takes &#x60;[lower, upper]&#x60; (inclusive; number, date, datetime attributes and &#x60;created_at&#x60; / &#x60;updated_at&#x60;); &#x60;empty&#x60;, &#x60;not-empty&#x60; take no value. &#x60;external_key&#x60; accepts every operator except &#x60;gt&#x60;, &#x60;lt&#x60; and &#x60;between&#x60;. - List and reference attributes compare the stored id (from &#x60;list_item_ids&#x60; / &#x60;reference_entity_ids&#x60; or the schema), never the label. - Unknown fields, operators that do not fit the field, malformed values and paths that do not traverse a reference are refused with 400 naming the valid fields; a path into a template the caller may not view is 403.  ### Sorting Sort results via &#x60;sort_field&#x60; (attribute UUID, slug, or standard timestamp) and &#x60;sort_direction&#x60; (&#x60;asc&#x60;/&#x60;desc&#x60;).
 
 ### Example
 
@@ -550,7 +552,7 @@ async function example() {
     exportEntitiesRequest: ...,
     // string | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential\'s `projects` claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code `stale_project_grant`; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 `no_project_selected`. Two clients holding the same credential may send different values at the same time. (optional)
     xOmnismithProjectId: 018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7d,
-    // string | Attribute UUID, attribute slug, or standard field (id, created_at, updated_at, deleted_at) to sort by (optional)
+    // string | Attribute UUID, attribute slug, or standard field (id, created_at, updated_at, deleted_at, external_key) to sort by (optional)
     sortField: created_at,
     // 'asc' | 'desc' | Sort direction: \"asc\" (ascending) or \"desc\" (descending) (optional)
     sortDirection: asc,
@@ -576,7 +578,7 @@ example().catch(console.error);
 | **templateId** | `string` | Unique identifier (UUID) of the template schema to export | [Defaults to `undefined`] |
 | **exportEntitiesRequest** | [ExportEntitiesRequest](ExportEntitiesRequest.md) |  | |
 | **xOmnismithProjectId** | `string` | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential\&#39;s &#x60;projects&#x60; claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code &#x60;stale_project_grant&#x60;; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 &#x60;no_project_selected&#x60;. Two clients holding the same credential may send different values at the same time. | [Optional] [Defaults to `undefined`] |
-| **sortField** | `string` | Attribute UUID, attribute slug, or standard field (id, created_at, updated_at, deleted_at) to sort by | [Optional] [Defaults to `undefined`] |
+| **sortField** | `string` | Attribute UUID, attribute slug, or standard field (id, created_at, updated_at, deleted_at, external_key) to sort by | [Optional] [Defaults to `undefined`] |
 | **sortDirection** | `asc`, `desc` | Sort direction: \&quot;asc\&quot; (ascending) or \&quot;desc\&quot; (descending) | [Optional] [Defaults to `&#39;asc&#39;`] [Enum: asc, desc] |
 
 ### Return type
@@ -639,7 +641,7 @@ async function example() {
     xOmnismithProjectId: 018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7d,
     // boolean | When true, attribute_values is an array of EntityAttributeValue items with attribute id, slug, raw value, resolved custom_value and reference_entity_id. When false (default), attribute_values is a compact object mapping attribute slug to display value, with the ids behind list, reference and file labels in list_item_ids, reference_entity_ids and file_ids. (optional)
     verbose: false,
-    // Array<string> | Attribute slugs or UUIDs to project, e.g. [\"title\", \"status\"]. Standard fields (id, template_id, template_slug, created_at, updated_at) are always included and do not need to be listed. When specified, only the requested attributes are fetched and returned in attribute_values, avoiding database hydration for unneeded attributes and significantly reducing response payload size. If omitted, all attributes defined on the template are returned. (optional)
+    // Array<string> | Attribute slugs or UUIDs to project, e.g. [\"title\", \"status\"]. Standard fields (id, template_id, template_slug, created_at, updated_at, external_key) are always included and do not need to be listed. When specified, only the requested attributes are fetched and returned in attribute_values, avoiding database hydration for unneeded attributes and significantly reducing response payload size. If omitted, all attributes defined on the template are returned. (optional)
     fields: ["title","status"],
   } satisfies GetEntityRequest;
 
@@ -663,7 +665,7 @@ example().catch(console.error);
 | **id** | `string` | Unique entity identifier (UUID) | [Defaults to `undefined`] |
 | **xOmnismithProjectId** | `string` | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential\&#39;s &#x60;projects&#x60; claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code &#x60;stale_project_grant&#x60;; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 &#x60;no_project_selected&#x60;. Two clients holding the same credential may send different values at the same time. | [Optional] [Defaults to `undefined`] |
 | **verbose** | `boolean` | When true, attribute_values is an array of EntityAttributeValue items with attribute id, slug, raw value, resolved custom_value and reference_entity_id. When false (default), attribute_values is a compact object mapping attribute slug to display value, with the ids behind list, reference and file labels in list_item_ids, reference_entity_ids and file_ids. | [Optional] [Defaults to `false`] |
-| **fields** | `Array<string>` | Attribute slugs or UUIDs to project, e.g. [\&quot;title\&quot;, \&quot;status\&quot;]. Standard fields (id, template_id, template_slug, created_at, updated_at) are always included and do not need to be listed. When specified, only the requested attributes are fetched and returned in attribute_values, avoiding database hydration for unneeded attributes and significantly reducing response payload size. If omitted, all attributes defined on the template are returned. | [Optional] |
+| **fields** | `Array<string>` | Attribute slugs or UUIDs to project, e.g. [\&quot;title\&quot;, \&quot;status\&quot;]. Standard fields (id, template_id, template_slug, created_at, updated_at, external_key) are always included and do not need to be listed. When specified, only the requested attributes are fetched and returned in attribute_values, avoiding database hydration for unneeded attributes and significantly reducing response payload size. If omitted, all attributes defined on the template are returned. | [Optional] |
 
 ### Return type
 
@@ -686,6 +688,94 @@ example().catch(console.error);
 | **400** | Bad Request |  -  |
 | **401** | Unauthorized |  -  |
 | **404** | Not Found |  -  |
+| **409** | No project is selected. The caller is authenticated but the request is tenant-scoped, so a project must be selected before it can be answered. The response body carries &#x60;\&quot;code\&quot;: \&quot;no_project_selected\&quot;&#x60;, which clients branch on to offer a project picker rather than an access-denied message. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## getEntityByKey
+
+> EntityResponse getEntityByKey(template, key, xOmnismithProjectId, verbose, fields)
+
+Get an entity record by its external key
+
+Retrieves the live record of the template that holds the external key — the id another system uses for it. The response is the same as &#x60;GET /entities/{id}&#x60;, with the same &#x60;verbose&#x60; and &#x60;fields&#x60; options. &#x60;404&#x60; when no live record of the template holds the key.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  EntityApi,
+} from '@omnismith-sdk/typescript';
+import type { GetEntityByKeyRequest } from '@omnismith-sdk/typescript';
+
+async function example() {
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
+  const config = new Configuration({ 
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new EntityApi(config);
+
+  const body = {
+    // string | Template UUID or human-readable slug
+    template: customer,
+    // string | The external key, exactly as stored (case-sensitive). URL-encode it: keys may contain `/`, `:` and spaces.
+    key: stripe:cus_NffrFeUfNV2Hib,
+    // string | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential\'s `projects` claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code `stale_project_grant`; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 `no_project_selected`. Two clients holding the same credential may send different values at the same time. (optional)
+    xOmnismithProjectId: 018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7d,
+    // boolean | When true, attribute_values is an array of EntityAttributeValue items with attribute id, slug, raw value, resolved custom_value and reference_entity_id. When false (default), attribute_values is a compact object mapping attribute slug to display value, with the ids behind list, reference and file labels in list_item_ids, reference_entity_ids and file_ids. (optional)
+    verbose: false,
+    // Array<string> | Attribute slugs or UUIDs to project, e.g. [\"title\", \"status\"]. Standard fields (id, template_id, template_slug, created_at, updated_at, external_key) are always included and do not need to be listed. If omitted, all attributes defined on the template are returned. (optional)
+    fields: ["title","status"],
+  } satisfies GetEntityByKeyRequest;
+
+  try {
+    const data = await api.getEntityByKey(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **template** | `string` | Template UUID or human-readable slug | [Defaults to `undefined`] |
+| **key** | `string` | The external key, exactly as stored (case-sensitive). URL-encode it: keys may contain &#x60;/&#x60;, &#x60;:&#x60; and spaces. | [Defaults to `undefined`] |
+| **xOmnismithProjectId** | `string` | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential\&#39;s &#x60;projects&#x60; claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code &#x60;stale_project_grant&#x60;; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 &#x60;no_project_selected&#x60;. Two clients holding the same credential may send different values at the same time. | [Optional] [Defaults to `undefined`] |
+| **verbose** | `boolean` | When true, attribute_values is an array of EntityAttributeValue items with attribute id, slug, raw value, resolved custom_value and reference_entity_id. When false (default), attribute_values is a compact object mapping attribute slug to display value, with the ids behind list, reference and file labels in list_item_ids, reference_entity_ids and file_ids. | [Optional] [Defaults to `false`] |
+| **fields** | `Array<string>` | Attribute slugs or UUIDs to project, e.g. [\&quot;title\&quot;, \&quot;status\&quot;]. Standard fields (id, template_id, template_slug, created_at, updated_at, external_key) are always included and do not need to be listed. If omitted, all attributes defined on the template are returned. | [Optional] |
+
+### Return type
+
+[**EntityResponse**](EntityResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Hydrated entity details |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **404** | Not Found |  -  |
+| **422** | Validation Error |  -  |
 | **409** | No project is selected. The caller is authenticated but the request is tenant-scoped, so a project must be selected before it can be answered. The response body carries &#x60;\&quot;code\&quot;: \&quot;no_project_selected\&quot;&#x60;, which clients branch on to offer a project picker rather than an access-denied message. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
@@ -895,7 +985,7 @@ example().catch(console.error);
 
 Import entities from structured CSV file
 
-Bulk imports entity records into a template schema from a structured CSV file.  ### Upsert Semantics - **Update existing**: If a data row includes an &#x60;id&#x60; matching an existing entity UUID, that entity is updated. - **Create new**: If the &#x60;id&#x60; column is empty, omitted, or contains a new UUID, a new entity record is created.  ### Required 2-Row CSV Header Format The CSV file must follow the Omnismith two-row header format (identical to the output of &#x60;POST /entities/export/{template_id}&#x60;): - **Row 1 (Display Header)**: Human-readable attribute names or aliases (e.g. &#x60;ID&#x60;, &#x60;SKU&#x60;, &#x60;Price&#x60;, &#x60;Category&#x60;). - **Row 2 (Metadata Marker)**: Canonical attribute identifiers prefixed by &#x60;#&#x60; (e.g. &#x60;#id&#x60;, &#x60;#018b2f1b-8c1a...&#x60;, &#x60;#018b2f1b-8c1b...&#x60;). - **Row 3+ (Data Rows)**: Serialized entity values conforming to the template\&#39;s attribute data types.  ### Attribute Value Validation - List attributes require valid &#x60;ListItem&#x60; option UUIDs. - Reference attributes require existing target &#x60;Entity&#x60; UUIDs. - Number/Date/Boolean fields must match required format syntax.  ### Execution Summary Returns an execution report detailing counts of created, updated, skipped, and failed rows, along with granular row/column error messages.
+Bulk imports entity records into a template schema from a structured CSV file.  ### Upsert Semantics - **Update existing**: If a data row includes an &#x60;id&#x60; matching an existing entity UUID, that entity is updated. - **Match by external key**: A row with an &#x60;external_key&#x60; and no &#x60;id&#x60; updates the live record holding that key, or creates one with it. A row with both is matched by &#x60;id&#x60;, and the key is written to it. An empty &#x60;external_key&#x60; cell leaves the key unchanged. - **Create new**: If the &#x60;id&#x60; column is empty, omitted, or contains a new UUID (and no key matches), a new entity record is created.  ### Required 2-Row CSV Header Format The CSV file must follow the Omnismith two-row header format (identical to the output of &#x60;POST /entities/export/{template_id}&#x60;): - **Row 1 (Display Header)**: Human-readable attribute names or aliases (e.g. &#x60;ID&#x60;, &#x60;SKU&#x60;, &#x60;Price&#x60;, &#x60;Category&#x60;). - **Row 2 (Metadata Marker)**: Canonical identifiers prefixed by &#x60;#&#x60;: &#x60;#id&#x60; first, then optionally &#x60;#created_at&#x60;, &#x60;#updated_at&#x60; and &#x60;#external_key&#x60;, then attribute UUIDs (e.g. &#x60;#018b2f1b-8c1a...&#x60;). - **Row 3+ (Data Rows)**: Serialized entity values conforming to the template\&#39;s attribute data types.  ### Attribute Value Validation - List attributes require valid &#x60;ListItem&#x60; option UUIDs. - Reference attributes require existing target &#x60;Entity&#x60; UUIDs. - Number/Date/Boolean fields must match required format syntax.  ### Execution Summary Returns an execution report detailing counts of created, updated, skipped, and failed rows, along with granular row/column error messages.
 
 ### Example
 
@@ -1251,7 +1341,7 @@ async function example() {
     limit: 50,
     // number | Zero-based pagination offset (optional)
     offset: 0,
-    // string | Attribute UUID, attribute slug, or standard field (id, created_at, updated_at, deleted_at) to sort by (optional)
+    // string | Attribute UUID, attribute slug, or standard field (id, created_at, updated_at, deleted_at, external_key) to sort by (optional)
     sortField: created_at,
     // 'asc' | 'desc' | Sort direction: \"asc\" (ascending) or \"desc\" (descending) (optional)
     sortDirection: desc,
@@ -1279,7 +1369,7 @@ example().catch(console.error);
 | **xOmnismithProjectId** | `string` | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential\&#39;s &#x60;projects&#x60; claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code &#x60;stale_project_grant&#x60;; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 &#x60;no_project_selected&#x60;. Two clients holding the same credential may send different values at the same time. | [Optional] [Defaults to `undefined`] |
 | **limit** | `number` | Maximum number of entity records to return (1-100) | [Optional] [Defaults to `50`] |
 | **offset** | `number` | Zero-based pagination offset | [Optional] [Defaults to `0`] |
-| **sortField** | `string` | Attribute UUID, attribute slug, or standard field (id, created_at, updated_at, deleted_at) to sort by | [Optional] [Defaults to `undefined`] |
+| **sortField** | `string` | Attribute UUID, attribute slug, or standard field (id, created_at, updated_at, deleted_at, external_key) to sort by | [Optional] [Defaults to `undefined`] |
 | **sortDirection** | `asc`, `desc` | Sort direction: \&quot;asc\&quot; (ascending) or \&quot;desc\&quot; (descending) | [Optional] [Defaults to `&#39;asc&#39;`] [Enum: asc, desc] |
 
 ### Return type
@@ -1392,7 +1482,7 @@ example().catch(console.error);
 
 Update entity attribute values
 
-Partial update: writes the attributes in the map and leaves every other attribute untouched. This is the default way to change an entity. See the &#x60;attributes&#x60; property for the accepted value shapes.  &#x60;attributes&#x60; is required and must not be empty. Dimension changes are appended to the entity\&#39;s history (unchanged values cost nothing); metric attributes are appended to the entity\&#39;s time series.  Errors: - &#x60;400&#x60; — the body is not the documented shape (missing &#x60;attributes&#x60;, a list instead of an object, unknown fields, wrong types). - &#x60;422&#x60; — the shape is right but the content is not: unknown attribute, attribute not on the template, duplicate attribute, bad &#x60;updated_at&#x60;, a value that fails its attribute type, or an operation on an attribute that is not a number. &#x60;errors&#x60; names the exact field, e.g. &#x60;attributes.status&#x60;. - &#x60;404&#x60; — no entity with that id.
+Partial update: writes the attributes in the map and leaves every other attribute untouched. This is the default way to change an entity. See the &#x60;attributes&#x60; property for the accepted value shapes.  &#x60;attributes&#x60; is required and must not be empty, unless the request only changes &#x60;external_key&#x60;. Dimension changes are appended to the entity\&#39;s history (unchanged values cost nothing); metric attributes are appended to the entity\&#39;s time series.  &#x60;external_key&#x60; sets or changes the key another system uses for this record; &#x60;null&#x60; clears it; omitted leaves it unchanged.  Errors: - &#x60;400&#x60; — the body is not the documented shape (missing &#x60;attributes&#x60;, a list instead of an object, unknown fields, wrong types). - &#x60;422&#x60; — the shape is right but the content is not: unknown attribute, attribute not on the template, duplicate attribute, bad &#x60;updated_at&#x60;, a value that fails its attribute type, or an operation on an attribute that is not a number. &#x60;errors&#x60; names the exact field, e.g. &#x60;attributes.status&#x60;. - &#x60;404&#x60; — no entity with that id. - &#x60;409&#x60; — another live record of the template already holds &#x60;external_key&#x60;.
 
 ### Example
 
@@ -1464,7 +1554,91 @@ example().catch(console.error);
 | **402** | Tier quota exceeded |  -  |
 | **404** | Not Found |  -  |
 | **422** | Validation Error |  -  |
-| **409** | No project is selected. The caller is authenticated but the request is tenant-scoped, so a project must be selected before it can be answered. The response body carries &#x60;\&quot;code\&quot;: \&quot;no_project_selected\&quot;&#x60;, which clients branch on to offer a project picker rather than an access-denied message. |  -  |
+| **409** | &#x60;external_key&#x60; is held by another live record (&#x60;type: error/conflict&#x60;), or no project is selected |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## upsertEntityByKey
+
+> UpsertEntityByKeyResponse upsertEntityByKey(template, upsertEntityByKeyRequest, xOmnismithProjectId)
+
+Create or update an entity by its external key
+
+Writes the record of the template that another system identifies by &#x60;external_key&#x60;: creates it with the key when no live record holds the key, otherwise updates the one that does. Use this for writes from an integration that knows its own ids (a customer, a device, an order) instead of searching first and then creating: sending the same key twice never creates two records.  On create, &#x60;attributes&#x60; is the initial state. On update it is a partial update, exactly like &#x60;PATCH /entities/{id}&#x60;: only the listed attributes change, and operation objects (&#x60;increment&#x60;) apply. Metric attributes are appended to the time series on either branch. Records are matched by key within the template only; a deleted record does not hold its key, so a later upsert creates a new record.  Errors: - &#x60;400&#x60; — the body is not the documented shape (missing &#x60;attributes&#x60;, a list instead of an object, unknown fields, wrong types). - &#x60;422&#x60; — the shape is right but the content is not: unknown attribute, attribute not on the template, duplicate attribute, bad &#x60;updated_at&#x60;, a value that fails its attribute type, or an operation on an attribute that is not a number. &#x60;errors&#x60; names the exact field, e.g. &#x60;attributes.status&#x60;. - &#x60;404&#x60; — no template with that slug or UUID in this project. - &#x60;409&#x60; — the key was taken by a concurrent write that could not be retried; send the request again.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  EntityApi,
+} from '@omnismith-sdk/typescript';
+import type { UpsertEntityByKeyOperationRequest } from '@omnismith-sdk/typescript';
+
+async function example() {
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
+  const config = new Configuration({ 
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new EntityApi(config);
+
+  const body = {
+    // string | Template UUID or human-readable slug
+    template: customer,
+    // UpsertEntityByKeyRequest
+    upsertEntityByKeyRequest: ...,
+    // string | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential\'s `projects` claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code `stale_project_grant`; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 `no_project_selected`. Two clients holding the same credential may send different values at the same time. (optional)
+    xOmnismithProjectId: 018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7d,
+  } satisfies UpsertEntityByKeyOperationRequest;
+
+  try {
+    const data = await api.upsertEntityByKey(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **template** | `string` | Template UUID or human-readable slug | [Defaults to `undefined`] |
+| **upsertEntityByKeyRequest** | [UpsertEntityByKeyRequest](UpsertEntityByKeyRequest.md) |  | |
+| **xOmnismithProjectId** | `string` | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential\&#39;s &#x60;projects&#x60; claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code &#x60;stale_project_grant&#x60;; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 &#x60;no_project_selected&#x60;. Two clients holding the same credential may send different values at the same time. | [Optional] [Defaults to `undefined`] |
+
+### Return type
+
+[**UpsertEntityByKeyResponse**](UpsertEntityByKeyResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **201** | No live record held the key; a new one was created with it |  -  |
+| **200** | The live record holding the key was updated |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **402** | Tier quota exceeded |  -  |
+| **404** | Not Found |  -  |
+| **422** | Validation Error |  -  |
+| **409** | The key was taken by a concurrent write (&#x60;type: error/conflict&#x60;), or no project is selected |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 

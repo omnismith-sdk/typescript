@@ -11,6 +11,8 @@ Name | Type
 `group_by` | Array&lt;string&gt;
 `aggregations` | [Array&lt;AggregateEntitiesRequestAggregationsInner&gt;](AggregateEntitiesRequestAggregationsInner.md)
 `limit` | number
+`global_search` | string
+`order` | string
 
 ## Example
 
@@ -23,6 +25,8 @@ const example = {
   "group_by": ["tier","country"],
   "aggregations": [{"op":"count"},{"op":"sum","field":"mrr"}],
   "limit": 50,
+  "global_search": Wireless,
+  "order": aggregate,
 } satisfies AggregateEntitiesRequest
 
 console.log(example)

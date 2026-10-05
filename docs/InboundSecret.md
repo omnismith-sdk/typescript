@@ -1,24 +1,27 @@
 
-# AutomationResponseActionsInner
+# InboundSecret
 
+A secret deliveries are verified with. Only a hint is shown.
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`type` | string
-`config` | object
+`id` | string
+`hint` | string
+`created_at` | Date
 
 ## Example
 
 ```typescript
-import type { AutomationResponseActionsInner } from '@omnismith-sdk/typescript'
+import type { InboundSecret } from '@omnismith-sdk/typescript'
 
 // TODO: Update the object below with actual values
 const example = {
-  "type": telegram,
-  "config": null,
-} satisfies AutomationResponseActionsInner
+  "id": null,
+  "hint": x9Qa,
+  "created_at": null,
+} satisfies InboundSecret
 
 console.log(example)
 
@@ -27,7 +30,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as AutomationResponseActionsInner
+const exampleParsed = JSON.parse(exampleJSON) as InboundSecret
 console.log(exampleParsed)
 ```
 

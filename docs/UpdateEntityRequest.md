@@ -1,13 +1,14 @@
 
 # UpdateEntityRequest
 
-Payload containing attribute value mutations for an existing entity
+Payload containing attribute value mutations for an existing entity. Send `attributes`, `external_key`, or both.
 
 ## Properties
 
 Name | Type
 ------------ | -------------
 `attributes` | [{ [key: string]: EntityAttributesInputValue; }](EntityAttributesInputValue.md)
+`external_key` | string
 
 ## Example
 
@@ -17,6 +18,7 @@ import type { UpdateEntityRequest } from '@omnismith-sdk/typescript'
 // TODO: Update the object below with actual values
 const example = {
   "attributes": null,
+  "external_key": stripe:cus_NffrFeUfNV2Hib,
 } satisfies UpdateEntityRequest
 
 console.log(example)

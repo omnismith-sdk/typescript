@@ -1,7 +1,7 @@
 
 # TemplateOverviewResponse
 
-Template schema definition with bound attributes, validation rules, and executable actions.
+Template schema definition with bound attributes, validation rules, executable actions, and the inbound endpoints that feed it.
 
 ## Properties
 
@@ -14,6 +14,7 @@ Name | Type
 `attributes` | [Array&lt;TemplateAttributeOverviewResponse&gt;](TemplateAttributeOverviewResponse.md)
 `rules` | [Array&lt;EntityRuleOverviewResponse&gt;](EntityRuleOverviewResponse.md)
 `actions` | [Array&lt;EntityActionOverviewResponse&gt;](EntityActionOverviewResponse.md)
+`inbound_endpoints` | [Array&lt;InboundEndpointOverviewResponse&gt;](InboundEndpointOverviewResponse.md)
 
 ## Example
 
@@ -29,6 +30,7 @@ const example = {
   "attributes": null,
   "rules": null,
   "actions": null,
+  "inbound_endpoints": null,
 } satisfies TemplateOverviewResponse
 
 console.log(example)

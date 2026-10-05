@@ -16,6 +16,7 @@ Name | Type
 `display_mode` | string
 `displayed_columns` | Array&lt;string&gt;
 `pane_order` | number
+`group_by` | string
 
 ## Example
 
@@ -33,6 +34,7 @@ const example = {
   "display_mode": table,
   "displayed_columns": ["title","platform","status","scheduled_date"],
   "pane_order": 0,
+  "group_by": platform,
 } satisfies CreateWorkspaceViewRequest
 
 console.log(example)

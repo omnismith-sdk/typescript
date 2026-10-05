@@ -11,6 +11,7 @@ Name | Type
 `op` | string
 `id` | string
 `status` | string
+`created` | boolean
 `error` | [ErrorResponse](ErrorResponse.md)
 
 ## Example
@@ -24,6 +25,7 @@ const example = {
   "op": update,
   "id": 018b2f1b-8c1a-75b3-8000-7f0000010000,
   "status": ok,
+  "created": true,
   "error": null,
 } satisfies BatchOperationResult
 

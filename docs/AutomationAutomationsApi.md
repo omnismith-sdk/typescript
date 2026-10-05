@@ -8,6 +8,7 @@ All URIs are relative to *https://api.omnismith.io/v1*
 | [**deleteAutomation**](AutomationAutomationsApi.md#deleteautomation) | **DELETE** /automation/automations/{id} | Delete an automation |
 | [**getAutomation**](AutomationAutomationsApi.md#getautomation) | **GET** /automation/automations/{id} | Get an automation by ID |
 | [**listAutomationExecutions**](AutomationAutomationsApi.md#listautomationexecutions) | **GET** /automation/automations/{id}/executions | List automation execution logs |
+| [**listAutomationTimers**](AutomationAutomationsApi.md#listautomationtimers) | **GET** /automation/timers | List pending automation timers |
 | [**listAutomations**](AutomationAutomationsApi.md#listautomations) | **GET** /automation/automations | List project automations |
 | [**toggleAutomation**](AutomationAutomationsApi.md#toggleautomationoperation) | **PATCH** /automation/automations/{id}/toggle | Toggle automation enabled status |
 | [**updateAutomation**](AutomationAutomationsApi.md#updateautomationoperation) | **PUT** /automation/automations/{id} | Update an automation |
@@ -329,6 +330,91 @@ example().catch(console.error);
 | **401** | Unauthorized |  -  |
 | **404** | Automation not found |  -  |
 | **409** | No project is selected. The caller is authenticated but the request is tenant-scoped, so a project must be selected before it can be answered. The response body carries &#x60;\&quot;code\&quot;: \&quot;no_project_selected\&quot;&#x60;, which clients branch on to offer a project picker rather than an access-denied message. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## listAutomationTimers
+
+> ListAutomationTimers200Response listAutomationTimers(xOmnismithProjectId, automationId, entityId, limit)
+
+List pending automation timers
+
+Lists the pending timers of time-based automations, soonest first: the next slot of a &#x60;schedule&#x60; trigger, the moment a &#x60;date_reached&#x60; trigger fires for a record, the deadline of a &#x60;no_change_within&#x60; trigger. Use it to confirm that saving an automation or writing a record armed what you expected, and when it will fire. Pass &#x60;automation_id&#x60;, &#x60;entity_id&#x60; or both; at least one is required. A timer that has fired, been cancelled (record deleted, automation disabled or deleted) or been re-armed no longer appears under its old due time.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  AutomationAutomationsApi,
+} from '@omnismith-sdk/typescript';
+import type { ListAutomationTimersRequest } from '@omnismith-sdk/typescript';
+
+async function example() {
+  console.log("🚀 Testing @omnismith-sdk/typescript SDK...");
+  const config = new Configuration({ 
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new AutomationAutomationsApi(config);
+
+  const body = {
+    // string | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential\'s `projects` claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code `stale_project_grant`; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 `no_project_selected`. Two clients holding the same credential may send different values at the same time. (optional)
+    xOmnismithProjectId: 018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7d,
+    // string | Only timers of this automation (optional)
+    automationId: 01912ecb-4654-7890-a1b2-c3d4e5f60001,
+    // string | Only timers about this record (optional)
+    entityId: 01912ecb-4654-7890-a1b2-c3d4e5f60099,
+    // number | Maximum number of timers to return (optional)
+    limit: 100,
+  } satisfies ListAutomationTimersRequest;
+
+  try {
+    const data = await api.listAutomationTimers(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **xOmnismithProjectId** | `string` | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential\&#39;s &#x60;projects&#x60; claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code &#x60;stale_project_grant&#x60;; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 &#x60;no_project_selected&#x60;. Two clients holding the same credential may send different values at the same time. | [Optional] [Defaults to `undefined`] |
+| **automationId** | `string` | Only timers of this automation | [Optional] [Defaults to `undefined`] |
+| **entityId** | `string` | Only timers about this record | [Optional] [Defaults to `undefined`] |
+| **limit** | `number` | Maximum number of timers to return | [Optional] [Defaults to `100`] |
+
+### Return type
+
+[**ListAutomationTimers200Response**](ListAutomationTimers200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Pending timers, soonest first |  -  |
+| **400** | Neither automation_id nor entity_id was given, or a parameter is malformed |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | No permission to view automations |  -  |
+| **409** | No project is selected. The caller is authenticated but the request is tenant-scoped, so a project must be selected before it can be answered. The response body carries &#x60;\&quot;code\&quot;: \&quot;no_project_selected\&quot;&#x60;, which clients branch on to offer a project picker rather than an access-denied message. |  -  |
+| **422** | automation_id or entity_id is not a UUID, or limit is out of range |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 

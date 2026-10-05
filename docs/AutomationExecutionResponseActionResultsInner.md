@@ -10,6 +10,7 @@ Name | Type
 `success` | boolean
 `error_message` | string
 `executed_at` | Date
+`details` | object
 
 ## Example
 
@@ -22,6 +23,7 @@ const example = {
   "success": true,
   "error_message": null,
   "executed_at": 2026-08-26T12:00:01Z,
+  "details": {"status_code":200,"written":["company_size","industry"],"response_excerpt":"{\"employees\": 120, \"industry\": \"Retail\"}"},
 } satisfies AutomationExecutionResponseActionResultsInner
 
 console.log(example)

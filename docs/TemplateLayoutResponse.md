@@ -10,6 +10,7 @@ Name | Type
 `template_id` | string
 `category` | string
 `groups` | [Array&lt;TemplateGroupResponse&gt;](TemplateGroupResponse.md)
+`pinned_metric_ids` | Array&lt;string&gt;
 
 ## Example
 
@@ -21,6 +22,7 @@ const example = {
   "template_id": 018b2f1b-8c1a-75b3-8000-7f0000010010,
   "category": Engineering,
   "groups": null,
+  "pinned_metric_ids": null,
 } satisfies TemplateLayoutResponse
 
 console.log(example)

@@ -10,6 +10,7 @@ Name | Type
 `automation_id` | string
 `entity_id` | string
 `triggered_at` | Date
+`due_at` | Date
 `completed_at` | Date
 `status` | string
 `action_results` | [Array&lt;AutomationExecutionResponseActionResultsInner&gt;](AutomationExecutionResponseActionResultsInner.md)
@@ -26,6 +27,7 @@ const example = {
   "automation_id": 01912ecb-4654-7890-a1b2-c3d4e5f60001,
   "entity_id": 01912ecb-4654-7890-a1b2-c3d4e5f60099,
   "triggered_at": 2026-08-26T12:00Z,
+  "due_at": 2026-08-26T11:59:40Z,
   "completed_at": 2026-08-26T12:00:01Z,
   "status": success,
   "action_results": null,

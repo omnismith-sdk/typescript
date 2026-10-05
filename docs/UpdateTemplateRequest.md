@@ -9,6 +9,7 @@ Name | Type
 ------------ | -------------
 `attributes` | [Array&lt;TemplateAttributeInput&gt;](TemplateAttributeInput.md)
 `groups` | [Array&lt;TemplateGroupInput&gt;](TemplateGroupInput.md)
+`pinned_metric_ids` | Array&lt;string&gt;
 `name` | string
 `description` | string
 `category` | string
@@ -25,6 +26,7 @@ import type { UpdateTemplateRequest } from '@omnismith-sdk/typescript'
 const example = {
   "attributes": null,
   "groups": null,
+  "pinned_metric_ids": null,
   "name": Product SKU,
   "description": Updated e-commerce product schema,
   "category": Catalog,

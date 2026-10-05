@@ -15,6 +15,7 @@ Name | Type
 `attribute_ids` | Array&lt;string&gt;
 `attributes` | [Array&lt;TemplateResponseAttributesInner&gt;](TemplateResponseAttributesInner.md)
 `groups` | [Array&lt;TemplateGroupResponse&gt;](TemplateGroupResponse.md)
+`pinned_metric_ids` | Array&lt;string&gt;
 `created_at` | Date
 `updated_at` | Date
 `deleted_at` | Date
@@ -34,6 +35,7 @@ const example = {
   "attribute_ids": null,
   "attributes": null,
   "groups": null,
+  "pinned_metric_ids": null,
   "created_at": 2026-01-15T10:30Z,
   "updated_at": 2026-01-15T10:30Z,
   "deleted_at": null,

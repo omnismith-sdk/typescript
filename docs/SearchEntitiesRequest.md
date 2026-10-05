@@ -11,6 +11,7 @@ Name | Type
 `filter_groups` | Array&lt;Array&lt;EntityFilter&gt;&gt;
 `verbose` | boolean
 `fields` | Array&lt;string&gt;
+`group_key` | [SearchEntitiesRequestGroupKey](SearchEntitiesRequestGroupKey.md)
 
 ## Example
 
@@ -23,6 +24,7 @@ const example = {
   "filter_groups": [[{"field":"status","operator":"in","value":["018b2f1b-8c1a-75b3-8000-7f0000010020"]},{"field":"price","operator":"gt","value":"100"}]],
   "verbose": false,
   "fields": ["title","status","scheduled_date"],
+  "group_key": null,
 } satisfies SearchEntitiesRequest
 
 console.log(example)

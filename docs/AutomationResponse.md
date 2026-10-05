@@ -10,11 +10,12 @@ Name | Type
 `name` | string
 `description` | string
 `isEnabled` | boolean
-`trigger` | [AutomationResponseTrigger](AutomationResponseTrigger.md)
+`trigger` | [AutomationTrigger](AutomationTrigger.md)
 `conditions` | [Array&lt;AutomationResponseConditionsInner&gt;](AutomationResponseConditionsInner.md)
-`actions` | [Array&lt;AutomationResponseActionsInner&gt;](AutomationResponseActionsInner.md)
+`actions` | [Array&lt;AutomationAction&gt;](AutomationAction.md)
 `cooldownSeconds` | number
 `lastTriggeredAt` | Date
+`nextRunAt` | Date
 `createdAt` | Date
 `updatedAt` | Date
 
@@ -34,6 +35,7 @@ const example = {
   "actions": null,
   "cooldownSeconds": 60,
   "lastTriggeredAt": 2026-08-26T12:00Z,
+  "nextRunAt": 2026-10-05T07:00Z,
   "createdAt": 2026-08-26T10:00Z,
   "updatedAt": 2026-08-26T11:00Z,
 } satisfies AutomationResponse

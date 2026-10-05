@@ -18,6 +18,7 @@ Name | Type
 `display_mode` | string
 `displayed_columns` | Array&lt;string&gt;
 `pane_order` | number
+`group_by` | string
 `created_at` | Date
 `updated_at` | Date
 
@@ -39,6 +40,7 @@ const example = {
   "display_mode": table,
   "displayed_columns": ["name","status","ip_address","created_at"],
   "pane_order": 0,
+  "group_by": platform,
   "created_at": 2026-08-26T12:00Z,
   "updated_at": 2026-08-26T12:30Z,
 } satisfies WorkspaceViewResponse

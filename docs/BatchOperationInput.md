@@ -1,7 +1,7 @@
 
 # BatchOperationInput
 
-One write in a batch. Exact field set per op — create: template, id?, attributes · update: id, attributes · replace: id, attributes · delete: id. Any other field is rejected.
+One write in a batch. Exact field set per op — create: template, id?, external_key?, attributes · update: id, attributes · replace: id, attributes · delete: id · upsert: template, external_key, attributes. Any other field is rejected.
 
 ## Properties
 
@@ -11,6 +11,7 @@ Name | Type
 `id` | string
 `template` | string
 `attributes` | [{ [key: string]: EntityAttributesInputValue; }](EntityAttributesInputValue.md)
+`external_key` | string
 
 ## Example
 
@@ -23,6 +24,7 @@ const example = {
   "id": 018b2f1b-8c1a-75b3-8000-7f0000010000,
   "template": product_catalog,
   "attributes": null,
+  "external_key": stripe:cus_NffrFeUfNV2Hib,
 } satisfies BatchOperationInput
 
 console.log(example)

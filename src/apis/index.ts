@@ -16,6 +16,7 @@ export * from './EntityActionApi';
 export * from './EntityRuleApi';
 export * from './FeedbackApi';
 export * from './FileAttachmentApi';
+export * from './InboundApi';
 export * from './MarketplaceApi';
 export * from './OAuthApi';
 export * from './ProjectsApi';

@@ -12,6 +12,7 @@ Name | Type
 `template_slug` | string
 `created_at` | Date
 `updated_at` | Date
+`external_key` | string
 `attribute_values` | [EntityResponseAttributeValues](EntityResponseAttributeValues.md)
 `list_item_ids` | { [key: string]: string; }
 `reference_entity_ids` | { [key: string]: string; }
@@ -29,6 +30,7 @@ const example = {
   "template_slug": product_catalog,
   "created_at": 2026-08-26T12:00Z,
   "updated_at": 2026-08-26T12:05Z,
+  "external_key": stripe:cus_NffrFeUfNV2Hib,
   "attribute_values": null,
   "list_item_ids": {"category":"018b2f1b-8c1a-75b3-8000-7f0000010020"},
   "reference_entity_ids": {"supplier":"018b2f1b-8c1a-75b3-8000-7f0000010005"},

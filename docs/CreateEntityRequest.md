@@ -9,6 +9,7 @@ Name | Type
 ------------ | -------------
 `attributes` | [{ [key: string]: EntityAttributesInputValue; }](EntityAttributesInputValue.md)
 `id` | string
+`external_key` | string
 
 ## Example
 
@@ -19,6 +20,7 @@ import type { CreateEntityRequest } from '@omnismith-sdk/typescript'
 const example = {
   "attributes": null,
   "id": 018b2f1b-8c1a-75b3-8000-7f0000010000,
+  "external_key": stripe:cus_NffrFeUfNV2Hib,
 } satisfies CreateEntityRequest
 
 console.log(example)
